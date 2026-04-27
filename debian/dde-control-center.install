@@ -1,0 +1,6 @@
+usr/bin/
+usr/lib/*/*.so*
+usr/lib/*/dde-control-center/
+usr/share
+usr/lib/*/dde-grand-search-daemon/plugins/searcher/*
+usr/lib/systemd/user/
