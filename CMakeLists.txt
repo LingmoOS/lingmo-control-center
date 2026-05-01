@@ -5,9 +5,9 @@ set(BUILD_DOCS OFF CACHE BOOL "Generate doxygen-based documentation")
 
 set(PROJECT_NAME dde-control-center)
 project(${PROJECT_NAME}
-    VERSION ${DVERSION}
-    DESCRIPTION "Deepin Control Center"
-    HOMEPAGE_URL "https://github.com/linuxdeepin/dde-control-center"
+    VERSION "6.0.44"
+    DESCRIPTION "Lingmo OS Control Center"
+    HOMEPAGE_URL "https://github.com/LingmoOS/velora-control-center"
     LANGUAGES CXX C
 )
 
