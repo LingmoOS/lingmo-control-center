@@ -1,7 +1,7 @@
-Source: dde-control-center
+Source: lingmo-control-center
 Section: admin
 Priority: optional
-Maintainer: Deepin Sysdev <sysdev@deepin.com>
+Maintainer: Lingmo OS Team <team@lingmo.org>
 Build-Depends:
  debhelper-compat (= 12),
  pkg-config,
@@ -38,7 +38,7 @@ Build-Depends:
  libdde-shell-dev(>= 1.99.20),
  libdpkg-dev
 Standards-Version: 4.5.0
-Homepage: https://github.com/linuxdeepin/dde-control-center
+Homepage: https://github.com/LingmoOS/lingmo-control-center
 
 Package: dde-control-center
 Architecture: any

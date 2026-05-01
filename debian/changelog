@@ -1,3 +1,9 @@
+lingmo-control-center (6.1.81.lingmo.1) unstable; urgency=medium
+
+  * new release for Lingmo OS.
+
+ -- Lingmo OS Team <team@lingmo.org>  Fri, 01 May 2026 21:14:00 +0800
+
 dde-control-center (6.1.80) unstable; urgency=medium
 
   * fix: add support for markdown format in user license
