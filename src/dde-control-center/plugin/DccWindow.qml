@@ -72,8 +72,8 @@ D.ApplicationWindow {
                     productIcon: "preferences-system"
                     modality: Qt.WindowModal
                     productName: appProductName
-                    websiteName: D.DTK.deepinWebsiteName
-                    websiteLink: D.DTK.deepinWebsiteLink
+                    websiteName: D.DTK.lingmoSystemName
+                    websiteLink: D.DTK.lingmoSystemWebLink
                     description: qsTr("Control Center provides the options for system settings.")
                     onClosing: destroy(10)
                 }
