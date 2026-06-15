@@ -16,9 +16,7 @@ DccObject {
     icon: "keyboard_fn"
     weight: parent.weight // 300
     property int searchEditWidth: 600
-    property var viewScrollbar: ScrollBar {
-        width: 10
-    }
+    property var viewScrollbar: ScrollBar { }
 
     PropertyAnimation {
         id: scrollbarAnimation
@@ -32,6 +30,14 @@ DccObject {
 
     page: DccSettingsView {
         ScrollBar.vertical: viewScrollbar
+    }
+
+    Connections {
+        target: shortcutSettingsView
+        function onDeactive() {
+            shortcutSettingsBody.conflictAccels = ""
+            shortcutSettingsBody.isEditing = false
+        }
     }
 
     DccObject {
@@ -162,6 +168,13 @@ DccObject {
                             Layout.fillWidth: true
                             showEditButtons: shortcutSettingsBody.isEditing && model.isCustom
                             showWarnning: model.accels.length > 0 && shortcutSettingsBody.conflictAccels === model.accels
+
+                            Connections{
+                                target: model
+                                function onKeySequenceChanged() {
+                                    edit.keys= model.keySequence
+                                }
+                            }
 
                             onRequestKeys: {
                                 if (shortcutView.editItem) {
@@ -300,8 +313,15 @@ DccObject {
                                     MouseArea {
                                         anchors.fill: parent
                                         onClicked: {
-                                            edit.modifyShortcut(shortcutSettingsBody.conflictAccels)
+                                            var newAccels = shortcutSettingsBody.conflictAccels
+                                            edit.modifyShortcut(newAccels)
                                             shortcutSettingsBody.conflictAccels = ""
+
+                                            // Fix: hide conflict warning and reset edit state after replacing
+                                            edit.keys = dccData.formatKeys(newAccels)
+                                            conflictText.visible = false
+                                            shortcutView.editItem = null
+                                            shortcutView.conflictText = null
                                         }
                                     }
                                 }

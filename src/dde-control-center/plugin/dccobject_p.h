@@ -6,7 +6,9 @@
 
 #include "dccobject.h"
 
+#include <QLoggingCategory>
 #include <QVector>
+
 #define DCC_HIDDEN 0x80000000
 #define DCC_DISABLED 0x40000000
 #define DCC_CONFIG_HIDDEN 0x20000000
@@ -24,6 +26,8 @@
 #define DCC_CANSEARCH 0x04000000 // 不参与搜索
 
 namespace dccV25 {
+Q_DECLARE_LOGGING_CATEGORY(dccLog);
+
 class DccObject::Private
 {
 public:
@@ -43,6 +47,8 @@ public:
 
     inline DccObject *getParent() const { return m_parent; }
 
+    inline DccObject *getRecommendedParent() const { return m_recommendedParent; }
+
     inline const QVector<DccObject *> &getObjects() const { return m_objects; }
 
     DccObject *getChild(int childPos) const;
@@ -50,6 +56,7 @@ public:
 
     void addObject(DccObject *child);
     void removeObject(DccObject *child);
+    void removeObjectFromParent();
     void clearObject();
 
 protected:
@@ -57,6 +64,8 @@ protected:
     virtual ~Private();
 
     virtual inline void SetParent(DccObject *anObject) { m_parent = anObject; }
+
+    virtual inline void SetRecommendedParent(DccObject *parent) { m_recommendedParent = parent; }
 
 private:
     // data property
@@ -70,9 +79,11 @@ protected:
     quint8 m_pageType;
     quint16 m_weight;
     quint32 m_flags;
+    bool m_componentComplete;
 
-    DccObject *q_ptr;    // q指针
-    DccObject *m_parent; // 父项
+    DccObject *q_ptr;                        // q指针
+    DccObject *m_parent;                     // 父项
+    QPointer<DccObject> m_recommendedParent; // 推荐父项
     DccObject *m_currentObject;
     QVector<DccObject *> m_children; // 子项
     QVector<DccObject *> m_objects;  // m_data中DccObject

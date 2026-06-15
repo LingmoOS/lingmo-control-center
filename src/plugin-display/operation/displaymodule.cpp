@@ -61,19 +61,16 @@ DisplayModulePrivate::DisplayModulePrivate(DisplayModule *parent)
     : q_ptr(parent)
     , m_primary(nullptr)
     , m_maxGlobalScale(1.0)
+    , m_screensFormRect(false)
 {
-    QMetaObject::invokeMethod(
-            q_ptr,
-            [this]() {
-                init();
-            },
-            Qt::QueuedConnection);
+    qRegisterMetaType<QHash<Monitor *, QPair<int, int>>>("QHash<Monitor *, QPair<int, int>>");
+    m_model = new DisplayModel(q_ptr);
+    m_worker = new DisplayWorker(m_model, q_ptr);
+    init();
 }
 
 void DisplayModulePrivate::init()
 {
-    m_model = new DisplayModel(q_ptr);
-    m_worker = new DisplayWorker(m_model, q_ptr);
     m_worker->active();
     q_ptr->connect(m_model, &DisplayModel::monitorListChanged, [this]() {
         updateMonitorList();
@@ -89,9 +86,14 @@ void DisplayModulePrivate::init()
     q_ptr->connect(m_model, &DisplayModel::colorTemperatureChanged, q_ptr, &DisplayModule::colorTemperatureChanged);
     q_ptr->connect(m_model, &DisplayModel::customColorTempTimePeriodChanged, q_ptr, &DisplayModule::customColorTempTimePeriodChanged);
     q_ptr->connect(m_model, &DisplayModel::adjustCCTmodeChanged, q_ptr, &DisplayModule::colorTemperatureModeChanged);
+    q_ptr->connect(m_model, &DisplayModel::autoBacklightSupportedChanged, q_ptr, &DisplayModule::autoBacklightSupportedChanged);
+    q_ptr->connect(m_model, &DisplayModel::autoBacklightEnabledChanged, q_ptr, &DisplayModule::autoBacklightEnabledChanged);
+    q_ptr->connect(m_model, &DisplayModel::builtinMonitorNameChanged, q_ptr, &DisplayModule::builtinMonitorNameChanged);
+    q_ptr->connect(m_model, &DisplayModel::concatScreenModeChanged, q_ptr, &DisplayModule::isConcatScreenModeChanged);
     updateMonitorList();
     updatePrimary();
     updateDisplayMode();
+    updateConcatScreenMode();
 }
 
 void DisplayModulePrivate::updateVirtualScreens()
@@ -142,6 +144,9 @@ void DisplayModulePrivate::updateVirtualScreens()
         q_ptr->connect(screen, &DccScreen::rotateChanged, q_ptr, &DisplayModule::applyChanged, Qt::QueuedConnection);
         q_ptr->connect(screen, &DccScreen::currentModeChanged, q_ptr, &DisplayModule::applyChanged, Qt::QueuedConnection);
         q_ptr->connect(screen, &DccScreen::wallpaperChanged, q_ptr, &DisplayModule::wallpaperChanged);
+        q_ptr->connect(screen, &DccScreen::scaleChanged, q_ptr, [this, screen]() {
+            updateScale(screen);
+        });
         m_virtualScreens << screen;
     }
     if (changed) {
@@ -158,10 +163,14 @@ void DisplayModulePrivate::updateVirtualScreens()
         updatePrimary();
         Q_EMIT q_ptr->virtualScreensChanged();
     }
+    updateScreensFormRect();
 }
 
 void DisplayModulePrivate::updateMonitorList()
 {
+    if (m_model->isConcatScreenMode()) {
+        resetConcatScreenMode();
+    }
     bool changed = false;
     QList<Monitor *> addMonitorList = m_model->monitorList();
     for (auto it = m_screens.cbegin(); it != m_screens.cend();) {
@@ -203,6 +212,7 @@ void DisplayModulePrivate::updateMonitorList()
         updateVirtualScreens();
         updateMaxGlobalScale();
         updateDisplayMode();
+        updateConcatScreenMode();
         Q_EMIT q_ptr->screensChanged();
     }
 }
@@ -247,6 +257,7 @@ void DisplayModulePrivate::updateDisplayMode()
         m_displayMode = displayMode;
         Q_EMIT q_ptr->displayModeChanged();
     }
+    updateScreensFormRect();
 }
 
 void DisplayModulePrivate::updateMaxGlobalScale()
@@ -274,9 +285,62 @@ void DisplayModulePrivate::updateMaxGlobalScale()
     }
 }
 
+void DisplayModulePrivate::updateScreensFormRect()
+{
+    QList<DccScreen *> screens = enabledScreens();
+    bool isRect = false;
+    if (screens.size() >= 2) {
+        QList<QRectF> rects;
+        for (auto s : screens) {
+            rects << QRectF(s->x(), s->y(), s->width(), s->height());
+        }
+        QRectF bounding = rects[0];
+        qreal totalArea = rects[0].width() * rects[0].height();
+        for (int i = 1; i < rects.size(); ++i) {
+            bounding = bounding.united(rects[i]);
+            totalArea += rects[i].width() * rects[i].height();
+        }
+        isRect = qFuzzyCompare(bounding.width() * bounding.height(), totalArea);
+    }
+    if (m_screensFormRect != isRect) {
+        m_screensFormRect = isRect;
+        Q_EMIT q_ptr->screensFormRectChanged();
+    }
+}
+
+void DisplayModulePrivate::updateConcatScreenMode()
+{
+    m_worker->updateConcatScreenMode();
+}
+
+void DisplayModulePrivate::mergeToConcatScreen()
+{
+    QStringList outputs;
+    for (auto s : enabledScreens()) {
+        outputs << s->name();
+    }
+    m_worker->mergeToConcatScreen(outputs);
+}
+
+void DisplayModulePrivate::resetConcatScreenMode()
+{
+    m_worker->resetConcatScreenMode();
+}
+
 DccScreen *DisplayModulePrivate::primary() const
 {
     return m_primary;
+}
+
+QList<DccScreen *> DisplayModulePrivate::enabledScreens() const
+{
+    QList<DccScreen *> result;
+    for (auto s : m_screens) {
+        if (s->enable()) {
+            result << s;
+        }
+    }
+    return result;
 }
 
 QString DisplayModulePrivate::displayMode() const
@@ -284,9 +348,13 @@ QString DisplayModulePrivate::displayMode() const
     return m_displayMode;
 }
 
-void DisplayModulePrivate::setScreenPosition(QList<ScreenData *> screensData)
+void DisplayModulePrivate::setScreenPosition(const QList<ScreenData *> &screensData)
 {
-    qRegisterMetaType<QHash<Monitor *, QPair<int, int>>>("QHash<Monitor *, QPair<int, int>>");
+    m_worker->setMonitorPosition(buildMonitorPosition(screensData));
+}
+
+QHash<Monitor *, QPair<int, int>> DisplayModulePrivate::buildMonitorPosition(const QList<ScreenData *> &screensData)
+{
     QHash<Monitor *, QPair<int, int>> monitorPosition;
     int lstX = 1000000, lstY = 1000000;
     for (auto item : screensData) {
@@ -308,7 +376,40 @@ void DisplayModulePrivate::setScreenPosition(QList<ScreenData *> screensData)
     for (auto it = monitorPosition.cbegin(); it != monitorPosition.cend(); ++it) {
         qDebug() << "applySettings 处理之后:" << it.key()->name() << it.value() << it.key()->w() << it.key()->h();
     }
-    m_worker->setMonitorPosition(monitorPosition);
+    return monitorPosition;
+}
+
+void DisplayModulePrivate::updateScale(DccScreen *item)
+{
+    if (!item || m_model->displayMode() != EXTEND_MODE) {
+        return;
+    }
+    QList<ScreenData *> tmpListItems;
+    ScreenData *pwItem = nullptr;
+    for (auto obj : m_virtualScreens) {
+        if (obj) {
+            ScreenData *tmpItem = new ScreenData(obj);
+            tmpListItems.append(tmpItem);
+            if (obj == item) {
+                pwItem = tmpItem;
+            }
+        }
+    }
+    if (tmpListItems.size() < 2 || !pwItem) {
+        qDeleteAll(tmpListItems);
+        return;
+    }
+    ConcatScreen *concatScreen = new ConcatScreen(tmpListItems, pwItem);
+    concatScreen->executemultiScreenAlgo(true);
+    delete concatScreen;
+
+    auto monitorPosition = buildMonitorPosition(tmpListItems);
+    m_worker->updateMonitorPosition(monitorPosition);
+    qDeleteAll(tmpListItems);
+    // 设置过快会导致treeland崩溃
+    QTimer::singleShot(300, q_ptr, [this, monitorPosition] {
+        m_worker->setMonitorPosition(monitorPosition);
+    });
 }
 
 DisplayModule::DisplayModule(QObject *parent)
@@ -362,6 +463,9 @@ void DisplayModule::setDisplayMode(const QString &mode)
         name = mode;
     }
     Q_D(DisplayModule);
+    if (d->m_model->isConcatScreenMode() && modeType != EXTEND_MODE) {
+        d->resetConcatScreenMode();
+    }
     d->m_worker->switchMode(modeType, name);
 }
 
@@ -519,6 +623,56 @@ void DisplayModule::setCustomColorTempTimePeriod(const QString &timePeriod)
     d->m_worker->setCustomColorTempTimePeriod(startTime.toString(DEFAULT_TIME_FORMAT) + "-" + endTime.toString(DEFAULT_TIME_FORMAT));
 }
 
+bool DisplayModule::autoBacklightSupported() const
+{
+    Q_D(const DisplayModule);
+    return d->m_model->autoBacklightSupported();
+}
+
+bool DisplayModule::autoBacklightEnabled() const
+{
+    Q_D(const DisplayModule);
+    return d->m_model->autoBacklightEnabled();
+}
+
+void DisplayModule::setAutoBacklightEnabled(bool enabled)
+{
+    Q_D(DisplayModule);
+    if (autoBacklightEnabled() != enabled) {
+        Q_EMIT d->m_model->requestSetAutoBacklightEnable(enabled);
+    }
+}
+
+QString DisplayModule::builtinMonitorName() const
+{
+    Q_D(const DisplayModule);
+    return d->m_model->builtinMonitorName();
+}
+
+bool DisplayModule::screensFormRect() const
+{
+    Q_D(const DisplayModule);
+    return d->m_screensFormRect;
+}
+
+bool DisplayModule::isConcatScreenMode() const
+{
+    Q_D(const DisplayModule);
+    return d->m_model->isConcatScreenMode();
+}
+
+void DisplayModule::mergeToConcatScreen()
+{
+    Q_D(DisplayModule);
+    d->mergeToConcatScreen();
+}
+
+void DisplayModule::resetConcatScreenMode()
+{
+    Q_D(DisplayModule);
+    d->resetConcatScreenMode();
+}
+
 void DisplayModule::saveChanges()
 {
     Q_D(DisplayModule);
@@ -577,6 +731,7 @@ void DisplayModule::executemultiScreenAlgo(QList<QObject *> listItems, QObject *
         }
     }
     if (tmpListItems.size() < 2 || !pwItem) {
+        qDeleteAll(tmpListItems);
         return;
     }
     ConcatScreen *concatScreen = new ConcatScreen(tmpListItems, pwItem);

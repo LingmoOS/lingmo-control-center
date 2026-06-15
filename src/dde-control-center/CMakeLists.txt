@@ -69,6 +69,11 @@ target_link_libraries(${Control_Center_Name} PRIVATE
     ${Control_Center_Libraries}
 )
 
+if (HAVE_DDE_API_EVENTLOGGER)
+    target_compile_definitions(${Control_Center_Name} PRIVATE HAVE_DDE_API_EVENTLOGGER)
+    target_link_libraries(${Control_Center_Name} PRIVATE DDEAPI::EventLogger)
+endif()
+
 file(GLOB_RECURSE DCC_Translation_QML_FILES ${DCC_PROJECT_ROOT_DIR}/qml/*.qml ${DCC_PROJECT_ROOT_DIR}/src/*.qml)
 file(GLOB_RECURSE DCC_Translation_SOURCE_FILES ${DCC_PROJECT_ROOT_DIR}/src/*.cpp ${DCC_PROJECT_ROOT_DIR}/src/*.h)
 dcc_handle_plugin_translation(NAME ${Control_Center_Name} SOURCE_DIR ${DCC_PROJECT_ROOT_DIR} QML_FILES ${DCC_Translation_QML_FILES} SOURCE_FILES ${DCC_Translation_SOURCE_FILES})
@@ -89,16 +94,8 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.deepin.dde.ControlCenter1.service
 # systemd service
 if (NOT DEFINED SYSTEMD_USER_UNIT_DIR)
     find_package(PkgConfig REQUIRED)
-    pkg_check_modules(Systemd QUIET libsystemd)
-    if (Systemd_FOUND)
-        pkg_get_variable(SYSTEMD_USER_UNIT_DIR systemd systemduserunitdir)
-        if (NOT SYSTEMD_USER_UNIT_DIR)
-            set(SYSTEMD_USER_UNIT_DIR "${CMAKE_INSTALL_PREFIX}/lib/systemd/user")
-        endif()
-    else()
-        pkg_check_modules(Systemd REQUIRED systemd)
-        pkg_get_variable(SYSTEMD_USER_UNIT_DIR systemd systemduserunitdir)
-    endif()
+    pkg_check_modules(Systemd REQUIRED systemd)
+    pkg_get_variable(SYSTEMD_USER_UNIT_DIR systemd systemduserunitdir)
 endif()
 
 configure_file(

@@ -5,9 +5,9 @@ set(BUILD_DOCS OFF CACHE BOOL "Generate doxygen-based documentation")
 
 set(PROJECT_NAME dde-control-center)
 project(${PROJECT_NAME}
-    VERSION "6.0.44"
-    DESCRIPTION "Lingmo OS Control Center"
-    HOMEPAGE_URL "https://github.com/LingmoOS/velora-control-center"
+    VERSION ${DVERSION}
+    DESCRIPTION "Deepin Control Center"
+    HOMEPAGE_URL "https://github.com/linuxdeepin/dde-control-center"
     LANGUAGES CXX C
 )
 
@@ -101,7 +101,7 @@ if(DCC_ENABLE_MEMORY_MANAGEMENT)
   add_definitions(-DDCC_ENABLE_MEMORY_MANAGEMENT)
 endif()
 # 增加安全编译参数
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(POSITION_INDEPENDENT_CODE True)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
@@ -135,11 +135,11 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 add_definitions(-DTRANSLATE_READ_DIR="${DCC_TRANSLATE_READ_DIR}")
-# 插件安装目录
-set(DCC_PLUGINS_INSTALL_DIR ${DCC_DEBUG_LIBDIR}/${DCC_PLUGINS_DIR} CACHE STRING "Install dir for dde-control-center plugins")
-# 插件读取目录
+# 插件安装目录 (始终安装到系统目录)
+set(DCC_PLUGINS_INSTALL_DIR ${DCC_INSTALL_DIR}/${DCC_PLUGINS_DIR} CACHE STRING "Install dir for dde-control-center plugins")
+# 插件读取目录 (Debug模式读取构建目录, Release模式读取系统目录)
 set(MODULE_READ_DIR "${DCC_DEBUG_LIBDIR}" CACHE STRING "Dir to find dde-control-center modules")
-set(PLUGINS_READ_DIR "${DCC_PLUGINS_INSTALL_DIR}" CACHE STRING "Dir to find dde-control-center plugins")
+set(PLUGINS_READ_DIR "${DCC_DEBUG_LIBDIR}/${DCC_PLUGINS_DIR}" CACHE STRING "Dir to find dde-control-center plugins")
 
 GNUInstallDirs_get_absolute_install_dir(
     MODULE_READ_FULL_DIR
@@ -177,6 +177,15 @@ if(${QT_NS}_VERSION VERSION_GREATER_EQUAL 6.10)
 endif()
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
+
+# Check if dde-api provides EventLogger (header-only)
+find_package(DDEAPI QUIET)
+if(DDEAPI_FOUND)
+    set(HAVE_DDE_API_EVENTLOGGER ON)
+    message(STATUS "Found DDEAPI: EventLogger available")
+else()
+    message(STATUS "DDEAPI not found, event logging will be disabled")
+endif()
 
 if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "sw_64")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mieee")

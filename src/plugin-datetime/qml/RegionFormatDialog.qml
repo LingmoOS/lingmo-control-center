@@ -99,7 +99,7 @@ Loader {
                             model: regionFormatLoader.viewModel
                             currentIndex: regionFormatLoader.currentIndex
                             clip: true
-                            ScrollBar.vertical: scrollBar
+                            ScrollBar.vertical: ScrollBar { }
 
                             layer.enabled: true
                             layer.effect: MultiEffect {
@@ -112,8 +112,7 @@ Loader {
 
                             Component.onCompleted: {
                             if (currentIndex >= 0 && currentIndex < count) {
-                                let delegateHeight = 40;
-                                contentY = currentIndex * delegateHeight;
+                                positionViewAtIndex(currentIndex, ListView.Contain);
 
                                 Qt.callLater(function() {
                                     if (currentItem && currentItem.model) {
@@ -181,20 +180,6 @@ Loader {
                                 }
                             }
                         }
-
-                        ScrollBar {
-                            id: scrollBar
-                            anchors.top: parent.top
-                            anchors.bottom: parent.bottom
-                            anchors.right: parent.right
-                            anchors.rightMargin: -width
-                            width: 10
-                            orientation: Qt.Vertical
-
-                            position: itemsView.visibleArea.yPosition
-                            size: itemsView.visibleArea.heightRatio
-                            active: hovered || pressed || itemsView.moving || itemsView.flicking
-                        }
                     }
                 }
 
@@ -252,17 +237,22 @@ Loader {
                                 ColumnLayout {
                                     Layout.leftMargin: 8
                                     Layout.fillWidth: true
+                                    Layout.minimumWidth: implicitWidth
                                     Layout.alignment: Qt.AlignVCenter
                                     spacing: 0
                                     DccLabel {
                                         Layout.fillWidth: true
+                                        Layout.minimumWidth: implicitWidth
                                         text: repeater.getName(index)
                                     }
                                 }
                                 Control {
+                                    Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                                     Layout.rightMargin: 10
-                                    contentItem:  Label {
+                                    contentItem: DccLabel {
+                                        width: parent.width
+                                        horizontalAlignment: Text.AlignRight
                                         text: repeater.getValue(index)
                                     }
                                 }

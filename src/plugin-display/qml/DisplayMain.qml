@@ -12,6 +12,8 @@ DccObject {
     id: root
     property var screen: dccData.virtualScreens[0]
     property var activeDialogs: []
+    property bool screensFormRect: dccData.screensFormRect
+    property bool isExtendMode: dccData.displayMode === "EXTEND"
     property var scaleModelConst: [{
             "text": qsTr("100%"),
             "value": 1.0
@@ -95,7 +97,7 @@ DccObject {
     }
     function getQtScreen(screen) {
         for (var s of Qt.application.screens) {
-            if (s.virtualX === screen.x && s.virtualY === screen.y && (Math.abs(s.width * s.devicePixelRatio - screen.currentResolution.width) < 1) && (Math.abs(s.height * s.devicePixelRatio - screen.currentResolution.height) < 1)) {
+            if (s.virtualX === screen.x && s.virtualY === screen.y && (Math.abs(s.width * s.devicePixelRatio - screen.width) < 1) && (Math.abs(s.height * s.devicePixelRatio - screen.height) < 1)) {
                 return s
             }
         }
@@ -188,7 +190,7 @@ DccObject {
             name: "monitorsGround"
             parentName: "monitorControl"
             weight: 10
-            enabled: dccData.virtualScreens.length > 1
+            enabled: dccData.virtualScreens.length > 1 && !(root.isExtendMode && dccData.isConcatScreenMode)
             Component.onCompleted: cacheImage()
             pageType: DccObject.Item
             onParentItemChanged: item => { if (item) { item.topInset = 0; item.bottomInset = 0 } }
@@ -340,6 +342,7 @@ DccObject {
             displayName: qsTr("Identify")
             weight: 20
             visible: dccData.virtualScreens.length > 1 || (dccData.virtualScreens.length === 1 && dccData.virtualScreens[0].screenItems.length > 1)
+            enabled: !(root.isExtendMode && dccData.isConcatScreenMode)
             pageType: DccObject.Item
             onParentItemChanged: item => { if (item) item.topInset = 6 }
             page: Item {
@@ -463,6 +466,7 @@ DccObject {
             visible: dccData.virtualScreens.length > 1
             page: ComboBox {
                 flat: true
+                enabled: !(root.isExtendMode && dccData.isConcatScreenMode)
                 textRole: "name"
                 model: dccData.virtualScreens
                 function indexOfScreen(primary) {
@@ -478,6 +482,66 @@ DccObject {
                 onActivated: {
                     if (dccData.primaryScreen !== currentValue) {
                         dccData.primaryScreen = currentValue
+                    }
+                }
+            }
+        }
+        DccObject {
+            name: "mergeToConcatScreen"
+            parentName: "display/displayMultipleDisplays"
+            displayName: qsTr("Concat Screen")
+            weight: 40
+            visible: root.isExtendMode && dccData.isX11 && dccData.screens.length > 1
+            pageType: DccObject.Item
+            page: Item {
+                implicitHeight: 40
+                RowLayout {
+                    anchors.fill: parent
+                    anchors.leftMargin: 14
+                    anchors.rightMargin:14
+
+                    D.Label {
+                        text: dccObj.displayName
+                        Layout.rightMargin: 4
+                    }
+                    D.Button {
+                        id: helpBtn
+                        flat: true
+                        implicitWidth: 16
+                        implicitHeight: 16
+                        icon {
+                            name: "help"
+                            width: 16
+                            height: 16
+                        }
+                        hoverEnabled: false
+                        background: Item {}
+                        ToolTip {
+                            x: 0
+                            implicitWidth: 400
+                            visible: helpBtn.checked
+                            contentItem: D.Label {
+                                text: qsTr("Drag the display layout first to form a rectangle. If a rectangular layout is not possible, set all displays to the same resolution first.")
+                                wrapMode: Text.Wrap
+                                padding: 8
+                            }
+                        }
+                        onClicked: checked = !checked
+                        onActiveFocusChanged: if (!activeFocus) checked = false
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                    }
+                    Switch {
+                        checked: dccData.isConcatScreenMode
+                        enabled: root.screensFormRect || dccData.isConcatScreenMode
+                        onCheckedChanged: {
+                            if (checked) {
+                                dccData.mergeToConcatScreen()
+                            } else {
+                                dccData.resetConcatScreenMode()
+                            }
+                        }
                     }
                 }
             }
@@ -577,6 +641,7 @@ DccObject {
         }
     }
     DccObject {
+        id: brightnessGroup
         name: "brightnessGroup"
         parentName: "display"
         displayName: qsTr("Brightness")
@@ -584,27 +649,41 @@ DccObject {
         visible: screen.screenItems.length > 1
         pageType: DccObject.Item
         page: DccGroupView {}
-        DccObject {
-            name: "brightness"
-            parentName: "display/brightnessGroup"
-            displayName: qsTr("Brightness")
-            weight: 10
-            pageType: DccObject.Editor
-            onParentItemChanged: item => { if (item) item.implicitHeight = 36 }
-            page: Item {
+
+        function getBuiltinScreenIndex() {
+            for (var i = 0; i < screen.screenItems.length; i++) {
+                if (screen.screenItems[i].name === dccData.builtinMonitorName) {
+                    return i;
+                }
             }
+            return -1;
         }
+
         DccRepeater {
             model: screen.screenItems
             delegate: DccObject {
                 name: "brightness" + index
                 parentName: "display/brightnessGroup"
-                weight: 20 + index
+                weight: 200 + index * 5
                 displayName: screen.screenItems[index].name
                 pageType: DccObject.Editor
                 page: BrightnessComponent {
                     screenItem: screen.screenItems[index]
                 }
+            }
+        }
+        DccObject {
+            name: "autoBrightness"
+            parentName: "display/brightnessGroup"
+            displayName: qsTr("Auto Brightness")
+            weight: 200 + brightnessGroup.getBuiltinScreenIndex() * 5 + 1
+            visible: dccData.autoBacklightSupported && brightnessGroup.getBuiltinScreenIndex() >= 0
+            backgroundType: DccObject.Normal
+            pageType: DccObject.Editor
+            onParentItemChanged: item => { if (item) { item.rightItemTopMargin = 6; item.rightItemBottomMargin = 6 } }
+            page: Switch {
+                checked: dccData.autoBacklightEnabled
+                onClicked: dccData.autoBacklightEnabled = checked
             }
         }
     }
@@ -626,6 +705,20 @@ DccObject {
                 screenItem: screen.screenItems[0]
             }
         }
+        DccObject {
+            name: "autoBrightness"
+            parentName: "display/screenGroup"
+            displayName: qsTr("Auto Brightness")
+            weight: 15
+            visible: dccData.autoBacklightSupported && screen.screenItems.length === 1 && screen.screenItems[0].name === dccData.builtinMonitorName
+            backgroundType: DccObject.Normal
+            pageType: DccObject.Editor
+            onParentItemChanged: item => { if (item) { item.rightItemTopMargin = 6; item.rightItemBottomMargin = 6 } }
+            page: Switch {
+                checked: dccData.autoBacklightEnabled
+                onClicked: dccData.autoBacklightEnabled = checked
+            }
+        }
 
         DccObject {
             name: "displayResolution"
@@ -636,6 +729,7 @@ DccObject {
             page: ComboBox {
                 id: resolutionComboBox
                 flat: true
+                enabled: !(root.isExtendMode && dccData.isConcatScreenMode)
                 model: root.getResolutionModel(screen.resolutionList, screen.bestResolution)
                 textRole: "text"
                 valueRole: "value"
@@ -780,6 +874,7 @@ DccObject {
             pageType: DccObject.Editor
             page: ComboBox {
                 flat: true
+                enabled: !(root.isExtendMode && dccData.isConcatScreenMode)
                 textRole: "text"
                 valueRole: "value"
                 model: root.getRateModel(screen.rateList, screen.bestRate)
@@ -813,6 +908,7 @@ DccObject {
             pageType: DccObject.Editor
             page: ComboBox {
                 flat: true
+                enabled: !(root.isExtendMode && dccData.isConcatScreenMode)
                 textRole: "text"
                 valueRole: "value"
                 model: [{
@@ -859,6 +955,7 @@ DccObject {
             pageType: DccObject.Editor
             page: ComboBox {
                 flat: true
+                enabled: !(root.isExtendMode && dccData.isConcatScreenMode)
                 textRole: "text"
                 valueRole: "value"
                 model: dccData.isX11 ? root.getScaleModel(dccData.maxGlobalScale, dccData.globalScale) : root.getScaleModel(screen.maxScale, screen.scale)
@@ -889,6 +986,7 @@ DccObject {
         onParentItemChanged: item => { if (item) item.topInset = 6 }
         page: ComboBox {
             flat: true
+            enabled: !(root.isExtendMode && dccData.isConcatScreenMode)
             textRole: "text"
             valueRole: "value"
             model: root.getScaleModel(dccData.maxGlobalScale, dccData.globalScale)
@@ -928,7 +1026,7 @@ DccObject {
         weight: 110
         visible: dccData.colorTemperatureEnabled
         pageType: DccObject.Item
-        onParentItemChanged: item => { if (item) item.topInset = 6 }
+        onParentItemChanged: item => { if (item) { item.rightItemTopMargin = 6; item.rightItemBottomMargin = 6 } }
         page: DccGroupView {}
         DccObject {
             name: "time"

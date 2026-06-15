@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_TW">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_TW">
 <context>
     <name>AccountSettings</name>
     <message>
@@ -191,7 +193,7 @@ To ensure successful entry:
     <message>
         <source>&quot;Biometric authentication&quot; is a function for user identity authentication provided by UnionTech Software Technology Co., Ltd. Through &quot;biometric authentication&quot;, the biometric data collected will be compared with that stored in the device, and the user identity will be verified based on the comparison result.
 
-Please be noted that UnionTech Software Technology Co., Ltd. will not collect or access your biometric information, which will be stored on your local device. Please only enable the biometric authentication in your personal device and use your own biometric information for related operations, and promptly disable or delete other people's biometric information on that device, otherwise you will bear the risk arising therefrom.
+Please be noted that UnionTech Software Technology Co., Ltd. will not collect or access your biometric information, which will be stored on your local device. Please only enable the biometric authentication in your personal device and use your own biometric information for related operations, and promptly disable or delete other people&apos;s biometric information on that device, otherwise you will bear the risk arising therefrom.
 
 UnionTech Software Technology Co., Ltd. is committed to research and improve the security, accuracy and stability of biometric authentication. However, due to environmental, equipment, technical and other factors and risk control, there is no guarantee that you will pass the biometric authentication temporarily. Therefore, please do not take biometric authentication as the only way to log in to UOS. If you have any questions or suggestions when using the biometric authentication, you can give feedback through &quot;Service and Support&quot; in the UOS.</source>
         <translation>「生物認證」是統信軟體技術有限公司提供的一種對使用者進行身份認證的功能。通過「生物認證」，將採集的生物識別資料與儲存在裝置本地的生物識別資料進行比對，並根據比對結果來驗證使用者身份。
@@ -236,7 +238,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     <message>
         <source>&quot;Biometric authentication&quot; is a function for user identity authentication provided by UnionTech Software Technology Co., Ltd. Through &quot;biometric authentication&quot;, the biometric data collected will be compared with that stored in the device, and the user identity will be verified based on the comparison result.
 
-Please be noted that UnionTech Software Technology Co., Ltd. will not collect or access your biometric information, which will be stored on your local device. Please only enable the biometric authentication in your personal device and use your own biometric information for related operations, and promptly disable or delete other people's biometric information on that device, otherwise you will bear the risk arising therefrom.
+Please be noted that UnionTech Software Technology Co., Ltd. will not collect or access your biometric information, which will be stored on your local device. Please only enable the biometric authentication in your personal device and use your own biometric information for related operations, and promptly disable or delete other people&apos;s biometric information on that device, otherwise you will bear the risk arising therefrom.
 
 UnionTech Software Technology Co., Ltd. is committed to research and improve the security, accuracy and stability of biometric authentication. However, due to environmental, equipment, technical and other factors and risk control, there is no guarantee that you will pass the biometric authentication temporarily. Therefore, please do not take biometric authentication as the only way to log in to UOS. If you have any questions or suggestions when using the biometric authentication, you can give feedback through &quot;Service and Support&quot; in the UOS.</source>
         <translation>「生物認證」是統信軟體技術有限公司提供的一種對使用者進行身份認證的功能。通過「生物認證」，將採集的生物識別資料與儲存在裝置本地的生物識別資料進行比對，並根據比對結果來驗證使用者身份。
@@ -285,7 +287,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     <message>
         <source>&quot;Biometric authentication&quot; is a function for user identity authentication provided by UnionTech Software Technology Co., Ltd. Through &quot;biometric authentication&quot;, the biometric data collected will be compared with that stored in the device, and the user identity will be verified based on the comparison result.
 
-Please be noted that UnionTech Software Technology Co., Ltd. will not collect or access your biometric information, which will be stored on your local device. Please only enable the biometric authentication in your personal device and use your own biometric information for related operations, and promptly disable or delete other people's biometric information on that device, otherwise you will bear the risk arising therefrom.
+Please be noted that UnionTech Software Technology Co., Ltd. will not collect or access your biometric information, which will be stored on your local device. Please only enable the biometric authentication in your personal device and use your own biometric information for related operations, and promptly disable or delete other people&apos;s biometric information on that device, otherwise you will bear the risk arising therefrom.
 
 UnionTech Software Technology Co., Ltd. is committed to research and improve the security, accuracy and stability of biometric authentication. However, due to environmental, equipment, technical and other factors and risk control, there is no guarantee that you will pass the biometric authentication temporarily. Therefore, please do not take biometric authentication as the only way to log in to UOS. If you have any questions or suggestions when using the biometric authentication, you can give feedback through &quot;Service and Support&quot; in the UOS.</source>
         <translation>「生物認證」是統信軟體技術有限公司提供的一種對使用者進行身份認證的功能。通過「生物認證」，將採集的生物識別資料與儲存在裝置本地的生物識別資料進行比對，並根據比對結果來驗證使用者身份。
@@ -1136,10 +1138,6 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
         <translation>https://www.uniontech.com/agreement/experience-tw</translation>
     </message>
     <message>
-        <source>Agree and Join User Experience Program</source>
-        <translation>同意並加入使用者體驗計劃</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;We are deeply aware of the importance of your personal information to you. So we have the Privacy Policy that covers how we collect, use, share, transfer, publicly disclose, and store your information.&lt;/p&gt;&lt;p&gt;You can &lt;a href=&quot;%1&quot;&gt;click here&lt;/a&gt; to view our latest privacy policy and/or view it online by visiting &lt;a href=&quot;%1&quot;&gt; %1&lt;/a&gt;. Please read carefully and fully understand our practices on customer privacy. If you have any questions, please contact us at: %2.&lt;/p&gt;</source>
         <translation>&lt;p&gt;統信軟體非常重視您的隱私。因此我們制定了涵蓋如何收集、使用、共享、轉讓、公開披露以及儲存您的資訊的隱私政策。&lt;/p&gt;&lt;p&gt;您可以&lt;a href=&quot;%1&quot;&gt;點選此處&lt;/a&gt; 檢視我們最新的隱私政策和/或通過訪問&lt;a href=&quot;%1&quot;&gt; %1&lt;/a&gt;線上檢視。請您務必認真閱讀、充分理解我們針對客戶隱私的做法，如果有任何疑問，請聯絡我們：%2。&lt;/p&gt;</translation>
     </message>
@@ -1184,7 +1182,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Confirm</source>
-        <translation>確認</translation>
+        <translation>確定</translation>
     </message>
 </context>
 <context>
@@ -1225,11 +1223,11 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>%1 hours earlier than local</source>
-        <translation>比本地早了 %1 小時</translation>
+        <translation>早 %1 小時</translation>
     </message>
     <message>
         <source>%1 hours later than local</source>
-        <translation>比本地晚了 %1 小時</translation>
+        <translation>晚 %1 小時</translation>
     </message>
     <message>
         <source>Space</source>
@@ -1608,7 +1606,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>After entering the developer mode, you can obtain root permissions, but it may also damage the system integrity, so please use it with caution.</source>
-        <translation>可獲得root使用許可權，但同時也可能導致系統完教性遭到破壞，請謹慎使用。</translation>
+        <translation>可獲得root使用許可權，但同時也可能導致系統完整性遭到破壞，請謹慎使用。</translation>
     </message>
     <message>
         <source>Allowed</source>
@@ -1941,6 +1939,18 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <message>
         <source>Scaling</source>
         <translation>縮放</translation>
+    </message>
+    <message>
+        <source>Auto Brightness</source>
+        <translation>自動調節亮度</translation>
+    </message>
+    <message>
+        <source>Concat Screen</source>
+        <translation>跨屏拼接</translation>
+    </message>
+    <message>
+        <source>Drag the display layout first to form a rectangle. If a rectangular layout is not possible, set all displays to the same resolution first.</source>
+        <translation>請先拖動屏幕示意图，将多屏拼接为矩形；若当前无法拼接为矩形，请先统一分辨率。</translation>
     </message>
 </context>
 <context>
@@ -2477,10 +2487,6 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
         <translation>大</translation>
     </message>
     <message>
-        <source>X-Large</source>
-        <translation>極大</translation>
-    </message>
-    <message>
         <source>Some apps require logout or system restart to take effect</source>
         <translation>部分應用需登出或重啟系統後生效</translation>
     </message>
@@ -2737,11 +2743,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Picker service is not available</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Invalid color format: %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3741,19 +3747,19 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>TimezoneDialog</name>
     <message>
         <source>Add time zone</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Determine the time zone based on the current location</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time zone:</source>
-        <translation type="unfinished"/>
+        <translation>時區：</translation>
     </message>
     <message>
         <source>Nearest City:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -3838,6 +3844,21 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <message>
         <source>Common</source>
         <translation>通用</translation>
+    </message>
+</context>
+<context>
+    <name>UeProgramLicenseDialog</name>
+    <message>
+        <source>Agree and Join User Experience Program</source>
+        <translation>同意並加入使用者體驗計劃</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取 消</translation>
+    </message>
+    <message>
+        <source>Confirm</source>
+        <translation>確 認</translation>
     </message>
 </context>
 <context>

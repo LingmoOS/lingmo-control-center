@@ -1,9 +1,10 @@
-// SPDX-FileCopyrightText: 2024 - 2027 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2024 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "controlcenterdbusadaptor.h"
 
 #include "dccmanager.h"
+#include "dccobject_p.h"
 
 #include <QCoreApplication>
 #include <QDBusConnection>
@@ -17,8 +18,6 @@
 #include <QWindow>
 
 using namespace dccV25;
-static Q_LOGGING_CATEGORY(dccLog, "dde.dcc.DBusAdaptor");
-
 const QString DBusProperties = "org.freedesktop.DBus.Properties";
 const QString DBusPropertiesChanged = "PropertiesChanged";
 
@@ -94,10 +93,7 @@ void ControlCenterDBusAdaptor::ShowPage(const QString &url)
 
 void ControlCenterDBusAdaptor::Toggle()
 {
-    QWindow *w = parent()->mainWindow();
-    w->setVisible(!w->isVisible());
-    if (w->isVisible())
-        w->requestActivate();
+    parent()->toggle();
 }
 
 QString ControlCenterDBusAdaptor::GetAllModule()

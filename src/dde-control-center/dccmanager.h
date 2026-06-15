@@ -23,7 +23,7 @@ QT_END_NAMESPACE
 namespace dccV25 {
 class NavigationModel;
 class SearchModel;
-class PluginManager;
+class DccPluginManager;
 class DccImageProvider;
 
 class DccManager : public DccApp, protected QDBusContext
@@ -74,6 +74,7 @@ public Q_SLOTS:
     void cacheImage(const QString &id, const QSize &thumbnailSize = QSize());
 
     void show();
+    void toggle();
     void showHelp();
     // DBus Search
     QString search(const QString &json) const;
@@ -81,7 +82,7 @@ public Q_SLOTS:
     bool stop(const QString &json);
     bool action(const QString &json);
     QString GetAllModule();
-    void onDccObjectDestroyed();
+    void onDccObjectDestroyed(DccObject *obj);
 
 Q_SIGNALS:
     void activeItemChanged(QQuickItem *item, bool isIndicatorShown);
@@ -100,13 +101,18 @@ private:
     const DccObject *findParent(const DccObject *obj);
     bool eventFilter(QObject *watched, QEvent *event) override;
     bool isIndicatorShown(const QString &cmd) const;
+    QString parseShowPageUrl(const QString &url, QString &cmd) const;
+    void replyShowPageRequest(const QString &url, const QDBusMessage &message, bool found) const;
+    void startPendingShow(const QString &url, const QDBusMessage &message);
 
 private Q_SLOTS:
     void saveSize();
     void handleScreenAdded(QScreen *screen);
     void waitShowPage(const QString &url, const QDBusMessage message);
     void clearShowParam();
+    void handleShowReady();
     void tryShow();
+    void tryShowFallback();
     void doShowPage(QPointer<DccObject> obj, const QString &cmd);
     void updateModuleConfig(const QString &key);
     void onVisible(bool visible);
@@ -118,6 +124,7 @@ private Q_SLOTS:
     void clearData();
     void waitLoadFinished() const;
     void doGetAllModule(const QDBusMessage message) const;
+    void onPageStayTimeout();
 
 private:
     DccObject *m_root;
@@ -129,7 +136,7 @@ private:
     QVector<DccObject *> m_currentObjects;   // 当前显示的页面路径，从根页面到当前页面
     QVector<DccObject *> m_triggeredObjects; // 用户交互触发的对象路径，从根菜单到当前子控件
 
-    PluginManager *m_plugins;
+    DccPluginManager *m_plugins;
     QPointer<QWindow> m_window;
     Dtk::Core::DConfig *m_dconfig;
     QSet<QString> m_hideModule;
@@ -141,10 +148,16 @@ private:
     int m_sidebarWidth;
     // DBus调用时，对应项还没加载完成，此处保存跳转参数
     QTimer *m_showTimer;
+    QTimer *m_showFallbackTimer;
     QString m_showUrl;
     QDBusMessage m_showMessage;
 
     QHash<QString, QVector<DccObject *>> m_objMap; // 映射对象名称到对象指针列表，用于快速查找
+
+#ifdef HAVE_DDE_API_EVENTLOGGER
+    QTimer *m_pageStayTimer;
+    QStringList m_lastPageTags;
+#endif
 };
 } // namespace dccV25
 #endif // DCCMANAGER_H

@@ -22,6 +22,7 @@ Q_LOGGING_CATEGORY(DdcDisplayWorker, "dcc-display-worker")
 
 
 const QString DisplayInterface("org.deepin.dde.Display1");
+constexpr const char * const CONCAT_SCREEN_NAME = "DDE-CONCAT-SCREEN";
 
 Q_DECLARE_METATYPE(QList<QDBusObjectPath>)
 using namespace dccV25;
@@ -85,10 +86,10 @@ void DisplayWorker::active()
         //                               "AllowEnableMultiScaleRatio",
         //                               false));
 
-        QDBusPendingCallWatcher *scalewatcher = new QDBusPendingCallWatcher(m_displayInter->GetScaleFactor());
+        QDBusPendingCallWatcher *scalewatcher = new QDBusPendingCallWatcher(m_displayInter->GetScaleFactor(), this);
         connect(scalewatcher, &QDBusPendingCallWatcher::finished, this, &DisplayWorker::onGetScaleFinished);
 
-        QDBusPendingCallWatcher *screenscaleswatcher = new QDBusPendingCallWatcher(m_displayInter->GetScreenScaleFactors());
+        QDBusPendingCallWatcher *screenscaleswatcher = new QDBusPendingCallWatcher(m_displayInter->GetScreenScaleFactors(), this);
         connect(screenscaleswatcher, &QDBusPendingCallWatcher::finished, this, &DisplayWorker::onGetScreenScalesFinished);
 
         onMonitorsBrightnessChanged(m_displayInter->brightness());
@@ -107,6 +108,9 @@ void DisplayWorker::active()
         m_model->setCustomColorTempTimePeriod(m_displayInter->customColorTempTimePeriod());
         m_model->setmaxBacklightBrightness(m_displayInter->maxBacklightBrightness());
         m_model->setAutoLightAdjustIsValid(m_displayInter->hasAmbientLightSensor());
+
+        // 初始化自动亮度
+        initAutoBacklight();
 
         bool isRedshiftValid = true;
         QDBusReply<bool> reply = m_displayInter->SupportSetColorTemperatureSync();
@@ -554,7 +558,15 @@ void DisplayWorker::setMonitorBrightness(Monitor *mon, const double brightness)
     }
 }
 
-void DisplayWorker::setMonitorPosition(QHash<Monitor *, QPair<int, int>> monitorPosition)
+void DisplayWorker::updateMonitorPosition(const QHash<Monitor *, QPair<int, int>> &monitorPosition)
+{
+    for (auto it(monitorPosition.cbegin()); it != monitorPosition.cend(); ++it) {
+        it.key()->setX(it.value().first);
+        it.key()->setY(it.value().second);
+    }
+}
+
+void DisplayWorker::setMonitorPosition(const QHash<Monitor *, QPair<int, int>> monitorPosition)
 {
     if (WQt::Utils::isTreeland()) {
         auto *opCfg = m_reg->outputManager()->createConfiguration();
@@ -954,6 +966,45 @@ void DisplayWorker::setAmbientLightAdjustBrightness(bool able)
     m_displayInter->setAmbientLightAdjustBrightness(able);
 }
 
+void DisplayWorker::initAutoBacklight()
+{
+    if (!m_displayInter)
+        return;
+
+    // 读取自动亮度支持状态
+    bool supported = m_displayInter->autoBrightnessSupported();
+    m_model->setAutoBacklightSupported(supported);
+
+    // 读取自动亮度启用状态
+    bool enabled = m_displayInter->autoBrightnessEnabled();
+    m_model->setAutoBacklightEnabled(enabled);
+
+    // 获取内置屏幕名称
+    QString builtinName = m_displayInter->GetBuiltinMonitorName();
+    if (!builtinName.isEmpty()) {
+        m_model->setBuiltinMonitorName(builtinName);
+    }
+
+    // 连接信号
+    connect(m_displayInter, &DisplayDBusProxy::AutoBrightnessSupportedChanged, m_model, &DisplayModel::setAutoBacklightSupported);
+    connect(m_displayInter, &DisplayDBusProxy::AutoBrightnessEnabledChanged, m_model, &DisplayModel::setAutoBacklightEnabled);
+    connect(m_model, &DisplayModel::requestSetAutoBacklightEnable, this, &DisplayWorker::setAutoBacklightEnabled);
+}
+
+void DisplayWorker::setAutoBacklightEnabled(const bool value)
+{
+    if (!m_displayInter)
+        return;
+
+    QDBusPendingReply<> reply = m_displayInter->SetAutoBrightnessEnabled(value);
+    reply.waitForFinished();
+    if (reply.isError()) {
+        qCWarning(DdcDisplayWorker) << "Set auto brightness enabled failed, error: " << reply.error().message();
+    } else {
+        qCInfo(DdcDisplayWorker) << "Set `AutoBrightnessEnabled`, value: " << value;
+    }
+}
+
 void DisplayWorker::setTouchScreenAssociation(const QString &monitor, const QString &touchscreenUUID)
 {
     m_displayInter->AssociateTouch(monitor, touchscreenUUID);
@@ -988,4 +1039,59 @@ void DisplayWorker::setMonitorResolutionBySize(Monitor *mon, const int width, co
         });
         watcher->waitForFinished();
     }
+}
+
+void DisplayWorker::mergeToConcatScreen(const QStringList &outputs)
+{
+    if (WQt::Utils::isTreeland()) {
+        return;
+    }
+
+    if (outputs.size() < 2) {
+        return;
+    }
+        
+    QString outputsStr = outputs.join(",");
+    qCDebug(DdcDisplayWorker) << "[ConcatScreen] mergeToConcatScreen: xrandr --setmonitor" << CONCAT_SCREEN_NAME << "auto" << outputsStr;
+    QProcess p;
+    p.start("xrandr", {"--setmonitor", CONCAT_SCREEN_NAME, "auto", outputsStr});
+    p.waitForFinished(5000);
+    if (p.exitCode() != 0) {
+        qCWarning(DdcDisplayWorker) << "[ConcatScreen] mergeToConcatScreen failed:" << p.readAllStandardError();
+        return;
+    }
+    m_model->setIsConcatScreenMode(true);
+}
+
+void DisplayWorker::resetConcatScreenMode()
+{
+    if (WQt::Utils::isTreeland()) {
+        return;
+    }
+
+    QProcess p;
+    p.start("xrandr", {"--delmonitor", CONCAT_SCREEN_NAME});
+    p.waitForFinished(5000);
+    if (p.exitCode() != 0) {
+        qCWarning(DdcDisplayWorker) << "[ConcatScreen] delmonitor failed:" << p.readAllStandardError();
+        return;
+    }
+
+    m_model->setIsConcatScreenMode(false);
+}
+
+void DisplayWorker::updateConcatScreenMode()
+{
+    if (WQt::Utils::isTreeland()) {
+        return;
+    }
+
+    QProcess p;
+    p.start("xrandr", {"--listmonitors"});
+    p.waitForFinished(3000);
+    if (p.exitCode() != 0) {
+        qCWarning(DdcDisplayWorker) << "[ConcatScreen] listmonitors failed:" << p.readAllStandardError();
+    }
+    QByteArray output = p.readAllStandardOutput();
+    m_model->setIsConcatScreenMode(output.contains(CONCAT_SCREEN_NAME));
 }

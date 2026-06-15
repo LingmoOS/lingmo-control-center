@@ -1,4 +1,4 @@
-//SPDX-FileCopyrightText: 2018 - 2023 UnionTech Software Technology Co., Ltd.
+//SPDX-FileCopyrightText: 2018 - 2026 UnionTech Software Technology Co., Ltd.
 //
 //SPDX-License-Identifier: GPL-3.0-or-later
 #ifndef DISPLAYMODEL_H
@@ -65,6 +65,15 @@ public:
     inline bool isAudtoLightAdjust() const { return m_isAutoLightAdjust; }
     void setAutoLightAdjust(bool);
 
+    inline bool autoBacklightSupported() const { return m_autoBacklightSupported; }
+    void setAutoBacklightSupported(bool supported);
+
+    inline bool autoBacklightEnabled() const { return m_autoBacklightEnabled; }
+    void setAutoBacklightEnabled(bool enabled);
+
+    inline QString builtinMonitorName() const { return m_builtinMonitorName; }
+    void setBuiltinMonitorName(const QString &name);
+
     inline BrightnessMap brightnessMap() const { return m_brightnessMap; }
     void setBrightnessMap(const BrightnessMap &brightnessMap);
 
@@ -94,6 +103,9 @@ public:
     inline bool monitorModeChanging() const { return m_monitorModeChanging; }
     void setmodeChanging(bool changing);
 
+    inline bool isConcatScreenMode() const { return m_isConcatScreenMode; }
+    void setIsConcatScreenMode(bool enabled);
+
 Q_SIGNALS:
     void screenHeightChanged(const int h) const;
     void screenWidthChanged(const int w) const;
@@ -107,6 +119,10 @@ Q_SIGNALS:
     void redshiftVaildChanged(const bool isvalid) const;
     void autoLightAdjustSettingChanged(bool setting) const;
     void autoLightAdjustVaildChanged(bool isvalid) const;
+    void autoBacklightSupportedChanged(bool supported) const;
+    void autoBacklightEnabledChanged(bool enabled) const;
+    void builtinMonitorNameChanged(const QString &name) const;
+    void requestSetAutoBacklightEnable(bool enabled) const;
     void touchscreenListChanged() const;
     void touchscreenMapChanged() const;
     void maxBacklightBrightnessChanged(uint value);
@@ -120,6 +136,7 @@ Q_SIGNALS:
     void sharedDevicesChanged(bool on) const;
     void filesStoragePathChanged(const QString& path) const;
     void customColorTempTimePeriodChanged(const QString& timePeriod);
+    void concatScreenModeChanged(bool enabled);
 
 private Q_SLOTS:
     void setScreenHeight(const int h);
@@ -150,6 +167,9 @@ private:
     bool m_RefreshRateEnable {false};
     bool m_isAutoLightAdjust {false};
     bool m_AutoLightAdjustIsValid {false};
+    bool m_autoBacklightSupported {false};
+    bool m_autoBacklightEnabled {false};
+    QString m_builtinMonitorName;
     bool m_allowEnableMultiScaleRatio;
     bool m_resolutionRefreshEnable;
     bool m_brightnessEnable;
@@ -159,6 +179,7 @@ private:
     uint m_maxBacklightBrightness {0};
     bool m_allSupportFillModes;
     bool m_monitorModeChanging; // 配置修改中,仅控制中心修改时才处理自动拼接
+    bool m_isConcatScreenMode { false };
 };
 }
 

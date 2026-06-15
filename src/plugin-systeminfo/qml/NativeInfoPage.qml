@@ -21,7 +21,7 @@ DccObject {
         visible: !dccData.systemInfoMode().showDetail
         page: RowLayout {
             Image {
-                source: "file://" + DTK.deepinDistributionOrgLogo
+                source: "file://" + DTK.lingmoDefaultLogo
             }
 
             ColumnLayout {

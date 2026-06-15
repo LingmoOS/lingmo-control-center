@@ -41,6 +41,8 @@ std::mutex SCALE_SETTING_GUARD;
 static const QString PlyMouthConf = QStringLiteral("/etc/plymouth/plymouthd.conf");
 static const QString kTmpGrubBgDir = QStringLiteral("/tmp/dcc-grub-backgrounds");
 
+constexpr const char* const BOOT_WALLPAPER_ENABLED = "bootWallpaperEnabled";
+constexpr const char* const BOOT_GRUB_USERNAME_VISIBLE = "bootGrubUserNameVisible";
 
 const QString &GRUB_EDIT_AUTH_ACCOUNT("root");
 
@@ -165,6 +167,9 @@ CommonInfoWork::CommonInfoWork(CommonInfoModel *model, QObject *parent)
                                  "/com/deepin/sync/Helper",
                                  "com.deepin.sync.Helper",
                                  QDBusConnection::systemBus(), this))
+    , m_dtkConfig(Dtk::Core::DConfig::create("org.deepin.dde.control-center", 
+                                             "org.deepin.dde.control-center.commoninfo", 
+                                             QString(), this))
 {
     //注册类型
     qRegisterMetaType<DebugArg>("DebugArg");
@@ -225,6 +230,8 @@ CommonInfoWork::CommonInfoWork(CommonInfoModel *model, QObject *parent)
     });
 
     connect(m_commonInfoProxy, &CommonInfoProxy::DeveloperModeChanged, m_commomModel, &CommonInfoModel::setIsDeveloperMode);
+
+    initDtkConfig();
 }
 
 CommonInfoWork::~CommonInfoWork()
@@ -333,6 +340,23 @@ void CommonInfoWork::initDebugLogLevel()
         }
         watcher->deleteLater();
     });
+}
+
+void CommonInfoWork::initDtkConfig()
+{
+    if (!m_dtkConfig)
+        return;
+
+    connect(m_dtkConfig, &Dtk::Core::DConfig::valueChanged, this, &CommonInfoWork::onDTKConfigChanged);
+
+    const QStringList configKeys = {
+        BOOT_WALLPAPER_ENABLED,
+        BOOT_GRUB_USERNAME_VISIBLE
+    };
+
+    for (const QString& key : configKeys) {
+        onDTKConfigChanged(key);
+    }
 }
 
 QString CommonInfoWork::verifyPassword(QString text)
@@ -537,6 +561,26 @@ bool CommonInfoWork::showReadOnlyProtection() const
 
     qCDebug(DccCommonInfoWork) << "showReadOnlyProtection:" << ret;
     return ret;
+}
+
+void CommonInfoWork::onDTKConfigChanged(const QString& key)
+{
+    if (!m_dtkConfig || !m_dtkConfig->isValid())
+    {
+        qCWarning(DccCommonInfoWork) << "Invalid CommonInfo DConfig.";
+        return;
+    }
+
+    if (!m_commomModel)
+    {
+        qCWarning(DccCommonInfoWork) << "Invalid CommonInfo Model.";
+        return;
+    }
+
+    if (key == BOOT_WALLPAPER_ENABLED)
+        m_commomModel->setBootWallpaperEnabled(m_dtkConfig->value(key).toBool());
+    else if (key == BOOT_GRUB_USERNAME_VISIBLE)
+        m_commomModel->setBootGrubUserNameVisible(m_dtkConfig->value(key).toBool());
 }
 
 void CommonInfoWork::setBootDelay(bool value)

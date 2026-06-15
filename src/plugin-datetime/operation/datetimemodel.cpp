@@ -58,7 +58,10 @@ static QString getDescription(const ZoneInfo &zoneInfo)
         description = DatetimeModel::tr("%1 hours later than local").arg(QString::number(-timeDelta, 'f', decimalNumber));
     }
 
-    return QString("%1, %2").arg(dateLiteral).arg(description);
+    QDateTime targetTime = localTime.addSecs(static_cast<qint64>(timeDelta * 3600));
+    QString timeText = targetTime.toString("HH:mm");
+
+    return QString("%1, %2, %3").arg(dateLiteral).arg(description).arg(timeText);
 }
 
 static QString getDisplayText(const ZoneInfo &zoneInfo)
@@ -139,6 +142,19 @@ static inline QString unEscapSpace(const QString &space)
     // 将所有空格类字符（包括普通空格和特殊空格）都转换为 "Space" 显示
     // 这样用户在UI中看到的都是 "Space"，但实际使用的是区域对应的空格字符
     return space.at(0).isSpace() ? DatetimeModel::tr("Space") : space;
+}
+
+static inline bool isSpaceSymbol(const QString &value)
+{
+    if (value.isEmpty())
+        return false;
+
+    return value == DatetimeModel::tr("Space") || value.at(0).isSpace();
+}
+
+static inline QString normalizedSymbol(const QString &value)
+{
+    return isSpaceSymbol(value) ? DatetimeModel::tr("Space") : value;
 }
 
 // 将显示用的符号转换回实际的字符
@@ -340,6 +356,19 @@ QAbstractListModel *DatetimeModel::userTimezoneModel()
         auto indexBegin = m_userTimezoneModel->index(0);
         auto indexEnd = m_userTimezoneModel->index(m_userTimeZones.count() - 1);
         Q_EMIT m_userTimezoneModel->dataChanged(indexBegin, indexEnd);
+    });
+    connect(this, &DatetimeModel::currentTimeChanged, m_userTimezoneModel, [this]() {
+        static int lastMinute = -1;
+        int curMinute = QTime::currentTime().minute();
+        if (curMinute == lastMinute)
+            return;
+        lastMinute = curMinute;
+
+        if (!m_userTimeZones.isEmpty()) {
+            auto indexBegin = m_userTimezoneModel->index(0);
+            auto indexEnd = m_userTimezoneModel->index(m_userTimeZones.count() - 1);
+            Q_EMIT m_userTimezoneModel->dataChanged(indexBegin, indexEnd);
+        }
     });
 
     return m_userTimezoneModel;
@@ -1419,8 +1448,9 @@ bool DatetimeModel::hasSymbolConflict() const
 
 bool DatetimeModel::symbolsConflict(const QString &decimal, const QString &separator) const
 {
-    // 检查两个符号是否非空且相同
-    return !decimal.isEmpty() && !separator.isEmpty() && decimal == separator;
+    // 所有空白类字符在符号逻辑中都视为同一个 "Space" 符号
+    return !decimal.isEmpty() && !separator.isEmpty()
+            && normalizedSymbol(decimal) == normalizedSymbol(separator);
 }
 
 QStringList DatetimeModel::getAllSupportedSymbols() const
@@ -1478,7 +1508,7 @@ QString DatetimeModel::resolveDecimalSymbol(const QString &decimal, const QStrin
     } else if (separator == ".") {
         // 点→逗号：当分隔符是点时，小数点改为逗号
         return ",";
-    } else if (separator == " " || separator == tr("Space")) {
+    } else if (isSpaceSymbol(separator)) {
         // 空格→点：当分隔符是空格时，小数点改为点
         return ".";
     } else if (separator == "'") {
@@ -1516,7 +1546,7 @@ QStringList DatetimeModel::getFilteredDecimalSymbols() const
         symbols.removeAll(currentSeparator);
         
         // 如果当前分隔符是空格字符，也要排除实际的空格字符
-        if (currentSeparator.contains(' ')) {
+        if (isSpaceSymbol(currentSeparator)) {
             symbols.removeAll(" ");
         }
     }
@@ -1539,9 +1569,9 @@ QStringList DatetimeModel::getFilteredSeparatorSymbols() const
     QString currentSeparator = m_work->digitGroupingSymbol();
     
     // 检查小数点是否为空格（空字符串或空格字符）
-    bool isDecimalSpace = currentDecimal.isEmpty() || currentDecimal.contains(' ');
+    bool isDecimalSpace = currentDecimal.isEmpty() || isSpaceSymbol(currentDecimal);
     // 检查分隔符是否为空格
-    bool isSeparatorSpace = currentSeparator.isEmpty() || currentSeparator.contains(' ');
+    bool isSeparatorSpace = currentSeparator.isEmpty() || isSpaceSymbol(currentSeparator);
     
     // 场景1：小数点为空格，分隔符也为空格 → 冲突！需要自动调整小数点
     if (isDecimalSpace && isSeparatorSpace) {
@@ -1575,7 +1605,7 @@ QStringList DatetimeModel::getFilteredSeparatorSymbols() const
             symbols.removeAll(currentDecimal);
             
             // 如果当前小数点是空格字符，也要排除实际的空格字符
-            if (currentDecimal.contains(' ')) {
+            if (isSpaceSymbol(currentDecimal)) {
                 symbols.removeAll(" ");
             }
         } else {

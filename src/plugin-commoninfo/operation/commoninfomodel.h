@@ -1,4 +1,4 @@
-//SPDX-FileCopyrightText: 2018 - 2023 UnionTech Software Technology Co., Ltd.
+//SPDX-FileCopyrightText: 2018 - 2026 UnionTech Software Technology Co., Ltd.
 //
 //SPDX-License-Identifier: GPL-3.0-or-later
 #pragma once
@@ -28,6 +28,8 @@ class CommonInfoModel : public QObject
     Q_PROPERTY(bool needShowModalDialog READ needShowModalDialog NOTIFY needShowModalDialogChanged FINAL)
     Q_PROPERTY(bool isDeveloperMode READ isDeveloperMode NOTIFY isDeveloperModeChanged FINAL)
     Q_PROPERTY(bool readOnlyProtectionEnabled READ readOnlyProtectionEnabled NOTIFY readOnlyProtectionEnabledChanged FINAL)
+    Q_PROPERTY(bool bootWallpaperEnabled READ bootWallpaperEnabled NOTIFY bootWallpaperEnabledChanged FINAL)
+    Q_PROPERTY(bool bootGrubUserNameVisible READ bootGrubUserNameVisible NOTIFY bootGrubUserNameVisibleChanged FINAL)
 
 
 public:
@@ -68,6 +70,12 @@ public:
     bool isDeveloperMode() const;
     bool readOnlyProtectionEnabled() const;
 
+    void setBootWallpaperEnabled(bool bootWallpaperEnabled);
+    bool bootWallpaperEnabled() const;
+
+    void setBootGrubUserNameVisible(bool bootGrubUserNameVisible);
+    bool bootGrubUserNameVisible() const;
+
 Q_SIGNALS:
     void bootDelayChanged(const bool enabled) const;
     void themeEnabledChanged(const bool enabled) const;
@@ -93,6 +101,8 @@ Q_SIGNALS:
 
     void isDeveloperModeChanged();
     void readOnlyProtectionEnabledChanged();
+    void bootWallpaperEnabledChanged();
+    void bootGrubUserNameVisibleChanged();
 
 public Q_SLOTS:
     void setBootDelay(bool bootDelay);
@@ -135,5 +145,6 @@ private:
 
     bool m_isDeveloperMode;
     bool m_readOnlyProtectionEnabled{false};
-
+    bool m_bootWallpaperEnabled{true};
+    bool m_bootGrubUserNameVisible{true};
 };
