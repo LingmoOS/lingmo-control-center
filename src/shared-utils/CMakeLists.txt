@@ -4,6 +4,12 @@
 
 add_library(dcc-shared-utils OBJECT)
 
+set_target_properties(
+    dcc-shared-utils
+    PROPERTIES
+    POSITION_INDEPENDENT_CODE ON
+)
+
 find_package(ICU COMPONENTS i18n uc)
 
 set(DCC_SHARED_UTILS_SOURCES
