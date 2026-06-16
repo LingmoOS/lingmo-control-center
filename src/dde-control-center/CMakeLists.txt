@@ -95,7 +95,16 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.deepin.dde.ControlCenter1.service
 if (NOT DEFINED SYSTEMD_USER_UNIT_DIR)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(Systemd REQUIRED libsystemd)
-    pkg_get_variable(SYSTEMD_USER_UNIT_DIR libsystemd systemduserunitdir)
+
+    pkg_get_variable(
+        SYSTEMD_USER_UNIT_DIR
+        libsystemd
+        systemduserunitdir
+    )
+
+    if(NOT SYSTEMD_USER_UNIT_DIR)
+        set(SYSTEMD_USER_UNIT_DIR "/usr/lib/systemd/user")
+    endif()
 endif()
 
 configure_file(
