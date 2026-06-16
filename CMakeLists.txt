@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.18)
 
-set(DVERSION "6.0.44" CACHE STRING "define project version")
+set(DVERSION "6.1.89" CACHE STRING "define project version")
 set(BUILD_DOCS OFF CACHE BOOL "Generate doxygen-based documentation")
 
 set(PROJECT_NAME dde-control-center)
 project(${PROJECT_NAME}
-    VERSION ${DVERSION}
-    DESCRIPTION "Deepin Control Center"
-    HOMEPAGE_URL "https://github.com/linuxdeepin/dde-control-center"
+    VERSION "6.1.89"
+    DESCRIPTION "Lingmo Control Center"
+    HOMEPAGE_URL "https://github.com/LingmoOS/velora-control-center"
     LANGUAGES CXX C
 )
 
