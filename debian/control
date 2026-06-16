@@ -37,7 +37,7 @@ Build-Depends:
  libssl-dev,
  libdde-shell-dev(>= 1.99.20),
  libdpkg-dev,
- libsystemd-dev
+ libsystemd-dev,
 Standards-Version: 4.5.0
 Homepage: https://github.com/LingmoOS/lingmo-control-center
 
