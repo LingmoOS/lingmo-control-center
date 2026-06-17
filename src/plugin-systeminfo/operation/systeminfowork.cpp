@@ -86,7 +86,29 @@ void SystemInfoWork::activate()
     m_model->setLogoPath(DSysInfo::distributionOrgLogo(DSysInfo::Distribution, DSysInfo::Normal));
     if (DSysInfo::isDeepin()) {
         m_model->setLicenseState(static_cast<ActiveState>(m_systemInfoDBusProxy->authorizationState()));
-        QString productName = QString("%1").arg(DSysInfo::uosSystemName());
+        // 从 /etc/os-release 读取 NAME 字段作为系统名称
+        QString productName;
+        {
+            QFile osRelease("/etc/os-release");
+            if (osRelease.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QTextStream in(&osRelease);
+                while (!in.atEnd()) {
+                    QString line = in.readLine();
+                    if (line.startsWith("NAME=")) {
+                        productName = line.mid(5).trimmed();
+                        // 去除首尾引号
+                        if (productName.startsWith('"') && productName.endsWith('"'))
+                            productName = productName.mid(1, productName.length() - 2);
+                        else if (productName.startsWith('\'') && productName.endsWith('\''))
+                            productName = productName.mid(1, productName.length() - 2);
+                        break;
+                    }
+                }
+                osRelease.close();
+            }
+            if (productName.isEmpty())
+                productName = "Unknown OS";  // fallback
+        }
         m_model->setProductName(productName);
         QString versionNumber = QString("%1").arg(DSysInfo::majorVersion());
         m_model->setVersionNumber(versionNumber);
@@ -143,6 +165,37 @@ void SystemInfoWork::activate()
         platformname = "Wayland";
     }
     m_model->setGraphicsPlatform(platformname);
+
+    // 从 /etc/debian_version 读取 Debian 版本
+    {
+        QString debianVer;
+        QFile dvFile("/etc/debian_version");
+        if (dvFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            debianVer = QString(dvFile.readAll()).trimmed();
+            dvFile.close();
+        }
+        m_model->setDebianVersion(debianVer.isEmpty() ? "Unknown" : debianVer);
+    }
+
+    // 编译日期（来自编译时宏 __DATE__ + __TIME__），格式化为 YYYY-MM-DD HH:mm
+    {
+        QDate buildDate = QLocale(QLocale::English).toDate(__DATE__, "MMM d yyyy");
+        if (!buildDate.isValid())
+            buildDate = QLocale(QLocale::English).toDate(__DATE__, "MMM dd yyyy");
+        QString buildTime = QString(__TIME__).left(5);  // 截取 HH:mm
+        m_model->setBuildDate(buildDate.toString("yyyy-MM-dd") + " " + buildTime);
+    }
+
+    // 内部版本号（从 /etc/lingmo-build-version 读取，格式如 26R01/26b01/26a01）
+    {
+        QString bv;
+        QFile bvFile("/etc/lingmo-build-version");
+        if (bvFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            bv = QString(bvFile.readAll()).trimmed();
+            bvFile.close();
+        }
+        m_model->setBuildVersion(bv);
+    }
 
     // 初始化开源协议
     initGnuLicenseData();

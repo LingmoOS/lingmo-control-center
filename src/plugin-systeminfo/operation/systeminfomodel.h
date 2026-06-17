@@ -56,6 +56,9 @@ class SystemInfoModel : public QObject
     Q_PROPERTY(QString logoPath READ logoPath NOTIFY logoPathChanged FINAL)
     Q_PROPERTY(QString systemInstallationDate READ systemInstallationDate NOTIFY systemInstallationDateChanged FINAL)
     Q_PROPERTY(QString graphicsPlatform READ graphicsPlatform NOTIFY graphicsPlatformChanged FINAL)
+    Q_PROPERTY(QString debianVersion READ debianVersion NOTIFY debianVersionChanged FINAL)
+    Q_PROPERTY(QString buildDate READ buildDate NOTIFY buildDateChanged FINAL)
+    Q_PROPERTY(QString buildVersion READ buildVersion NOTIFY buildVersionChanged FINAL)
 
 public:
     explicit SystemInfoModel(QObject *parent = nullptr);
@@ -124,6 +127,15 @@ public:
     QString graphicsPlatform() const;
     void setGraphicsPlatform(const QString &newGraphicsPlatform);
 
+    QString debianVersion() const { return m_debianVersion; }
+    void setDebianVersion(const QString &version);
+
+    QString buildDate() const { return m_buildDate; }
+    void setBuildDate(const QString &date);
+
+    QString buildVersion() const { return m_buildVersion; }
+    void setBuildVersion(const QString &version);
+
 Q_SIGNALS:
     void productNameChanged(const QString& version);
     void versionNumberChanged(const QString& version);
@@ -168,6 +180,12 @@ Q_SIGNALS:
     void systemInstallationDateChanged();
 
     void graphicsPlatformChanged();
+
+    void debianVersionChanged();
+
+    void buildDateChanged();
+
+    void buildVersionChanged();
 
 public Q_SLOTS:
     void setProductName(const QString& name);
@@ -216,6 +234,9 @@ private:
     bool m_showDetail;
     QString m_systemInstallationDate;
     QString m_graphicsPlatform;
+    QString m_debianVersion;
+    QString m_buildDate;
+    QString m_buildVersion;
 };
 
 }

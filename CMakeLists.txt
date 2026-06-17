@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 set(DVERSION "6.1.89" CACHE STRING "define project version")
+set(BUILD_VERSION "" CACHE STRING "internal build version, e.g. 26R01, 26b01, 26a01")
 set(BUILD_DOCS OFF CACHE BOOL "Generate doxygen-based documentation")
 
 set(PROJECT_NAME dde-control-center)

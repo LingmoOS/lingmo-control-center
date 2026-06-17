@@ -12,36 +12,36 @@ import org.deepin.dcc 1.0
 import org.deepin.dtk.style 1.0 as DS
 DccObject {
     id: root11
-    DccObject {
-        name: "systemLogo"
-        weight: 10
-        parentName: "systemInfo"
-        pageType: DccObject.Item
-        backgroundType: DccObject.Normal
-        visible: !dccData.systemInfoMode().showDetail
-        page: RowLayout {
-            Image {
-                source: "file://" + DTK.lingmoDefaultLogo
-            }
+    // DccObject {
+    //     name: "systemLogo"
+    //     weight: 10
+    //     parentName: "systemInfo"
+    //     pageType: DccObject.Item
+    //     backgroundType: DccObject.Normal
+    //     visible: !dccData.systemInfoMode().showDetail
+    //     page: RowLayout {
+    //         Image {
+    //             source: "file://" + DTK.lingmoDefaultLogo
+    //         }
 
-            ColumnLayout {
-                Label {
-                    font.bold: true
-                    font.pixelSize: 22
-                    horizontalAlignment: Text.AlignLeft
-                    text: qsTr("UOS")
-                }
+    //         ColumnLayout {
+    //             Label {
+    //                 font.bold: true
+    //                 font.pixelSize: 22
+    //                 horizontalAlignment: Text.AlignLeft
+    //                 text: qsTr("UOS")
+    //             }
 
-                Label {
-                    Layout.alignment: Qt.AlignHCenter
-                    text: dccData.systemInfoMode().systemCopyright
-                    horizontalAlignment: Text.AlignHCenter
-                    wrapMode: Text.Wrap
-                    Layout.preferredWidth: parent ? parent.width : implicitWidth
-                }
-            }
-        }
-    }
+    //             Label {
+    //                 Layout.alignment: Qt.AlignHCenter
+    //                 text: dccData.systemInfoMode().systemCopyright
+    //                 horizontalAlignment: Text.AlignHCenter
+    //                 wrapMode: Text.Wrap
+    //                 Layout.preferredWidth: parent ? parent.width : implicitWidth
+    //             }
+    //         }
+    //     }
+    // }
 
     DccObject {
         name: "systemDetailLogo"
@@ -263,19 +263,54 @@ DccObject {
             }
         }
         DccObject {
-            name: "edition"
+            name: "buildVersion"
             weight: 40
             parentName: "nativeInfoGrp"
             pageType: DccObject.Editor
-            displayName: qsTr("Edition") + ":"
+            displayName: qsTr("Build Version") + ":"
             page: Label {
                 horizontalAlignment: Text.AlignLeft
-                text: dccData.systemInfoMode().version
+                text: dccData.systemInfoMode().buildVersion
             }
         }
         DccObject {
-            name: "type"
+            name: "debianVersion"
             weight: 50
+            parentName: "nativeInfoGrp"
+            pageType: DccObject.Editor
+            displayName: qsTr("Debian Version") + ":"
+            page: Label {
+                horizontalAlignment: Text.AlignLeft
+                text: dccData.systemInfoMode().debianVersion
+            }
+        }
+        // DccObject {
+        //     name: "edition"
+        //     weight: 40
+        //     parentName: "nativeInfoGrp"
+        //     pageType: DccObject.Editor
+        //     displayName: qsTr("Edition") + ":"
+        //     page: Label {
+        //         horizontalAlignment: Text.AlignLeft
+        //         text: dccData.systemInfoMode().version
+        //     }
+        // }
+
+        DccObject {
+            name: "buildDate"
+            weight: 60
+            parentName: "nativeInfoGrp"
+            pageType: DccObject.Editor
+            displayName: qsTr("Build Date") + ":"
+            page: Label {
+                horizontalAlignment: Text.AlignLeft
+                text: dccData.systemInfoMode().buildDate
+            }
+        }
+
+        DccObject {
+            name: "type"
+            weight: 70
             parentName: "nativeInfoGrp"
             pageType: DccObject.Editor
             displayName: qsTr("Type") + ":"
@@ -285,48 +320,48 @@ DccObject {
             }
         }
 
-        DccObject {
-            name: "authorization"
-            weight: 60
-            parentName: "nativeInfoGrp"
-            pageType: DccObject.Editor
-            displayName: qsTr("Authorization") + ":"
-            visible: dccData.systemInfoMode().showAuthorization()
-            page: RowLayout {
-                spacing: 8
-                Label {
-                    id: jihuo
-                    color: dccData.systemInfoMode().licenseStatusColor
-                    horizontalAlignment: Text.AlignLeft
-                    text: dccData.systemInfoMode().licenseStatusText
-                }
+        // DccObject {
+        //     name: "authorization"
+        //     weight: 60
+        //     parentName: "nativeInfoGrp"
+        //     pageType: DccObject.Editor
+        //     displayName: qsTr("Authorization") + ":"
+        //     visible: dccData.systemInfoMode().showAuthorization()
+        //     page: RowLayout {
+        //         spacing: 8
+        //         Label {
+        //             id: jihuo
+        //             color: dccData.systemInfoMode().licenseStatusColor
+        //             horizontalAlignment: Text.AlignLeft
+        //             text: dccData.systemInfoMode().licenseStatusText
+        //         }
 
-                Button {
-                    id: licenseActionBtn
-                    text: dccData.systemInfoMode().licenseActionText
-                    ColorSelector.family: Palette.CommonColor
-                    implicitHeight: 30
-                    implicitWidth: licenseActionBtnMetrics.width + 2 * (DS.Style.button.hPadding + DS.Style.control.borderWidth)
-                    flat: false
-                    visible: dccData.systemInfoMode().showDetail
-                    onClicked: {
-                        dccData.systemInfoWork().showActivatorDialog()
-                    }
-                    ToolTip.visible: licenseActionBtn.hovered && licenseActionBtnMetrics.width > licenseActionBtn.availableWidth
-                    ToolTip.text: licenseActionBtn.text
-                    ToolTip.delay: 500
-                    TextMetrics {
-                        id: licenseActionBtnMetrics
-                        font: licenseActionBtn.font
-                        text: licenseActionBtn.text
-                    }
-                }
-            }
-        }
+        //         Button {
+        //             id: licenseActionBtn
+        //             text: dccData.systemInfoMode().licenseActionText
+        //             ColorSelector.family: Palette.CommonColor
+        //             implicitHeight: 30
+        //             implicitWidth: licenseActionBtnMetrics.width + 2 * (DS.Style.button.hPadding + DS.Style.control.borderWidth)
+        //             flat: false
+        //             visible: dccData.systemInfoMode().showDetail
+        //             onClicked: {
+        //                 dccData.systemInfoWork().showActivatorDialog()
+        //             }
+        //             ToolTip.visible: licenseActionBtn.hovered && licenseActionBtnMetrics.width > licenseActionBtn.availableWidth
+        //             ToolTip.text: licenseActionBtn.text
+        //             ToolTip.delay: 500
+        //             TextMetrics {
+        //                 id: licenseActionBtnMetrics
+        //                 font: licenseActionBtn.font
+        //                 text: licenseActionBtn.text
+        //             }
+        //         }
+        //     }
+        // }
 
         DccObject {
             name: "systemInstallationTime"
-            weight: 70
+            weight: 80
             visible: dccData.systemInfoMode().showAuthorization()
             parentName: "nativeInfoGrp"
             pageType: DccObject.Editor
@@ -339,7 +374,7 @@ DccObject {
 
         DccObject {
             name: "kernel"
-            weight: 80
+            weight: 90
             parentName: "nativeInfoGrp"
             pageType: DccObject.Editor
             displayName: qsTr("Kernel") + ":"
@@ -351,7 +386,7 @@ DccObject {
 
         DccObject {
             name: "graphicsPlatform"
-            weight: 90
+            weight: 100
             parentName: "nativeInfoGrp"
             pageType: DccObject.Editor
             visible: dccData.systemInfoMode().showGraphicsPlatform()
@@ -365,7 +400,7 @@ DccObject {
         DccObject {
             id: processorObj
             name: "processor"
-            weight: 100
+            weight: 110
             parentName: "nativeInfoGrp"
             pageType: DccObject.Editor
             displayName: qsTr("Processor") + ":"
@@ -390,7 +425,7 @@ DccObject {
 
         DccObject {
             name: "memory"
-            weight: 100
+            weight: 120
             parentName: "nativeInfoGrp"
             pageType: DccObject.Editor
             displayName: qsTr("Memory") + ":"
@@ -401,26 +436,26 @@ DccObject {
         }
     }
 
-    DccObject {
-        name: "detailBtn"
-        weight: 60
-        parentName: "systemInfo"
-        pageType: DccObject.Item
-        visible: !dccData.systemInfoMode().showDetail
-        page: RowLayout {
+    // DccObject {
+    //     name: "detailBtn"
+    //     weight: 60
+    //     parentName: "systemInfo"
+    //     pageType: DccObject.Item
+    //     visible: !dccData.systemInfoMode().showDetail
+    //     page: RowLayout {
 
-            Button {
-                Layout.topMargin: 10
-                implicitWidth: 250
-                implicitHeight: 30
-                Layout.alignment: Qt.AlignHCenter
-                text: "显示详细信息"
-                font: DTK.fontManager.t6
-                opacity: 0.7
-                onClicked: {
-                    dccData.systemInfoWork().showDetail()
-                }
-            }
-        }
-    }
+    //         Button {
+    //             Layout.topMargin: 10
+    //             implicitWidth: 250
+    //             implicitHeight: 30
+    //             Layout.alignment: Qt.AlignHCenter
+    //             text: "显示详细信息"
+    //             font: DTK.fontManager.t6
+    //             opacity: 0.7
+    //             onClicked: {
+    //                 dccData.systemInfoWork().showDetail()
+    //             }
+    //         }
+    //     }
+    // }
 }

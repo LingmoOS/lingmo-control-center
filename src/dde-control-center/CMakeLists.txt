@@ -48,7 +48,7 @@ add_executable(${Control_Center_Name}
     qrc/dcc.qrc
 )
 
-target_compile_definitions(${Control_Center_Name} PRIVATE CVERSION="${CMAKE_PROJECT_VERSION}")
+target_compile_definitions(${Control_Center_Name} PRIVATE CVERSION="${CMAKE_PROJECT_VERSION}" BUILD_VERSION="${BUILD_VERSION}")
 
 target_include_directories(${Control_Center_Name} PRIVATE
     include

@@ -1,3 +1,13 @@
+lingmo-control-center (6.1.90.lingmo.1) unstable; urgency=medium
+
+  * add build version, debian version and build date display
+  * add BUILD_VERSION compile option to pass internal build version
+  * add debianVersion, buildDate, buildVersion properties and related setters to systeminfo model
+  * read os-release, debian_version, lingmo-build-version files to get corresponding info
+  * adjust qml ui to show new system info items, reorder original info items
+
+ -- Lingmo OS Team <team@lingmo.org>  Wed, 17 Jun 2026 23:56:00 +0800
+
 lingmo-control-center (6.1.89.lingmo.2) unstable; urgency=medium
 
   * new release for Lingmo OS.

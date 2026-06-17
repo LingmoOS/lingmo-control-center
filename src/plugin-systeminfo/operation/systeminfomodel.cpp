@@ -120,6 +120,30 @@ void SystemInfoModel::setGraphicsPlatform(const QString &newGraphicsPlatform)
     Q_EMIT graphicsPlatformChanged();
 }
 
+void SystemInfoModel::setDebianVersion(const QString &version)
+{
+    if (m_debianVersion == version)
+        return;
+    m_debianVersion = version;
+    Q_EMIT debianVersionChanged();
+}
+
+void SystemInfoModel::setBuildDate(const QString &date)
+{
+    if (m_buildDate == date)
+        return;
+    m_buildDate = date;
+    Q_EMIT buildDateChanged();
+}
+
+void SystemInfoModel::setBuildVersion(const QString &version)
+{
+    if (m_buildVersion == version)
+        return;
+    m_buildVersion = version;
+    Q_EMIT buildVersionChanged();
+}
+
 bool SystemInfoModel::showAuthorization() const
 {
     return !(IS_COMMUNITY_SYSTEM || DSysInfo::UosEditionUnknown == DSysInfo::uosEditionType()) && DSysInfo::uosEditionType() != DSysInfo::UosEnterpriseC;
