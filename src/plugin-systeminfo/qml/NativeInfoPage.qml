@@ -31,14 +31,7 @@ DccObject {
                 Layout.preferredWidth: Math.min(parent.width * 0.7, 280)
                 Layout.preferredHeight: logoColumn.implicitHeight + 48
                 radius: 16
-                color: "transparent"
-
-                // 渐变背景
-                gradient: Gradient {
-                    orientation: Gradient.Vertical
-                    GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0.95) }
-                    GradientStop { position: 1.0; color: Qt.rgba(0.95, 0.96, 0.98, 0.9) }
-                }
+                color: palette.window
 
                 // 边框
                 border.color: Qt.rgba(0, 0, 0, 0.08)
