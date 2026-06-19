@@ -1,4 +1,4 @@
-lingmo-control-center (6.1.91.lingmo.1) unstable; urgency=medium
+lingmo-control-center (6.1.92.lingmo.1) unstable; urgency=medium
 
   * add build version, Debian version, and build date information
   * add BUILD_VERSION compile-time option for internal build version tracking

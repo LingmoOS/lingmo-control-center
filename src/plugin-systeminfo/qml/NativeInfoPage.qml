@@ -44,17 +44,6 @@ DccObject {
                 border.color: Qt.rgba(0, 0, 0, 0.08)
                 border.width: 1
 
-                // 阴影效果（通过额外的 Rectangle 模拟）
-                layer.enabled: true
-                layer.effect: DropShadow {
-                    horizontalOffset: 0
-                    verticalOffset: 4
-                    radius: 12
-                    samples: 17
-                    color: Qt.rgba(0, 0, 0, 0.1)
-                    transparentBorder: true
-                }
-
                 ColumnLayout {
                     id: logoColumn
                     anchors.centerIn: parent
