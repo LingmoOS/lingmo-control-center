@@ -85,7 +85,30 @@ void SystemInfoWork::activate()
 
     m_model->setLogoPath(DSysInfo::distributionOrgLogo(DSysInfo::Distribution, DSysInfo::Normal));
     if (DSysInfo::isDeepin()) {
-        m_model->setLicenseState(static_cast<ActiveState>(m_systemInfoDBusProxy->authorizationState()));
+        // 判断是否为 Lingmo OS：os-release ID=lingmo 且 /system/.version 存在
+        bool isLingmo = false;
+        {
+            QFile osRelease("/etc/os-release");
+            if (osRelease.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QTextStream in(&osRelease);
+                while (!in.atEnd()) {
+                    QString line = in.readLine();
+                    if (line.startsWith("ID=")) {
+                        QString id = line.mid(3).trimmed();
+                        if (id.startsWith('"') && id.endsWith('"'))
+                            id = id.mid(1, id.length() - 2);
+                        else if (id.startsWith('\'') && id.endsWith('\''))
+                            id = id.mid(1, id.length() - 2);
+                        if (id == "lingmo") {
+                            isLingmo = QFile::exists("/system/.version");
+                        }
+                        break;
+                    }
+                }
+                osRelease.close();
+            }
+        }
+        m_model->setLicenseState(isLingmo ? ActiveState::Authorized : ActiveState::Unauthorized);
         // 从 /etc/os-release 读取 NAME 字段作为系统名称
         QString productName;
         {
@@ -110,7 +133,28 @@ void SystemInfoWork::activate()
                 productName = "Unknown OS";  // fallback
         }
         m_model->setProductName(productName);
-        QString versionNumber = QString("%1").arg(DSysInfo::majorVersion());
+        // 从 /etc/os-release 读取 VERSION 字段作为版本号
+        QString versionNumber;
+        {
+            QFile osRelease("/etc/os-release");
+            if (osRelease.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QTextStream in(&osRelease);
+                while (!in.atEnd()) {
+                    QString line = in.readLine();
+                    if (line.startsWith("VERSION=")) {
+                        versionNumber = line.mid(8).trimmed();
+                        if (versionNumber.startsWith('"') && versionNumber.endsWith('"'))
+                            versionNumber = versionNumber.mid(1, versionNumber.length() - 2);
+                        else if (versionNumber.startsWith('\'') && versionNumber.endsWith('\''))
+                            versionNumber = versionNumber.mid(1, versionNumber.length() - 2);
+                        break;
+                    }
+                }
+                osRelease.close();
+            }
+            if (versionNumber.isEmpty())
+                versionNumber = QString("%1").arg(DSysInfo::majorVersion());
+        }
         m_model->setVersionNumber(versionNumber);
     }
     QString version;

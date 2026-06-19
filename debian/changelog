@@ -1,3 +1,15 @@
+lingmo-control-center (6.1.91.lingmo.1) unstable; urgency=medium
+
+  * add build version, Debian version, and build date information
+  * add BUILD_VERSION compile-time option for internal build version tracking
+  * add debianVersion, buildDate, and buildVersion properties to the systeminfo model
+  * read system information from os-release, debian_version, and lingmo-build-version
+  * update the QML interface to display additional system information and reorder existing entries
+  * add a CI workflow for Fedora SRPM builds
+  * add RPM packaging configuration files
+
+ -- Lingmo OS Team <team@lingmo.org>  Fri, 19 Jun 2026 12:25:00 +0800
+
 lingmo-control-center (6.1.90.lingmo.1) unstable; urgency=medium
 
   * add build version, debian version and build date display

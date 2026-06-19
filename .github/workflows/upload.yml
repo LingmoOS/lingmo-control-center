@@ -47,3 +47,56 @@ jobs:
           obs-password: ${{ secrets.OBS_TOKEN }}
           obs-instance-url: 'https://api.opensuse.org'
           local-package-dir: './src-tar-output'
+  fedora-srpm:
+    name: Build SRPM on Fedora
+    runs-on: ubuntu-latest
+    container: docker.io/library/fedora:latest
+    steps:
+      - name: Install Build Dependencies
+        run: |
+          dnf install -y rpm-build rpmdevtools git coreutils tar gzip
+
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Create Source Tarball (per spec Source0)
+        run: |
+          SPEC_FILE=$(find . -maxdepth 3 -name '*.spec' | head -1)
+          if [ -z "$SPEC_FILE" ]; then echo "No spec found"; exit 1; fi
+          SPEC_VERSION=$(grep '^Version:' "$SPEC_FILE" | awk '{print $2}' | head -1)
+          SPEC_NAME=$(grep '^Name:' "$SPEC_FILE" | awk '{print $2}' | head -1)
+          TARBALL_NAME="${SPEC_NAME}-${SPEC_VERSION}"
+          cp -a . "/tmp/${TARBALL_NAME}"
+          cd /tmp
+          tar czf "/__w/${TARBALL_NAME}.tar.gz" "$TARBALL_NAME"
+
+      - name: Setup rpmbuild Tree
+        run: |
+          rpmdev-setuptree
+          cd /__w
+          SPEC_FILE=$(find . -maxdepth 4 -name '*.spec' | head -1)
+          TARBALL=$(find . -maxdepth 1 -name '*.tar.gz' | head -1)
+          cp "$SPEC_FILE" ~/rpmbuild/SOURCES/
+          cp "$TARBALL" ~/rpmbuild/SOURCES/
+          cp "$SPEC_FILE" ~/rpmbuild/SPECS/
+
+      - name: Build SRPM
+        run: rpmbuild -bs ~/rpmbuild/SPECS/*.spec
+
+      - name: Collect SRPM + Sources
+        run: |
+          mkdir -p srpm-output
+          cp ~/rpmbuild/SRPMS/*.rpm srpm-output/
+          cp ~/rpmbuild/SOURCES/*.tar.gz srpm-output/
+          cp ~/rpmbuild/SPECS/*.spec srpm-output/
+
+      - name: Upload to OBS
+        uses: LingmoOS/action-upload-to-obs@0.0.4
+        with:
+          remove-old-sources: true
+          obs-package-name: 'lingmo-control-center'
+          obs-project-name: 'home:LingmoOS'
+          obs-user-name: ${{ secrets.OBS_USERNAME }}
+          obs-password: ${{ secrets.OBS_TOKEN }}
+          obs-instance-url: 'https://api.opensuse.org'
+          local-package-dir: './srpm-output'
