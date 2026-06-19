@@ -63,7 +63,6 @@ DccObject {
                         Layout.alignment: Qt.AlignHCenter
                         font.pixelSize: 22
                         font.bold: true
-                        font.family: DTK.fontManager.t7.font.family
                         color: palette.text
                         text: dccData.systemInfoMode().productName
                     }
@@ -72,7 +71,6 @@ DccObject {
                     Label {
                         Layout.alignment: Qt.AlignHCenter
                         font.pixelSize: 13
-                        font.family: DTK.fontManager.t10.font.family
                         color: palette.midlight
                         text: dccData.systemInfoMode().versionNumber
                     }
@@ -82,7 +80,6 @@ DccObject {
                         Layout.alignment: Qt.AlignHCenter
                         Layout.bottomMargin: 8
                         font.pixelSize: 11
-                        font.family: DTK.fontManager.t11.font.family
                         color: palette.mid
                         wrapMode: Text.Wrap
                         Layout.preferredWidth: parent ? parent.width - 40 : implicitWidth
