@@ -1,3 +1,9 @@
+lingmo-control-center (6.1.95.lingmo.1) unstable; urgency=medium
+
+  * new release for Lingmo OS.
+
+ -- Lingmo OS Team <team@lingmo.org>  Sat, 20 Jun 2026 20:34:00 +0800
+
 lingmo-control-center (6.1.94.lingmo.1) unstable; urgency=medium
 
   * add build version, Debian version, and build date information

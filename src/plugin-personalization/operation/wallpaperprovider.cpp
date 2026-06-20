@@ -29,9 +29,9 @@
 
 Q_LOGGING_CATEGORY(DdcPersonalizationWallpaperWorker, "dcc-personalization-wallpaper-worker")
 
-#define SYS_WALLPAPER_DIR "/usr/share/wallpapers/deepin"
-#define SYS_SOLIDE_WALLPAPER_DIR "/usr/share/wallpapers/deepin-solidwallpapers"
-#define SYS_LIVE_WALLPAPER_DIR "/usr/share/wallpapers/deepin-livewallpapers"
+#define SYS_WALLPAPER_DIR "/usr/share/wallpapers/lingmo"
+#define SYS_SOLIDE_WALLPAPER_DIR "/usr/share/wallpapers/solidwallpapers"
+#define SYS_LIVE_WALLPAPER_DIR "/usr/share/wallpapers/livewallpapers"
 #define CUSTOM_SOLIDE_WALLPAPER_DIR "/var/cache/wallpapers/custom-solidwallpapers"
 #define CUSTOM_WALLPAPER_DIR "/var/cache/wallpapers/custom-wallpapers"
 

@@ -649,6 +649,7 @@ DccObject {
         displayName: qsTr("Start animation")
         description: qsTr("Adjust the size of the logo animation on the system startup interface")
         weight: 60
+        visible: false
         pageType: DccObject.Item
         page: ColumnLayout {
             Layout.topMargin: 0
@@ -716,6 +717,7 @@ DccObject {
         name: "checkAnimation"
         parentName: "bootMenu"
         weight: 70
+        visible: false
         backgroundType: DccObject.Normal
         pageType: DccObject.Item
         page: Rectangle {
