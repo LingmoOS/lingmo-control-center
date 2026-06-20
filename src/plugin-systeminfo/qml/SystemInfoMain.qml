@@ -15,7 +15,7 @@ DccObject {
         description: qsTr("System version, device information")
         icon: "about"
         weight: 1010
-        NativeInfoPage{}
+        page: NativeInfoPage {}
     }
     // DccObject {
     //     name: "versionProtocol"
