@@ -83,7 +83,10 @@ void SystemInfoWork::activate()
     //获取主机名
     m_model->setHostName(m_systemInfoDBusProxy->staticHostname());
 
-    m_model->setLogoPath(DSysInfo::distributionOrgLogo(DSysInfo::Distribution, DSysInfo::Normal));
+    m_model->setLogoPath(DSysInfo::distributionOrgLogo(
+        DSysInfo::Distribution,
+        DSysInfo::Normal,
+        QStringLiteral("/usr/share/lingmo/distribution/distribution_logo.svg")));
     if (DSysInfo::isDeepin()) {
         // 判断是否为 Lingmo OS：os-release ID=lingmo 且 /system/.version 存在
         bool isLingmo = false;
