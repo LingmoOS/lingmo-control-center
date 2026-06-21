@@ -41,6 +41,8 @@ class SystemInfoModel : public QObject
     Q_PROPERTY(bool joinUeProgram READ joinUeProgram NOTIFY joinUeProgramChanged FINAL)
 
     Q_PROPERTY(QString productName READ productName NOTIFY productNameChanged FINAL)
+    Q_PROPERTY(QString osName READ osName NOTIFY osNameChanged FINAL)
+    Q_PROPERTY(QString osVersion READ osVersion NOTIFY osVersionChanged FINAL)
     Q_PROPERTY(QString systemCopyright READ systemCopyright NOTIFY systemCopyrightChanged FINAL)
     Q_PROPERTY(QString hostName READ hostName NOTIFY hostNameChanged FINAL)
     Q_PROPERTY(QString version READ version NOTIFY versionChanged FINAL)
@@ -65,6 +67,8 @@ public:
 
     QString productName() const { return m_productName;}
     QString versionNumber() const { return m_versionNumber;}
+    QString osName() const { return m_osName;}
+    QString osVersion() const { return m_osVersion;}
     QString version() const { return m_version;}
     QString type() const { return m_type;}
     QString processor() const { return m_processor;}
@@ -139,6 +143,8 @@ public:
 Q_SIGNALS:
     void productNameChanged(const QString& version);
     void versionNumberChanged(const QString& version);
+    void osNameChanged(const QString& name);
+    void osVersionChanged(const QString& version);
     void versionChanged(const QString& version);
     void typeChanged(const QString& type);
     void processorChanged(const QString& processor);
@@ -190,6 +196,8 @@ Q_SIGNALS:
 public Q_SLOTS:
     void setProductName(const QString& name);
     void setVersionNumber(const QString& number);
+    void setOsName(const QString& name);
+    void setOsVersion(const QString& version);
     void setVersion(const QString& version);
     void setType(qlonglong type);
     void setProcessor(const QString& processor);
@@ -203,6 +211,8 @@ private:
     QString m_version;
     QString m_productName;
     QString m_versionNumber;
+    QString m_osName;
+    QString m_osVersion;
     QString m_type;
     QString m_processor;
     QString m_memory;

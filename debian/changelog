@@ -1,3 +1,9 @@
+lingmo-control-center (6.1.99.lingmo.1) unstable; urgency=medium
+
+  * new release for Lingmo OS.
+
+ -- Lingmo OS Team <team@lingmo.org>  Mon, 22 Jun 2026 00:34:00 +0800
+
 lingmo-control-center (6.1.98.lingmo.1) unstable; urgency=medium
 
   * feat(dock): 添加布局模式设置功能

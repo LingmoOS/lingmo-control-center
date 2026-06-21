@@ -66,6 +66,24 @@ void SystemInfoModel::setVersionNumber(const QString &number)
     Q_EMIT versionNumberChanged(m_versionNumber);
 }
 
+void SystemInfoModel::setOsName(const QString &name)
+{
+    if (m_osName == name)
+        return;
+
+    m_osName = name;
+    Q_EMIT osNameChanged(m_osName);
+}
+
+void SystemInfoModel::setOsVersion(const QString &version)
+{
+    if (m_osVersion == version)
+        return;
+
+    m_osVersion = version;
+    Q_EMIT osVersionChanged(m_osVersion);
+}
+
 void SystemInfoModel::setVersion(const QString &version)
 {
     if (m_version == version)

@@ -159,6 +159,12 @@ void SystemInfoWork::activate()
                 versionNumber = QString("%1").arg(DSysInfo::majorVersion());
         }
         m_model->setVersionNumber(versionNumber);
+        // 从 /etc/os-release 读取 PRETTY_NAME/VERSION 作为 osName/osVersion
+        {
+            QSettings osRelease("/etc/os-release", QSettings::IniFormat);
+            m_model->setOsName(osRelease.value("PRETTY_NAME", "Unknown OS").toString());
+            m_model->setOsVersion(osRelease.value("VERSION", DSysInfo::majorVersion()).toString());
+        }
     }
     QString version;
     if (DSysInfo::uosType() == DSysInfo::UosServer || DSysInfo::uosEditionType() == DSysInfo::UosEuler) {

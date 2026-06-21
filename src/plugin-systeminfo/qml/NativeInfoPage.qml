@@ -301,7 +301,7 @@ DccObject {
             pageType: DccObject.Editor
             page: Label {
                 Layout.alignment: Qt.AlignRight | Qt.AlignTop
-                text: dccData.systemInfoMode().productName
+                text: dccData.systemInfoMode().osName
             }
             // page: Image {
             //     sourceSize.height: 16
@@ -316,7 +316,7 @@ DccObject {
             displayName: qsTr("Version")
             page: Label {
                 horizontalAlignment: Text.AlignLeft
-                text: dccData.systemInfoMode().versionNumber
+                text: dccData.systemInfoMode().osVersion
             }
         }
         DccObject {
