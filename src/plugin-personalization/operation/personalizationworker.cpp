@@ -689,12 +689,41 @@ void PersonalizationWorker::setAppearanceTheme(const QString &id, bool keepAuto)
 {
     Q_UNUSED(keepAuto)
     ThemeModel *globalTheme = m_model->getGlobalThemeModel();
+    const QString currentDefault = globalTheme->getDefault();
     QString mode;
-    QString themeId = getGlobalThemeId(globalTheme->getDefault(), mode);
+    QString themeId = getGlobalThemeId(currentDefault, mode);
     const QMap<QString, QJsonObject> &itemList = globalTheme->getList();
+
+    QString type;
+    QString targetThemeId;
     if (itemList.contains(themeId)) {
-        setDefaultByType(itemList.value(themeId)["type"].toString(),
-                                    themeId + id);
+        type = itemList.value(themeId)["type"].toString();
+        targetThemeId = themeId + id;
+    } else if (itemList.contains(currentDefault)) {
+        type = itemList.value(currentDefault)["type"].toString();
+        targetThemeId = currentDefault;
+        if (!id.isEmpty()) {
+            targetThemeId += id;
+        }
+    }
+
+    if (type.isEmpty()) {
+        qWarning() << "setAppearanceTheme: cannot determine theme type for" << currentDefault << themeId;
+        return;
+    }
+
+    if (!itemList.contains(targetThemeId)) {
+        if (id.isEmpty() && itemList.contains(themeId)) {
+            targetThemeId = themeId;
+        } else if (itemList.contains(currentDefault)) {
+            targetThemeId = currentDefault;
+        }
+    }
+
+    if (itemList.contains(targetThemeId)) {
+        setDefaultByType(type, targetThemeId);
+    } else {
+        qWarning() << "setAppearanceTheme: target theme not found" << targetThemeId << "from" << itemList.keys();
     }
 }
 

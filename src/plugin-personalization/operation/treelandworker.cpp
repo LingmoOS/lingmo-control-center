@@ -117,9 +117,19 @@ void TreeLandWorker::setDefault(const QJsonObject &value)
 void TreeLandWorker::setAppearanceTheme(const QString &id, bool keepAuto)
 {
     qCDebug(DdcPersonnalizationTreelandWorker) << "setAppearanceTheme:" << id;
+    if (m_appearanceContext.isNull()) {
+        init();
+    }
+
     if (!keepAuto) {
         PersonalizationWorker::setAppearanceTheme(id);
     }
+
+    if (m_appearanceContext.isNull()) {
+        qWarning() << "setAppearanceTheme: appearance context is not available";
+        return;
+    }
+
     if (id == ".light" && m_appearanceTheme != PersonalizationAppearanceContext::theme_type::theme_type_light) {
         m_appearanceTheme = PersonalizationAppearanceContext::theme_type::theme_type_light;
         m_appearanceContext->set_window_theme_type(PersonalizationAppearanceContext::theme_type::theme_type_light);
