@@ -136,6 +136,30 @@ DccObject {
         page: DccGroupView {}
 
         DccObject {
+            name: "layoutMode"
+            parentName: "personalization/dock/dockSettingsGroup"
+            displayName: qsTr("Layout Mode")
+            weight: 5
+            pageType: DccObject.Editor
+            page: CustomComBobox {
+                flat: true
+                model: layoutModeModel
+                currentIndex: indexByValue(dccData.layoutMode)
+
+                ListModel {
+                    id: layoutModeModel
+                    ListElement { text: qsTr("Taskbar Mode"); value: 0 }
+                    ListElement { text: qsTr("Dock Mode (Elegant)"); value: 1 }
+                }
+
+                onCurrentIndexChanged: {
+                    var selectedValue = model.get(currentIndex).value;
+                    dccData.setLayoutMode(selectedValue)
+                }
+            }
+        }
+
+        DccObject {
             name: "docksize"
             parentName: "personalization/dock/dockSettingsGroup"
             displayName: qsTr("Dock size")

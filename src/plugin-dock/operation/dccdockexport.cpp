@@ -55,10 +55,12 @@ DccDockExport::DccDockExport(QObject *parent)
 , m_pluginModel(new DockPluginModel(this))
 , m_sortProxyModel(new DockPluginSortProxyModel(this))
 , m_dconfig(Dtk::Core::DConfig::create("org.deepin.dde.shell", "org.deepin.ds.dock.taskmanager", QString(), this))
+, m_layoutDconfig(Dtk::Core::DConfig::create("org.deepin.dde.shell", "org.deepin.ds.dock.layout", QString(), this))
 , m_displayInter(nullptr)
 , m_displayMode(EXTEND_MODE)
 , m_monitorCount(0)
 , m_combineApp(true)
+, m_layoutMode(0)
 {
     if (m_dconfig && m_dconfig->isValid()) {
         const bool noTaskGrouping = m_dconfig->value("noTaskGrouping", false).toBool();
@@ -71,6 +73,20 @@ DccDockExport::DccDockExport(QObject *parent)
                 if (m_combineApp != combine) {
                     m_combineApp = combine;
                     Q_EMIT combineAppChanged(m_combineApp);
+                }
+            }
+        });
+    }
+
+    if (m_layoutDconfig && m_layoutDconfig->isValid()) {
+        m_layoutMode = m_layoutDconfig->value("layoutMode", 0).toInt();
+
+        connect(m_layoutDconfig, &Dtk::Core::DConfig::valueChanged, this, [this](const QString &key) {
+            if (key == QLatin1String("layoutMode")) {
+                int mode = m_layoutDconfig->value("layoutMode", 0).toInt();
+                if (m_layoutMode != mode) {
+                    m_layoutMode = mode;
+                    Q_EMIT layoutModeChanged(m_layoutMode);
                 }
             }
         });
@@ -207,6 +223,24 @@ void DccDockExport::setCombineApp(bool value)
     const bool noTaskGrouping = !value;
     m_dconfig->setValue("noTaskGrouping", noTaskGrouping);
     Q_EMIT combineAppChanged(m_combineApp);
+}
+
+int DccDockExport::layoutMode() const
+{
+    return m_layoutMode;
+}
+
+void DccDockExport::setLayoutMode(int mode)
+{
+    if (m_layoutMode == mode)
+        return;
+
+    m_layoutMode = mode;
+
+    if (m_layoutDconfig && m_layoutDconfig->isValid())
+        m_layoutDconfig->setValue("layoutMode", mode);
+
+    Q_EMIT layoutModeChanged(m_layoutMode);
 }
 
 void DccDockExport::onDisplayModeChanged(uint mode)
