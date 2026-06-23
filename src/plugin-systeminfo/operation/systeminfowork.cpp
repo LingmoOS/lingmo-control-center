@@ -159,12 +159,34 @@ void SystemInfoWork::activate()
                 versionNumber = QString("%1").arg(DSysInfo::majorVersion());
         }
         m_model->setVersionNumber(versionNumber);
-        // 从 /etc/os-release 读取 PRETTY_NAME/VERSION 作为 osName/osVersion
-        {
-            QSettings osRelease("/etc/os-release", QSettings::IniFormat);
-            m_model->setOsName(osRelease.value("PRETTY_NAME", "Unknown OS").toString());
-            m_model->setOsVersion(osRelease.value("VERSION", DSysInfo::majorVersion()).toString());
+    }
+    // 从 /etc/os-release 读取 PRETTY_NAME/VERSION 作为 osName/osVersion
+    {
+        QString osName;
+        QString osVersion;
+        QFile osRelease("/etc/os-release");
+        if (osRelease.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&osRelease);
+            while (!in.atEnd()) {
+                QString line = in.readLine();
+                if (line.startsWith("PRETTY_NAME=")) {
+                    osName = line.mid(12).trimmed();
+                    if (osName.startsWith('"') && osName.endsWith('"'))
+                        osName = osName.mid(1, osName.length() - 2);
+                    else if (osName.startsWith('\'') && osName.endsWith('\''))
+                        osName = osName.mid(1, osName.length() - 2);
+                } else if (line.startsWith("VERSION=")) {
+                    osVersion = line.mid(8).trimmed();
+                    if (osVersion.startsWith('"') && osVersion.endsWith('"'))
+                        osVersion = osVersion.mid(1, osVersion.length() - 2);
+                    else if (osVersion.startsWith('\'') && osVersion.endsWith('\''))
+                        osVersion = osVersion.mid(1, osVersion.length() - 2);
+                }
+            }
+            osRelease.close();
         }
+        m_model->setOsName(osName.isEmpty() ? "Unknown OS" : osName);
+        m_model->setOsVersion(osVersion.isEmpty() ? DSysInfo::majorVersion() : osVersion);
     }
     QString version;
     if (DSysInfo::uosType() == DSysInfo::UosServer || DSysInfo::uosEditionType() == DSysInfo::UosEuler) {

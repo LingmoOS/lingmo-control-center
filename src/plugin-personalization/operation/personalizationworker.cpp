@@ -694,37 +694,28 @@ void PersonalizationWorker::setAppearanceTheme(const QString &id, bool keepAuto)
     QString themeId = getGlobalThemeId(currentDefault, mode);
     const QMap<QString, QJsonObject> &itemList = globalTheme->getList();
 
-    QString type;
-    QString targetThemeId;
+    // Determine the base theme ID that exists in the item list
+    QString baseId;
     if (itemList.contains(themeId)) {
-        type = itemList.value(themeId)["type"].toString();
-        targetThemeId = themeId + id;
+        baseId = themeId;
     } else if (itemList.contains(currentDefault)) {
-        type = itemList.value(currentDefault)["type"].toString();
-        targetThemeId = currentDefault;
-        if (!id.isEmpty()) {
-            targetThemeId += id;
-        }
+        baseId = currentDefault;
+    } else {
+        qWarning() << "setAppearanceTheme: base theme not found for" << currentDefault << themeId;
+        return;
     }
 
+    const QString type = itemList.value(baseId)["type"].toString();
     if (type.isEmpty()) {
         qWarning() << "setAppearanceTheme: cannot determine theme type for" << currentDefault << themeId;
         return;
     }
 
-    if (!itemList.contains(targetThemeId)) {
-        if (id.isEmpty() && itemList.contains(themeId)) {
-            targetThemeId = themeId;
-        } else if (itemList.contains(currentDefault)) {
-            targetThemeId = currentDefault;
-        }
-    }
-
-    if (itemList.contains(targetThemeId)) {
-        setDefaultByType(type, targetThemeId);
-    } else {
-        qWarning() << "setAppearanceTheme: target theme not found" << targetThemeId << "from" << itemList.keys();
-    }
+    // Suffixed IDs (.light, .dark) are NOT in the item list — they are handled
+    // by the appearance service's doSetGlobalTheme via parseThemeType.
+    // Always pass the suffixed value so the service can determine the mode.
+    const QString targetThemeId = baseId + id;
+    setDefaultByType(type, targetThemeId);
 }
 
 void PersonalizationWorker::setIconTheme(const QString &id)
