@@ -30,6 +30,8 @@ class CommonInfoModel : public QObject
     Q_PROPERTY(bool readOnlyProtectionEnabled READ readOnlyProtectionEnabled NOTIFY readOnlyProtectionEnabledChanged FINAL)
     Q_PROPERTY(bool bootWallpaperEnabled READ bootWallpaperEnabled NOTIFY bootWallpaperEnabledChanged FINAL)
     Q_PROPERTY(bool bootGrubUserNameVisible READ bootGrubUserNameVisible NOTIFY bootGrubUserNameVisibleChanged FINAL)
+    Q_PROPERTY(bool isAlphaVersion READ isAlphaVersion NOTIFY isAlphaVersionChanged FINAL)
+    Q_PROPERTY(bool watermarkEnabled READ watermarkEnabled NOTIFY watermarkEnabledChanged FINAL)
 
 
 public:
@@ -76,6 +78,12 @@ public:
     void setBootGrubUserNameVisible(bool bootGrubUserNameVisible);
     bool bootGrubUserNameVisible() const;
 
+    bool isAlphaVersion() const;
+    void setIsAlphaVersion(bool isAlpha);
+
+    bool watermarkEnabled() const;
+    void setWatermarkEnabled(bool enabled);
+
 Q_SIGNALS:
     void bootDelayChanged(const bool enabled) const;
     void themeEnabledChanged(const bool enabled) const;
@@ -103,6 +111,8 @@ Q_SIGNALS:
     void readOnlyProtectionEnabledChanged();
     void bootWallpaperEnabledChanged();
     void bootGrubUserNameVisibleChanged();
+    void isAlphaVersionChanged();
+    void watermarkEnabledChanged();
 
 public Q_SLOTS:
     void setBootDelay(bool bootDelay);
@@ -147,4 +157,6 @@ private:
     bool m_readOnlyProtectionEnabled{false};
     bool m_bootWallpaperEnabled{true};
     bool m_bootGrubUserNameVisible{true};
+    bool m_isAlphaVersion{false};
+    bool m_watermarkEnabled{true};
 };

@@ -151,4 +151,48 @@ DccObject {
             }
         }
     }
+
+    DccObject {
+        name: "developWatermark"
+        parentName: "developerMode"
+        displayName: qsTr("Desktop Watermark")
+        description: qsTr("Show or hide the development version watermark on the desktop.")
+        weight: 80
+        visible: dccData.mode().isAlphaVersion
+        canSearch: visible
+        backgroundType: DccObject.Normal
+        pageType: DccObject.Item
+        page: RowLayout {
+            Layout.topMargin: 5
+            ColumnLayout {
+                spacing: 2
+                Layout.leftMargin: 15
+                Layout.topMargin: 5
+                Layout.bottomMargin: 5
+                Label {
+                    text: dccObj.displayName
+                    font: D.DTK.fontManager.t6
+                }
+
+                Label {
+                    horizontalAlignment: Text.AlignLeft
+                    wrapMode: Text.WordWrap
+                    text: dccObj.description
+                    font: D.DTK.fontManager.t10
+                    opacity: 0.5
+                    Layout.fillWidth: true
+                }
+            }
+
+            Switch {
+                Layout.alignment: Qt.AlignRight
+                Layout.rightMargin: 10
+                implicitWidth: 50
+                checked: dccData.mode().watermarkEnabled
+                onClicked: {
+                    dccData.work().setWatermarkEnabled(checked)
+                }
+            }
+        }
+    }
 }

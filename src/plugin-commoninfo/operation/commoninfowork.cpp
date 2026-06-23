@@ -20,6 +20,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QTextStream>
 #include <DDBusSender>
 #include <DConfig>
 
@@ -271,6 +272,13 @@ void CommonInfoWork::active()
     initDebugLogLevel();
 
     m_commomModel->setGrubThemePath(m_commonInfoProxy->Background());
+
+    m_commomModel->setIsAlphaVersion(isAlphaVersion());
+    if (m_commomModel->isAlphaVersion()) {
+        Dtk::Core::DConfig wmConfig("org.deepin.dde.file-manager.desktop.sys-watermask");
+        bool wmEnabled = wmConfig.isValid() ? wmConfig.value("watermarkEnabled", true).toBool() : true;
+        m_commomModel->setWatermarkEnabled(wmEnabled);
+    }
 }
 
 void CommonInfoWork::initGrubAnimationModel()
@@ -542,6 +550,38 @@ void CommonInfoWork::setReadOnlyProtectionEnabled(bool enabled)
     }
     
     m_commomModel->setReadOnlyProtectionEnabled(status);
+}
+
+void CommonInfoWork::setWatermarkEnabled(bool enabled)
+{
+    Dtk::Core::DConfig config("org.deepin.dde.file-manager.desktop.sys-watermask");
+    if (config.isValid()) {
+        config.setValue("watermarkEnabled", enabled);
+        qCInfo(DccCommonInfoWork) << "Watermark enabled set to:" << enabled;
+    } else {
+        qCWarning(DccCommonInfoWork) << "Failed to write watermarkEnabled DConfig";
+    }
+    m_commomModel->setWatermarkEnabled(enabled);
+}
+
+bool CommonInfoWork::isAlphaVersion() const
+{
+    QFile osRelease("/etc/os-release");
+    if (!osRelease.open(QIODevice::ReadOnly | QIODevice::Text))
+        return false;
+    QTextStream in(&osRelease);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        if (line.startsWith("VERSION_TYPE=")) {
+            QString vt = line.mid(13).trimmed();
+            if (vt.startsWith('"') && vt.endsWith('"'))
+                vt = vt.mid(1, vt.length() - 2);
+            else if (vt.startsWith('\'') && vt.endsWith('\''))
+                vt = vt.mid(1, vt.length() - 2);
+            return vt.compare("Alpha", Qt::CaseInsensitive) == 0;
+        }
+    }
+    return false;
 }
 
 bool CommonInfoWork::showReadOnlyProtection() const

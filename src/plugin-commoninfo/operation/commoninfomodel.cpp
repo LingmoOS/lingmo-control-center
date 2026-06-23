@@ -260,3 +260,29 @@ bool CommonInfoModel::isCommunitySystem() const
 {
     return Dtk::Core::DSysInfo::UosCommunity == Dtk::Core::DSysInfo::DSysInfo::uosEditionType();
 }
+
+bool CommonInfoModel::isAlphaVersion() const
+{
+    return m_isAlphaVersion;
+}
+
+void CommonInfoModel::setIsAlphaVersion(bool isAlpha)
+{
+    if (m_isAlphaVersion == isAlpha)
+        return;
+    m_isAlphaVersion = isAlpha;
+    emit isAlphaVersionChanged();
+}
+
+bool CommonInfoModel::watermarkEnabled() const
+{
+    return m_watermarkEnabled;
+}
+
+void CommonInfoModel::setWatermarkEnabled(bool enabled)
+{
+    if (m_watermarkEnabled == enabled)
+        return;
+    m_watermarkEnabled = enabled;
+    emit watermarkEnabledChanged();
+}

@@ -51,6 +51,8 @@ public:
     Q_INVOKABLE void setBackground(const QString &path);
     Q_INVOKABLE bool isSecurityCenterInstalled();
     Q_INVOKABLE bool isACLController() const;
+    Q_INVOKABLE void setWatermarkEnabled(bool enabled);
+    Q_INVOKABLE bool isAlphaVersion() const;
 
 public Q_SLOTS:
     void setBootDelay(bool value);
