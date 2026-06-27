@@ -10,6 +10,7 @@
 #include <DGuiApplicationHelper>
 
 #include <signal.h>
+#include <QPointer>
 #include <QStandardPaths>
 #include <QDebug>
 #include <QDateTime>
@@ -275,8 +276,11 @@ void CommonInfoWork::active()
 
     m_commomModel->setIsAlphaVersion(isAlphaVersion());
     if (m_commomModel->isAlphaVersion()) {
-        Dtk::Core::DConfig wmConfig("org.deepin.dde.file-manager.desktop.sys-watermask");
-        bool wmEnabled = wmConfig.isValid() ? wmConfig.value("watermarkEnabled", true).toBool() : true;
+        QPointer<Dtk::Core::DConfig> wmConfig(Dtk::Core::DConfig::create(
+            "org.deepin.dde.file-manager.desktop",
+            "org.deepin.dde.file-manager.desktop.sys-watermask",
+            QString(), this));
+        bool wmEnabled = wmConfig && wmConfig->isValid() ? wmConfig->value("watermarkEnabled", true).toBool() : true;
         m_commomModel->setWatermarkEnabled(wmEnabled);
     }
 }
@@ -554,9 +558,12 @@ void CommonInfoWork::setReadOnlyProtectionEnabled(bool enabled)
 
 void CommonInfoWork::setWatermarkEnabled(bool enabled)
 {
-    Dtk::Core::DConfig config("org.deepin.dde.file-manager.desktop.sys-watermask");
-    if (config.isValid()) {
-        config.setValue("watermarkEnabled", enabled);
+    QPointer<Dtk::Core::DConfig> config(Dtk::Core::DConfig::create(
+        "org.deepin.dde.file-manager.desktop",
+        "org.deepin.dde.file-manager.desktop.sys-watermask",
+        QString(), this));
+    if (config && config->isValid()) {
+        config->setValue("watermarkEnabled", enabled);
         qCInfo(DccCommonInfoWork) << "Watermark enabled set to:" << enabled;
     } else {
         qCWarning(DccCommonInfoWork) << "Failed to write watermarkEnabled DConfig";
