@@ -10,8 +10,8 @@
 #include <QDBusMetaType>
 #include <QDebug>
 
-const static QString MonitorService = "org.deepin.dde.Display1";
-const static QString MonitorInterface = "org.deepin.dde.Display1.Monitor";
+const static QString MonitorService = "org.lingmo.Display1";
+const static QString MonitorInterface = "org.lingmo.Display1.Monitor";
 
 const static QString PropertiesInterface = "org.freedesktop.DBus.Properties";
 const static QString PropertiesChanged = "PropertiesChanged";

@@ -20,7 +20,7 @@ Build-Depends:
  libgtest-dev,
  extra-cmake-modules,
  libqt6svg6,
- deepin-gettext-tools,
+ lingmo-gettext-tools,
  qml6-module-qtquick-layouts,
  qml6-module-qtquick-window,
  qml6-module-qt-labs-qmlmodels,
@@ -31,17 +31,17 @@ Build-Depends:
  treeland-protocols(>=0.4.1),
  libsystemd-dev,
  libdareader-dev,
- libdeepin-pw-check-dev,
+ liblingmo-pw-check-dev,
  libicu-dev,
  libwayland-dev,
  libssl-dev,
- libdde-shell-dev(>= 1.99.20),
+ liblingmo-shell-dev(>= 1.99.20),
  libdpkg-dev,
  libsystemd-dev,
 Standards-Version: 4.5.0
 Homepage: https://github.com/LingmoOS/lingmo-control-center
 
-Package: dde-control-center
+Package: lingmo-control-center
 Architecture: any
 Depends:
  ${shlibs:Depends}, ${misc:Depends},
@@ -66,18 +66,18 @@ Description: New control center for Deepin Desktop Environment,
  after the completion of the update.
  DDE Control Center is the control panel of Deepin Desktop Environment.
 
-Package: dde-control-center-dev
+Package: lingmo-control-center-dev
 Architecture: any
 Depends: 
- dde-control-center (= ${binary:Version}),
+ lingmo-control-center (= ${binary:Version}),
  qt6-declarative-dev,
  qt6-tools-dev,
  ${misc:Depends},
 Description: New control center for Deepin Desktop Environment - development files
  DDE Control Center is the control panel of Deepin Desktop Environment.
 
-Package: dde-control-center-doc
+Package: lingmo-control-center-doc
 Architecture: any
-Depends: dde-control-center (= ${binary:Version}), ${misc:Depends}
-Description: dde-control-center (document)
- This package contains the doc files of dde-control-center
+Depends: lingmo-control-center (= ${binary:Version}), ${misc:Depends}
+Description: lingmo-control-center (document)
+ This package contains the doc files of lingmo-control-center

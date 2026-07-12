@@ -11,12 +11,12 @@
 #include <QLoggingCategory>
 
 // Updater Job
-const static QString UpdaterService = QStringLiteral("org.deepin.dde.Lastore1");
-const static QString UpdaterJobInterface = QStringLiteral("org.deepin.dde.Lastore1.Job");
+const static QString UpdaterService = QStringLiteral("org.lingmo.Lastore1");
+const static QString UpdaterJobInterface = QStringLiteral("org.lingmo.Lastore1.Job");
 
 // Atomic Upgrade
-const static QString AtomicUpdaterService = QStringLiteral("org.deepin.AtomicUpgrade1");
-const static QString AtomicUpdaterJobInterface = QStringLiteral("org.deepin.AtomicUpgrade1");
+const static QString AtomicUpdaterService = QStringLiteral("org.lingmo.AtomicUpgrade1");
+const static QString AtomicUpdaterJobInterface = QStringLiteral("org.lingmo.AtomicUpgrade1");
 
 const static QString PropertiesInterface = QStringLiteral("org.freedesktop.DBus.Properties");
 const static QString PropertiesChanged = QStringLiteral("PropertiesChanged");

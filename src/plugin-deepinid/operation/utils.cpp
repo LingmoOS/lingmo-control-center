@@ -120,7 +120,7 @@ QString getThemeName()
 
 QString getActiveColor()
 {
-    QDBusInterface appearance_ifc_("org.deepin.dde.Appearance1",
+    QDBusInterface appearance_ifc_("org.lingmo.Appearance1",
                                    "/org/deepin/dde/Appearance1",
                                    "org.deepin.dde.Appearance1",
                                    QDBusConnection::sessionBus());
@@ -129,7 +129,7 @@ QString getActiveColor()
 
 QString getStandardFont()
 {
-    QDBusInterface appearance_ifc_("org.deepin.dde.Appearance1",
+    QDBusInterface appearance_ifc_("org.lingmo.Appearance1",
                                    "/org/deepin/dde/Appearance1",
                                    "org.deepin.dde.Appearance1",
                                    QDBusConnection::sessionBus());
@@ -158,11 +158,11 @@ QString getOsVersion()
 
 QString getDeviceCode()
 {
-    QDBusInterface Interface("com.deepin.deepinid",
+    QDBusInterface Interface("com.lingmo.deepinid",
                              "/com/deepin/deepinid",
                              "org.freedesktop.DBus.Properties",
                              QDBusConnection::sessionBus());
-    QDBusMessage reply = Interface.call("Get", "com.deepin.deepinid", "HardwareID");
+    QDBusMessage reply = Interface.call("Get", "com.lingmo.deepinid", "HardwareID");
     QList<QVariant> outArgs = reply.arguments();
     QString deviceCode = outArgs.at(0).value<QDBusVariant>().variant().toString();
     return deviceCode;
@@ -171,7 +171,7 @@ QString getDeviceCode()
 QStringList getDeviceInfo()
 {
     qDBusRegisterMetaType<HardwareInfo>();
-    QDBusInterface licenseInfo("com.deepin.sync.Helper",
+    QDBusInterface licenseInfo("com.lingmo.sync.Helper",
                                "/com/deepin/sync/Helper",
                                "com.deepin.sync.Helper",
                                QDBusConnection::systemBus());

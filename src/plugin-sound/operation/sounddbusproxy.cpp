@@ -11,21 +11,21 @@
 #include <QDBusMetaType>
 #include <QDBusReply>
 
-const static QString AudioService = QStringLiteral("org.deepin.dde.Audio1");
-const static QString AudioPath = QStringLiteral("/org/deepin/dde/Audio1");
-const static QString AudioInterface = QStringLiteral("org.deepin.dde.Audio1");
+const static QString AudioService = QStringLiteral("org.lingmo.Audio1");
+const static QString AudioPath = QStringLiteral("/org/lingmo/Audio1");
+const static QString AudioInterface = QStringLiteral("org.lingmo.Audio1");
 
-const static QString SoundEffectService = QStringLiteral("org.deepin.dde.SoundEffect1");
-const static QString SoundEffectPath = QStringLiteral("/org/deepin/dde/SoundEffect1");
-const static QString SoundEffectInterface = QStringLiteral("org.deepin.dde.SoundEffect1");
+const static QString SoundEffectService = QStringLiteral("org.lingmo.SoundEffect1");
+const static QString SoundEffectPath = QStringLiteral("/org/lingmo/SoundEffect1");
+const static QString SoundEffectInterface = QStringLiteral("org.lingmo.SoundEffect1");
 
-const static QString PowerService = QStringLiteral("org.deepin.dde.Power1");
-const static QString PowerPath = QStringLiteral("/org/deepin/dde/Power1");
-const static QString PowerInterface = QStringLiteral("org.deepin.dde.Power1");
+const static QString PowerService = QStringLiteral("org.lingmo.Power1");
+const static QString PowerPath = QStringLiteral("/org/lingmo/Power1");
+const static QString PowerInterface = QStringLiteral("org.lingmo.Power1");
 
-const static QString SinkInterface = QStringLiteral("org.deepin.dde.Audio1.Sink");
-const static QString SourceInterface = QStringLiteral("org.deepin.dde.Audio1.Source");
-const static QString MeterInterface = QStringLiteral("org.deepin.dde.Audio1.Meter");
+const static QString SinkInterface = QStringLiteral("org.lingmo.Audio1.Sink");
+const static QString SourceInterface = QStringLiteral("org.lingmo.Audio1.Source");
+const static QString MeterInterface = QStringLiteral("org.lingmo.Audio1.Meter");
 
 // using namespace DCC_NAMESPACE;
 SoundDBusProxy::SoundDBusProxy(QObject *parent)

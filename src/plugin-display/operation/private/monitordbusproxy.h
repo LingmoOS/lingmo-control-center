@@ -23,7 +23,7 @@ class MonitorDBusProxy : public QObject
     Q_OBJECT
 public:
     static inline const char *staticInterfaceName()
-    { return "org.deepin.dde.Display1.Monitor"; }
+    { return "org.lingmo.Display1.Monitor"; }
 
 public:
     explicit MonitorDBusProxy(QString monitorPath, QObject *parent = nullptr);

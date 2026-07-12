@@ -13,13 +13,13 @@
 
 #include <unistd.h>
 
-const QString PowerService = QStringLiteral("org.deepin.dde.Power1");
-const QString PowerPath = QStringLiteral("/org/deepin/dde/Power1");
-const QString PowerInterface = QStringLiteral("org.deepin.dde.Power1");
+const QString PowerService = QStringLiteral("org.lingmo.Power1");
+const QString PowerPath = QStringLiteral("/org/lingmo/Power1");
+const QString PowerInterface = QStringLiteral("org.lingmo.Power1");
 
-const QString SysPowerService = QStringLiteral("org.deepin.dde.Power1");
-const QString SysPowerPath = QStringLiteral("/org/deepin/dde/Power1");
-const QString SysPowerInterface = QStringLiteral("org.deepin.dde.Power1");
+const QString SysPowerService = QStringLiteral("org.lingmo.Power1");
+const QString SysPowerPath = QStringLiteral("/org/lingmo/Power1");
+const QString SysPowerInterface = QStringLiteral("org.lingmo.Power1");
 
 const QString Login1ManagerService = QStringLiteral("org.freedesktop.login1");
 const QString Login1ManagerPath = QStringLiteral("/org/freedesktop/login1");
@@ -29,15 +29,15 @@ const QString UPowerService = QStringLiteral("org.freedesktop.UPower");
 const QString UPowerPath = QStringLiteral("/org/freedesktop/UPower");
 const QString UPowerInterface = QStringLiteral("org.freedesktop.UPower");
 
-const QString accountsService = QStringLiteral("org.deepin.dde.Accounts1");
-const QString defaultAccountsPath = QStringLiteral("/org/deepin/dde/Accounts1");
-const QString accountsInterface = QStringLiteral("org.deepin.dde.Accounts1");
+const QString accountsService = QStringLiteral("org.lingmo.Accounts1");
+const QString defaultAccountsPath = QStringLiteral("/org/lingmo/Accounts1");
+const QString accountsInterface = QStringLiteral("org.lingmo.Accounts1");
 
-const QString accountsUserInterface = QStringLiteral("org.deepin.dde.Accounts1.User");
+const QString accountsUserInterface = QStringLiteral("org.lingmo.Accounts1.User");
 
-const QString timeDateService = QStringLiteral("org.deepin.dde.Timedate1");
-const QString timeDatePath = QStringLiteral("/org/deepin/dde/Timedate1");
-const QString timeDateInterface = QStringLiteral("org.deepin.dde.Timedate1");
+const QString timeDateService = QStringLiteral("org.lingmo.Timedate1");
+const QString timeDatePath = QStringLiteral("/org/lingmo/Timedate1");
+const QString timeDateInterface = QStringLiteral("org.lingmo.Timedate1");
 
 const QString PropertiesInterface = QStringLiteral("org.freedesktop.DBus.Properties");
 const QString PropertiesChanged = QStringLiteral("PropertiesChanged");
@@ -329,9 +329,9 @@ double PowerDBusProxy::batteryCapacity()
 
 int PowerDBusProxy::maxBacklightBrightness()
 {
-    QDBusInterface Interface("org.deepin.dde.Display1",
-                             "/org/deepin/dde/Display1",
-                             "org.deepin.dde.Display1",
+    QDBusInterface Interface("org.lingmo.Display1",
+                             "/org/lingmo/Display1",
+                             "org.lingmo.Display1",
                              QDBusConnection::sessionBus());
     return Interface.property("MaxBacklightBrightness").toInt();
 }

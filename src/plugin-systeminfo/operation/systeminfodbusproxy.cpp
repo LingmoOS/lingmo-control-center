@@ -16,24 +16,24 @@ const QString HostnameService = QStringLiteral("org.freedesktop.hostname1");
 const QString HostnamePath = QStringLiteral("/org/freedesktop/hostname1");
 const QString HostnameInterface = QStringLiteral("org.freedesktop.hostname1");
 
-const QString LicenseInfoService = QStringLiteral("com.deepin.license");
-const QString LicenseInfoPath = QStringLiteral("/com/deepin/license/Info");
-const QString LicenseInfoInterface = QStringLiteral("com.deepin.license.Info");
+const QString LicenseInfoService = QStringLiteral("com.lingmo.license");
+const QString LicenseInfoPath = QStringLiteral("/com/lingmo/license/Info");
+const QString LicenseInfoInterface = QStringLiteral("com.lingmo.license.Info");
 
-const QString LicenseActivatorService = QStringLiteral("com.deepin.license.activator");
-const QString LicenseActivatorPath = QStringLiteral("/com/deepin/license/activator");
-const QString LicenseActivatorInterface = QStringLiteral("com.deepin.license.activator");
+const QString LicenseActivatorService = QStringLiteral("com.lingmo.license.activator");
+const QString LicenseActivatorPath = QStringLiteral("/com/lingmo/license/activator");
+const QString LicenseActivatorInterface = QStringLiteral("com.lingmo.license.activator");
 
 const QString PropertiesInterface = QStringLiteral("org.freedesktop.DBus.Properties");
 const QString PropertiesChanged = QStringLiteral("PropertiesChanged");
 
-const QString &SystemInfoService = QStringLiteral("org.deepin.dde.SystemInfo1");
-const QString &SystemInfoPath = QStringLiteral("/org/deepin/dde/SystemInfo1");
-const QString &SystemInfoInterface = QStringLiteral("org.deepin.dde.SystemInfo1");
+const QString &SystemInfoService = QStringLiteral("org.lingmo.SystemInfo1");
+const QString &SystemInfoPath = QStringLiteral("/org/lingmo/SystemInfo1");
+const QString &SystemInfoInterface = QStringLiteral("org.lingmo.SystemInfo1");
 
-const QString &TimedateService = QStringLiteral("org.deepin.dde.Timedate1");
-const QString &TimedatePath = QStringLiteral("/org/deepin/dde/Timedate1");
-const QString &TimedateInterface = QStringLiteral("org.deepin.dde.Timedate1");
+const QString &TimedateService = QStringLiteral("org.lingmo.Timedate1");
+const QString &TimedatePath = QStringLiteral("/org/lingmo/Timedate1");
+const QString &TimedateInterface = QStringLiteral("org.lingmo.Timedate1");
 
 const QString &TimeZoneService = QStringLiteral("org.freedesktop.timedate1");
 const QString &TimeZonePath = QStringLiteral("/org/freedesktop/timedate1");

@@ -8,9 +8,9 @@
 #include <QDBusInterface>
 #include <QDBusPendingReply>
 
-const static QString WacomService = "org.deepin.dde.InputDevices1";
-const static QString WacomPath = "/org/deepin/dde/InputDevice1/Wacom";
-const static QString WacomInterface = "org.deepin.dde.InputDevice1.Wacom";
+const static QString WacomService = "org.lingmo.InputDevices1";
+const static QString WacomPath = "/org/lingmo/InputDevice1/Wacom";
+const static QString WacomInterface = "org.lingmo.InputDevice1.Wacom";
 
 WacomDBusProxy::WacomDBusProxy(QObject *parent)
     : QObject (parent)

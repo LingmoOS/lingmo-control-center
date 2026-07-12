@@ -349,7 +349,7 @@ SecurityLever AccountsWorker::getSecUserLeverbyname(QString userName)
 void AccountsWorker::checkPwdLimitLevel(int level)
 {
     // 密码校验失败并且安全中心密码安全等级不为低，弹出跳转到安全中心的对话框，低、中、高等级分别对应的值为1、2、3
-    QDBusInterface interface(QStringLiteral("com.deepin.defender.daemonservice"),
+    QDBusInterface interface(QStringLiteral("com.lingmo.defender.daemonservice"),
                              QStringLiteral("/com/deepin/defender/daemonservice"),
                              QStringLiteral("com.deepin.defender.daemonservice"));
     if (!interface.isValid()) {
@@ -368,8 +368,8 @@ void AccountsWorker::showDefender()
 {
     qDebug() << "showDefender call.....";
     QDBusPendingCall call = DDBusSender()
-            .service("com.deepin.defender.hmiscreen")
-            .interface("com.deepin.defender.hmiscreen")
+            .service("com.lingmo.defender.hmiscreen")
+            .interface("com.lingmo.defender.hmiscreen")
             .path("/com/deepin/defender/hmiscreen")
             .method(QString("ShowPage"))
             .arg(QString("securitytools"))

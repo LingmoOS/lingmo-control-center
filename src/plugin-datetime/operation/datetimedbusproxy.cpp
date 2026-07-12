@@ -12,24 +12,24 @@
 
 Q_LOGGING_CATEGORY(DdcDateTimeDbusProxy, "dcc-datetime-dbusproxy")
 
-const QString TimedateService = QStringLiteral("org.deepin.dde.Timedate1");
-const QString TimedatePath = QStringLiteral("/org/deepin/dde/Timedate1");
-const QString TimedateInterface = QStringLiteral("org.deepin.dde.Timedate1");
+const QString TimedateService = QStringLiteral("org.lingmo.Timedate1");
+const QString TimedatePath = QStringLiteral("/org/lingmo/Timedate1");
+const QString TimedateInterface = QStringLiteral("org.lingmo.Timedate1");
 
-const QString SystemTimedatedService = QStringLiteral("org.deepin.dde.Timedate1");
-const QString SystemTimedatedPath = QStringLiteral("/org/deepin/dde/Timedate1");
-const QString SystemTimedatedInterface = QStringLiteral("org.deepin.dde.Timedate1");
+const QString SystemTimedatedService = QStringLiteral("org.lingmo.Timedate1");
+const QString SystemTimedatedPath = QStringLiteral("/org/lingmo/Timedate1");
+const QString SystemTimedatedInterface = QStringLiteral("org.lingmo.Timedate1");
 
 const QString PropertiesInterface = QStringLiteral("org.freedesktop.DBus.Properties");
 const QString PropertiesChanged = QStringLiteral("PropertiesChanged");
 
-const QString LangSelectorService = QStringLiteral("org.deepin.dde.LangSelector1");
-const QString LangSelectorPath = QStringLiteral("/org/deepin/dde/LangSelector1");
-const QString LangSelectorInterface = QStringLiteral("org.deepin.dde.LangSelector1");
+const QString LangSelectorService = QStringLiteral("org.lingmo.LangSelector1");
+const QString LangSelectorPath = QStringLiteral("/org/lingmo/LangSelector1");
+const QString LangSelectorInterface = QStringLiteral("org.lingmo.LangSelector1");
 
-const QString FormatService = QStringLiteral("org.deepin.dde.Format1");
-const QString FormatPath = QStringLiteral("/org/deepin/dde/Format1");
-const QString FormatInterface = QStringLiteral("org.deepin.dde.Format1");
+const QString FormatService = QStringLiteral("org.lingmo.Format1");
+const QString FormatPath = QStringLiteral("/org/lingmo/Format1");
+const QString FormatInterface = QStringLiteral("org.lingmo.Format1");
 
 DatetimeDBusProxy::DatetimeDBusProxy(QObject *parent)
     : QObject(parent)

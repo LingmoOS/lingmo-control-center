@@ -11,11 +11,11 @@ class QTimer;
 QT_END_NAMESPACE
 
 /*
- * Adaptor class for interface com.deepin.dde.ControlCenter
+ * Adaptor class for interface com.lingmo.ControlCenter
  */
-#define DccDBusService "org.deepin.dde.ControlCenter1"
-#define DccDBusInterface "org.deepin.dde.ControlCenter1"
-#define DccDBusPath "/org/deepin/dde/ControlCenter1"
+#define DccDBusService "org.lingmo.ControlCenter1"
+#define DccDBusInterface "org.lingmo.ControlCenter1"
+#define DccDBusPath "/org/lingmo/ControlCenter1"
 
 namespace dccV25 {
 

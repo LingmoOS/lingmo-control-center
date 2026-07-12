@@ -45,9 +45,9 @@ QString SyncDBusProxy::LocalBindCheck(const QString &uosid, const QString &uuid)
 
 void SyncDBusProxy::init()
 {
-    const QString &service = QStringLiteral("com.deepin.sync.Helper");
-    const QString &path = QStringLiteral("/com/deepin/sync/Helper");
-    const QString &interface = QStringLiteral("com.deepin.sync.Helper");
+    const QString &service = QStringLiteral("com.lingmo.sync.Helper");
+    const QString &path = QStringLiteral("/com/lingmo/sync/Helper");
+    const QString &interface = QStringLiteral("com.lingmo.sync.Helper");
 
     m_dBusInter = new QDBusInterface(service, path, interface, QDBusConnection::systemBus(), this);
 

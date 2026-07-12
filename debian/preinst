@@ -1,2 +1,2 @@
 #!/bin/bash
-rm -rf  /home/*/.cache/deepin/dde-control-center/qmlcache/
+rm -rf  /home/*/.cache/deepin/lingmo-control-center/qmlcache/

@@ -161,11 +161,11 @@ CommonInfoWork::CommonInfoWork(CommonInfoModel *model, QObject *parent)
     , m_title("")
     , m_content("")
     , m_scaleIsSetting(false)
-    , m_debugConfigInter(new QDBusInterface("org.deepin.DebugConfig",
+    , m_debugConfigInter(new QDBusInterface("org.lingmo.DebugConfig",
                             "/org/deepin/DebugConfig",
                             "org.deepin.DebugConfig",
                             QDBusConnection::systemBus(), this))
-    , m_inter(new QDBusInterface("com.deepin.sync.Helper",
+    , m_inter(new QDBusInterface("com.lingmo.sync.Helper",
                                  "/com/deepin/sync/Helper",
                                  "com.deepin.sync.Helper",
                                  QDBusConnection::systemBus(), this))
@@ -380,8 +380,8 @@ QString CommonInfoWork::verifyPassword(QString text)
 void CommonInfoWork::jumpToSecurityCenter()
 {
     DDBusSender()
-    .service("com.deepin.defender.hmiscreen")
-    .interface("com.deepin.defender.hmiscreen")
+    .service("com.lingmo.defender.hmiscreen")
+    .interface("com.lingmo.defender.hmiscreen")
     .path("/com/deepin/defender/hmiscreen")
     .method(QString("ShowPage"))
     .arg(QString("securitytools"))
@@ -427,7 +427,7 @@ void CommonInfoWork::importCertificate(QString filePath)
            //当返回信息为错误接口信息才处理
     if (msg.type() == QDBusMessage::MessageType::ErrorMessage) {
         //系统通知弹窗qdbus 接口
-        QDBusInterface  tInterNotify("org.deepin.dde.Notification1",
+        QDBusInterface  tInterNotify("org.lingmo.Notification1",
                                     "/org/deepin/dde/Notification1",
                                     "org.deepin.dde.Notification1",
                                     QDBusConnection::sessionBus());
@@ -471,7 +471,7 @@ void CommonInfoWork::exportMessage(QString filePath)
 {
     filePath = filePath.remove("file://");
     qDebug() << " importCertificate file path :  " << filePath;
-    QDBusInterface licenseInfo("com.deepin.sync.Helper",
+    QDBusInterface licenseInfo("com.lingmo.sync.Helper",
                                "/com/deepin/sync/Helper",
                                "com.deepin.sync.Helper",
                                QDBusConnection::systemBus());
@@ -540,7 +540,7 @@ void CommonInfoWork::setReadOnlyProtectionEnabled(bool enabled)
     if (enabled == status) {
         qCInfo(DccCommonInfoWork) << "setReadOnlyProtectionEnabled applied successfully, enabled:" << enabled;
 
-        const QStringList rebootCommand{"dbus-send", "--session", "--print-reply", "--dest=org.deepin.dde.ShutdownFront1", "/org/deepin/dde/ShutdownFront1", "org.deepin.dde.ShutdownFront1.Restart"};
+        const QStringList rebootCommand{"dbus-send", "--session", "--print-reply", "--dest=org.lingmo.ShutdownFront1", "/org/lingmo/ShutdownFront1", "org.lingmo.ShutdownFront1.Restart"};
         DUtil::DNotifySender("")
             .appBody(tr("Restart device to finish applying Solid System Read-Only Protection settings"))
             .actions({"reboot", tr("Restart now"), "dismiss", tr("Dismiss")})
@@ -1017,10 +1017,10 @@ bool CommonInfoWork::isSecurityCenterInstalled()
         return iface->isServiceRegistered(serviceName);
     };
 
-    if (isDbusNameAvailable(QDBusConnection::sessionBus(), QStringLiteral("com.deepin.defender.hmiscreen")))
+    if (isDbusNameAvailable(QDBusConnection::sessionBus(), QStringLiteral("com.lingmo.defender.hmiscreen")))
         return true;
 
-    if (isDbusNameAvailable(QDBusConnection::systemBus(), QStringLiteral("com.deepin.defender.AutostartManager")))
+    if (isDbusNameAvailable(QDBusConnection::systemBus(), QStringLiteral("com.lingmo.defender.AutostartManager")))
         return true;
 
     return QFileInfo::exists("/usr/libexec/deepin/deepin-defender");

@@ -98,7 +98,7 @@ DccPanelExport::DccPanelExport(QObject *parent)
     , m_pluginModel(new PanelPluginModel(this))
     , m_sortProxyModel(new PanelPluginSortProxyModel(this))
     , m_dconfig(Dtk::Core::DConfig::create("org.deepin.dde.control-center", "org.deepin.dde.control.center.plugin.panel"))
-    , m_displayInter(new QDBusInterface("org.deepin.dde.Display1", "/org/deepin/dde/Display1", "org.deepin.dde.Display1", QDBusConnection::sessionBus(), this))
+    , m_displayInter(new QDBusInterface("org.lingmo.Display1", "/org/lingmo/Display1", "org.lingmo.Display1", QDBusConnection::sessionBus(), this))
     , m_displayMode(0)
     , m_monitorCount(0)
 {
@@ -138,7 +138,7 @@ void DccPanelExport::initData()
     }
 
     if (m_displayInter && m_displayInter->isValid()) {
-        QDBusConnection::sessionBus().connect("org.deepin.dde.Display1",
+        QDBusConnection::sessionBus().connect("org.lingmo.Display1",
                                                "/org/deepin/dde/Display1",
                                                "org.freedesktop.DBus.Properties",
                                                "PropertiesChanged",

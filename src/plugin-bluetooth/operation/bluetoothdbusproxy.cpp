@@ -9,13 +9,13 @@
 #include <QDBusInterface>
 #include <QDBusPendingReply>
 
-const static QString BluetoothService = "org.deepin.dde.Bluetooth1";
-const static QString BluetoothPath = "/org/deepin/dde/Bluetooth1";
-const static QString BluetoothInterface = "org.deepin.dde.Bluetooth1";
+const static QString BluetoothService = "org.lingmo.Bluetooth1";
+const static QString BluetoothPath = "/org/lingmo/Bluetooth1";
+const static QString BluetoothInterface = "org.lingmo.Bluetooth1";
 
-const static QString AirPlaneModeService = "org.deepin.dde.AirplaneMode1";
-const static QString AirPlaneModePath = "/org/deepin/dde/AirplaneMode1";
-const static QString AirPlaneModeInterface = "org.deepin.dde.AirplaneMode1";
+const static QString AirPlaneModeService = "org.lingmo.AirplaneMode1";
+const static QString AirPlaneModePath = "/org/lingmo/AirplaneMode1";
+const static QString AirPlaneModeInterface = "org.lingmo.AirplaneMode1";
 
 
 BluetoothDBusProxy::BluetoothDBusProxy(QObject *parent)
@@ -27,7 +27,7 @@ BluetoothDBusProxy::BluetoothDBusProxy(QObject *parent)
 
 void BluetoothDBusProxy::showBluetoothTransDialog(const QString &address, const QStringList &files)
 {
-    QDBusMessage message = QDBusMessage::createMethodCall("com.deepin.filemanager.filedialog", "/com/deepin/filemanager/filedialogmanager", "com.deepin.filemanager.filedialogmanager", "showBluetoothTransDialog");
+    QDBusMessage message = QDBusMessage::createMethodCall("com.lingmo.filemanager.filedialog", "/com/lingmo/filemanager/filedialogmanager", "com.lingmo.filemanager.filedialogmanager", "showBluetoothTransDialog");
     message << address << files;
     QDBusConnection::sessionBus().asyncCall(message);
 }

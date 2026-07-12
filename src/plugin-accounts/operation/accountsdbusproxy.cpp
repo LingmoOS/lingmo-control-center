@@ -17,9 +17,9 @@ AccountsDBusProxy::AccountsDBusProxy(QObject *parent)
 
 void AccountsDBusProxy::init()
 {
-    const QString accountsService = "org.deepin.dde.Accounts1";
-    const QString accountsPath = "/org/deepin/dde/Accounts1";
-    const QString accountsInterface = "org.deepin.dde.Accounts1";
+    const QString accountsService = "org.lingmo.Accounts1";
+    const QString accountsPath = "/org/lingmo/Accounts1";
+    const QString accountsInterface = "org.lingmo.Accounts1";
     const QString propertiesInterface = "org.freedesktop.DBus.Properties";
     const QString propertiesChanged = "PropertiesChanged";
 

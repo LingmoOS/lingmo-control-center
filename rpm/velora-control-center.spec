@@ -46,7 +46,7 @@ providing system settings and configuration management.
 %{_bindir}/dcc
 %{_bindir}/control-center
 %{_libdir}/dcc-plugins/
-%{_datadir}/dde-control-center/
+%{_datadir}/lingmo-control-center/
 %{_datadir}/dbus-1/services/*.service
 %{_datadir}/applications/dde-control-center.desktop
 %{_datadir}/icons/hicolor/*/apps/*.png

@@ -193,7 +193,7 @@ void SystemInfoWork::activate()
         version = QString("%1%2").arg(DSysInfo::minorVersion(), DSysInfo::uosEditionName());
         m_model->setVersion(version);
     } else if (DSysInfo::isDeepin()) {
-        QDBusConnection::systemBus().connect("com.deepin.license",
+        QDBusConnection::systemBus().connect("com.lingmo.license",
                                      "/com/deepin/license/Info",
                                      "com.deepin.license.Info",
                                      "LicenseStateChange",
@@ -629,7 +629,7 @@ void SystemInfoWork::onLicenseAuthorizationProperty()
 
 QString SystemInfoWork::getLicenseAuthorizationPropertyString()
 {
-    QDBusInterface licenseInfo("com.deepin.license",
+    QDBusInterface licenseInfo("com.lingmo.license",
                                "/com/deepin/license/Info",
                                "com.deepin.license.Info",
                                QDBusConnection::systemBus());

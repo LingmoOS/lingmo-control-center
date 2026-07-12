@@ -154,7 +154,7 @@ bool DccDockExport::combineApp() const
 void DccDockExport::initDisplayModeConnection()
 {
     // 创建DBus接口连接
-    m_displayInter = new QDBusInterface("org.deepin.dde.Display1",
+    m_displayInter = new QDBusInterface("org.lingmo.Display1",
                                        "/org/deepin/dde/Display1",
                                        "org.deepin.dde.Display1",
                                        QDBusConnection::sessionBus(),
@@ -192,7 +192,7 @@ void DccDockExport::initDisplayModeConnection()
         }
     }
 
-    QDBusConnection::sessionBus().connect("org.deepin.dde.Display1",
+    QDBusConnection::sessionBus().connect("org.lingmo.Display1",
                                        "/org/deepin/dde/Display1",
                                        "org.freedesktop.DBus.Properties",
                                        "PropertiesChanged",

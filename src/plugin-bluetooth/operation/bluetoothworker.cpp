@@ -290,7 +290,7 @@ void BluetoothWorker::connectDevice(const QString &deviceId, const QString adapt
 
 void BluetoothWorker::jumpToAirPlaneMode()
 {
-    QDBusMessage message = QDBusMessage::createMethodCall("com.deepin.dde.ControlCenter", // 服务名
+    QDBusMessage message = QDBusMessage::createMethodCall("com.lingmo.ControlCenter", // 服务名
                                                            "/com/deepin/dde/ControlCenter", // 对象路径
                                                            "com.deepin.dde.ControlCenter", // 接口名
                                                            "ShowPage"); // 方法名

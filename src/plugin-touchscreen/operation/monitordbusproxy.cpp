@@ -19,7 +19,7 @@ MonitorDBusProxy::MonitorDBusProxy(QString monitorPath, QObject *parent)
 
 void MonitorDBusProxy::init()
 {
-    m_dBusMonitorInter = new QDBusInterface("org.deepin.dde.Display1", m_monitorUserPath, "org.deepin.dde.Display1.Monitor", QDBusConnection::sessionBus(), this);
+    m_dBusMonitorInter = new QDBusInterface("org.lingmo.Display1", m_monitorUserPath, "org.lingmo.Display1.Monitor", QDBusConnection::sessionBus(), this);
 }
 
 QString MonitorDBusProxy::name()

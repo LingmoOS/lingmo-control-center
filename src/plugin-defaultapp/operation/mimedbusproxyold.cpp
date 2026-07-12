@@ -9,9 +9,9 @@
 #include <QDBusConnectionInterface>
 #include <QDBusPendingReply>
 
-const QString MimeService = QStringLiteral("org.deepin.dde.Mime1");
-const QString MimePath = QStringLiteral("/org/deepin/dde/Mime1");
-const QString MimeInterface = QStringLiteral("org.deepin.dde.Mime1");
+const QString MimeService = QStringLiteral("org.lingmo.Mime1");
+const QString MimePath = QStringLiteral("/org/lingmo/Mime1");
+const QString MimeInterface = QStringLiteral("org.lingmo.Mime1");
 
 bool MimeDBusProxyOld::isRegisted()
 {

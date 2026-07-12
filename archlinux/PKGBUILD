@@ -2,12 +2,12 @@ pkgname=deepin-control-center-git
 _pkgname=deepin-control-center
 pkgver=5.4.47.r673.g52c86a908
 pkgrel=1
-sourcename=dde-control-center
+sourcename=lingmo-control-center
 sourcetars=("$sourcename"_"$pkgver".tar.xz)
 sourcedir="$sourcename"
 pkgdesc='New control center for linux deepin'
 arch=('x86_64' 'aarch64')
-url="https://github.com/linuxdeepin/dde-control-center"
+url="https://github.com/linuxdeepin/lingmo-control-center"
 license=('GPL3')
 depends=('dtkwidget-git' 'libpwquality' 'doxygen'
          'deepin-daemon-git' 'startdde-git'

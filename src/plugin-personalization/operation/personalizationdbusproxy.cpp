@@ -10,37 +10,37 @@
 
 DCORE_USE_NAMESPACE
 
-const QString AppearanceService = QStringLiteral("org.deepin.dde.Appearance1");
-const QString AppearancePath = QStringLiteral("/org/deepin/dde/Appearance1");
-const QString AppearanceInterface = QStringLiteral("org.deepin.dde.Appearance1");
+const QString AppearanceService = QStringLiteral("org.lingmo.Appearance1");
+const QString AppearancePath = QStringLiteral("/org/lingmo/Appearance1");
+const QString AppearanceInterface = QStringLiteral("org.lingmo.Appearance1");
 
-const QString WMService = QStringLiteral("com.deepin.wm");
-const QString WMPath = QStringLiteral("/com/deepin/wm");
-const QString WMInterface = QStringLiteral("com.deepin.wm");
+const QString WMService = QStringLiteral("com.lingmo.wm");
+const QString WMPath = QStringLiteral("/com/lingmo/wm");
+const QString WMInterface = QStringLiteral("com.lingmo.wm");
 
 const QString EffectsService = QStringLiteral("org.kde.KWin");
 const QString EffectsPath = QStringLiteral("/Effects");
 const QString EffectsInterface = QStringLiteral("org.kde.kwin.Effects");
 
-const QString DaemonService = QStringLiteral("org.deepin.dde.Daemon1");
-const QString DaemonPath = QStringLiteral("/org/deepin/dde/Daemon1");
-const QString DaemonInterface = QStringLiteral("org.deepin.dde.Daemon1");
+const QString DaemonService = QStringLiteral("org.lingmo.Daemon1");
+const QString DaemonPath = QStringLiteral("/org/lingmo/Daemon1");
+const QString DaemonInterface = QStringLiteral("org.lingmo.Daemon1");
 
-const QString ScreenSaverServive = QStringLiteral("com.deepin.ScreenSaver");
-const QString ScreenSaverPath = QStringLiteral("/com/deepin/ScreenSaver");
-const QString ScreenSaverInterface = QStringLiteral("com.deepin.ScreenSaver");
+const QString ScreenSaverServive = QStringLiteral("com.lingmo.ScreenSaver");
+const QString ScreenSaverPath = QStringLiteral("/com/lingmo/ScreenSaver");
+const QString ScreenSaverInterface = QStringLiteral("com.lingmo.ScreenSaver");
 
-const QString WallpaperSlideshowService = QStringLiteral("org.deepin.dde.WallpaperSlideshow");
-const QString WallpaperSlideshowPath = QStringLiteral("/org/deepin/dde/WallpaperSlideshow");
-const QString WallpaperSlideshowInterface = QStringLiteral("org.deepin.dde.WallpaperSlideshow");
+const QString WallpaperSlideshowService = QStringLiteral("org.lingmo.WallpaperSlideshow");
+const QString WallpaperSlideshowPath = QStringLiteral("/org/lingmo/WallpaperSlideshow");
+const QString WallpaperSlideshowInterface = QStringLiteral("org.lingmo.WallpaperSlideshow");
 
-const QString PowerService = QStringLiteral("org.deepin.dde.Power1");
-const QString PowerPath = QStringLiteral("/org/deepin/dde/Power1");
-const QString PowerInterface = QStringLiteral("org.deepin.dde.Power1");
+const QString PowerService = QStringLiteral("org.lingmo.Power1");
+const QString PowerPath = QStringLiteral("/org/lingmo/Power1");
+const QString PowerInterface = QStringLiteral("org.lingmo.Power1");
 
-const static QString LastoreManagerService = QStringLiteral("org.deepin.dde.Lastore1");
-const static QString LastoreManagerPath = QStringLiteral("/org/deepin/dde/Lastore1");
-const static QString LastoreManagerInterface = QStringLiteral("org.deepin.dde.Lastore1.Manager");
+const static QString LastoreManagerService = QStringLiteral("org.lingmo.Lastore1");
+const static QString LastoreManagerPath = QStringLiteral("/org/lingmo/Lastore1");
+const static QString LastoreManagerInterface = QStringLiteral("org.lingmo.Lastore1.Manager");
 
 const QString PropertiesInterface = QStringLiteral("org.freedesktop.DBus.Properties");
 const QString PropertiesChanged = QStringLiteral("PropertiesChanged");

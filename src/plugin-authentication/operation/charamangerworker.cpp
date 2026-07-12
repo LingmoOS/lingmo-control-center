@@ -68,11 +68,11 @@ CharaMangerWorker::~CharaMangerWorker()
 void CharaMangerWorker::initCharaManger()
 {
     // 获取DeviceInfo属性
-    QDBusInterface charaManagerInter("org.deepin.dde.Authenticate1",
+    QDBusInterface charaManagerInter("org.lingmo.Authenticate1",
                              "/org/deepin/dde/Authenticate1/CharaManger",
                              "org.freedesktop.DBus.Properties",
                              QDBusConnection::systemBus());
-    QDBusPendingCall call = charaManagerInter.asyncCall("Get", "org.deepin.dde.Authenticate1.CharaManger", "DriverInfo");
+    QDBusPendingCall call = charaManagerInter.asyncCall("Get", "org.lingmo.Authenticate1.CharaManger", "DriverInfo");
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
     connect(watcher, &QDBusPendingCallWatcher::finished, [this, call, watcher] {
         if (!call.isError()) {

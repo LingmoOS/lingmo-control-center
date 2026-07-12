@@ -11,21 +11,21 @@
 #include <QDBusMetaType>
 #include <QDebug>
 
-const static QString LangSelectorService = "org.deepin.dde.LangSelector1";
-const static QString LangSelectorPath = "/org/deepin/dde/LangSelector1";
-const static QString LangSelectorInterface = "org.deepin.dde.LangSelector1";
+const static QString LangSelectorService = "org.lingmo.LangSelector1";
+const static QString LangSelectorPath = "/org/lingmo/LangSelector1";
+const static QString LangSelectorInterface = "org.lingmo.LangSelector1";
 
-const static QString KeyboardService = "org.deepin.dde.InputDevices1";
-const static QString KeyboardPath = "/org/deepin/dde/InputDevice1/Keyboard";
-const static QString KeyboardInterface = "org.deepin.dde.InputDevice1.Keyboard";
+const static QString KeyboardService = "org.lingmo.InputDevices1";
+const static QString KeyboardPath = "/org/lingmo/InputDevice1/Keyboard";
+const static QString KeyboardInterface = "org.lingmo.InputDevice1.Keyboard";
 
-const static QString KeybingdingService = "org.deepin.dde.Keybinding1";
-const static QString KeybingdingPath = "/org/deepin/dde/Keybinding1";
-const static QString KeybingdingInterface = "org.deepin.dde.Keybinding1";
+const static QString KeybingdingService = "org.lingmo.Keybinding1";
+const static QString KeybingdingPath = "/org/lingmo/Keybinding1";
+const static QString KeybingdingInterface = "org.lingmo.Keybinding1";
 
-const static QString WMService = "com.deepin.wm";
-const static QString WMPath = "/com/deepin/wm";
-const static QString WMInterface = "com.deepin.wm";
+const static QString WMService = "com.lingmo.wm";
+const static QString WMPath = "/com/lingmo/wm";
+const static QString WMInterface = "com.lingmo.wm";
 
 KeyboardDBusProxy::KeyboardDBusProxy(QObject *parent)
     : QObject(parent)

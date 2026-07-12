@@ -16,25 +16,25 @@
 
 using namespace DCC_NAMESPACE;
 
-const QString Service = "org.deepin.dde.InputDevices1";
-const QString MousePath = "/org/deepin/dde/InputDevice1/Mouse";
-const QString TouchpadPath = "/org/deepin/dde/InputDevice1/TouchPad";
-const QString TrackpointPath = "/org/deepin/dde/InputDevice1/Mouse";
-const QString InputDevicesPath = "/org/deepin/dde/InputDevices1";
+const QString Service = "org.lingmo.InputDevices1";
+const QString MousePath = "/org/lingmo/InputDevice1/Mouse";
+const QString TouchpadPath = "/org/lingmo/InputDevice1/TouchPad";
+const QString TrackpointPath = "/org/lingmo/InputDevice1/Mouse";
+const QString InputDevicesPath = "/org/lingmo/InputDevices1";
 const QString PropertiesInterface = "org.freedesktop.DBus.Properties";
-const QString MouseInterface = "org.deepin.dde.InputDevice1.Mouse";
-const QString TouchpadInterface = "org.deepin.dde.InputDevice1.TouchPad";
-const QString TrackpointInterface = "org.deepin.dde.InputDevice1.TrackPoint";
-const QString InputDevicesInterface = "org.deepin.dde.InputDevices1";
-const QString GestureInterface = "org.deepin.dde.Gesture1";
-const QString GesturePath = "/org/deepin/dde/Gesture1";
-const QString GestureService = "org.deepin.dde.Gesture1";
-const QString AppearanceService = "org.deepin.dde.Appearance1";
-const QString AppearancePath = "/org/deepin/dde/Appearance1";
-const QString AppearanceInterface = "org.deepin.dde.Appearance1";
-const QString PowerService = QStringLiteral("org.deepin.dde.Power1");
-const QString PowerPath = QStringLiteral("/org/deepin/dde/Power1");
-const QString PowerInterface = QStringLiteral("org.deepin.dde.Power1");
+const QString MouseInterface = "org.lingmo.InputDevice1.Mouse";
+const QString TouchpadInterface = "org.lingmo.InputDevice1.TouchPad";
+const QString TrackpointInterface = "org.lingmo.InputDevice1.TrackPoint";
+const QString InputDevicesInterface = "org.lingmo.InputDevices1";
+const QString GestureInterface = "org.lingmo.Gesture1";
+const QString GesturePath = "/org/lingmo/Gesture1";
+const QString GestureService = "org.lingmo.Gesture1";
+const QString AppearanceService = "org.lingmo.Appearance1";
+const QString AppearancePath = "/org/lingmo/Appearance1";
+const QString AppearanceInterface = "org.lingmo.Appearance1";
+const QString PowerService = QStringLiteral("org.lingmo.Power1");
+const QString PowerPath = QStringLiteral("/org/lingmo/Power1");
+const QString PowerInterface = QStringLiteral("org.lingmo.Power1");
 
 MouseDBusProxy::MouseDBusProxy(QObject *parent)
     : QObject(parent)

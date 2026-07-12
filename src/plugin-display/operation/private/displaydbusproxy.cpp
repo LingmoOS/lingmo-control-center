@@ -7,17 +7,17 @@
 #include <QDBusMetaType>
 #include <QDBusPendingReply>
 
-const static QString DisplayService = "org.deepin.dde.Display1";
-const static QString DisplayPath = "/org/deepin/dde/Display1";
-const static QString DisplayInterface = "org.deepin.dde.Display1";
+const static QString DisplayService = "org.lingmo.Display1";
+const static QString DisplayPath = "/org/lingmo/Display1";
+const static QString DisplayInterface = "org.lingmo.Display1";
 
-const static QString AppearanceService = "org.deepin.dde.Appearance1";
-const static QString AppearancePath = "/org/deepin/dde/Appearance1";
-const static QString AppearanceInterface = "org.deepin.dde.Appearance1";
+const static QString AppearanceService = "org.lingmo.Appearance1";
+const static QString AppearancePath = "/org/lingmo/Appearance1";
+const static QString AppearanceInterface = "org.lingmo.Appearance1";
 
-const static QString PowerService = "org.deepin.dde.Power1";
-const static QString PowerPath = "/org/deepin/dde/Power1";
-const static QString PowerInterface = "org.deepin.dde.Power1";
+const static QString PowerService = "org.lingmo.Power1";
+const static QString PowerPath = "/org/lingmo/Power1";
+const static QString PowerInterface = "org.lingmo.Power1";
 
 DisplayDBusProxy::DisplayDBusProxy(QObject *parent)
     : QObject(parent)
@@ -35,11 +35,11 @@ DisplayDBusProxy::DisplayDBusProxy(QObject *parent)
 
 void DisplayDBusProxy::init()
 {
-    m_dBusSystemDisplayInter = new DDBusInterface("org.deepin.dde.Display1", "/org/deepin/dde/Display1", "org.deepin.dde.Display1", QDBusConnection::systemBus(), this);
+    m_dBusSystemDisplayInter = new DDBusInterface("org.lingmo.Display1", "/org/lingmo/Display1", "org.lingmo.Display1", QDBusConnection::systemBus(), this);
     m_dBusDisplayInter = new DDBusInterface(DisplayService, DisplayPath, DisplayInterface, QDBusConnection::sessionBus(), this);
     m_dBusAppearanceInter = new DDBusInterface(AppearanceService, AppearancePath, AppearanceInterface, QDBusConnection::sessionBus(), this);
     m_dBusPowerInter = new DDBusInterface(PowerService, PowerPath, PowerInterface, QDBusConnection::sessionBus(), this);
-    QDBusConnection::sessionBus().connect("com.deepin.wm", "/com/deepin/wm", "com.deepin.wm", "WorkspaceSwitched", this, SIGNAL(WorkspaceSwitched(int, int)));
+    QDBusConnection::sessionBus().connect("com.lingmo.wm", "/com/lingmo/wm", "com.lingmo.wm", "WorkspaceSwitched", this, SIGNAL(WorkspaceSwitched(int, int)));
 }
 
 // power

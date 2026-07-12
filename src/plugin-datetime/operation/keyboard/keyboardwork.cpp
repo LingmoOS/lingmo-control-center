@@ -398,7 +398,7 @@ void KeyboardWorker::onPinyin()
 {
     m_letters.clear();
     m_metaDatas.clear();
-    QDBusInterface dbus_pinyin("org.deepin.dde.Pinyin1", "/org/deepin/dde/Pinyin1",
+    QDBusInterface dbus_pinyin("org.lingmo.Pinyin1", "/org/lingmo/Pinyin1",
                                "org.deepin.dde.Pinyin1");
 
     Q_FOREACH(const QString &str, m_model->kbLayout().keys()) {

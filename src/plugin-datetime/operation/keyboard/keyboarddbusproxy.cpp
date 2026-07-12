@@ -11,9 +11,9 @@
 #include <QDBusMetaType>
 #include <QDebug>
 
-const static QString LangSelectorService = "org.deepin.dde.LangSelector1";
-const static QString LangSelectorPath = "/org/deepin/dde/LangSelector1";
-const static QString LangSelectorInterface = "org.deepin.dde.LangSelector1";
+const static QString LangSelectorService = "org.lingmo.LangSelector1";
+const static QString LangSelectorPath = "/org/lingmo/LangSelector1";
+const static QString LangSelectorInterface = "org.lingmo.LangSelector1";
 
 KeyboardDBusProxy::KeyboardDBusProxy(QObject *parent)
     : QObject(parent)

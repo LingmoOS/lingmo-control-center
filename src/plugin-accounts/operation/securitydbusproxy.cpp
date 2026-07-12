@@ -42,9 +42,9 @@ std::tuple<QString, QString> SecurityDBusProxy::GetSEUserByName(const QString &u
 
 void SecurityDBusProxy::init()
 {
-    const QString &service = QStringLiteral("com.deepin.daemon.SecurityEnhance");
-    const QString &path = QStringLiteral("/com/deepin/daemon/SecurityEnhance");
-    const QString &interface = QStringLiteral("com.deepin.daemon.SecurityEnhance");
+    const QString &service = QStringLiteral("com.lingmo.daemon.SecurityEnhance");
+    const QString &path = QStringLiteral("/com/lingmo/daemon/SecurityEnhance");
+    const QString &interface = QStringLiteral("com.lingmo.daemon.SecurityEnhance");
 
     m_dBusInter = new DDBusInterface(service, path, interface, QDBusConnection::systemBus(), this);
 
