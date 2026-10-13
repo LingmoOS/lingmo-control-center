@@ -46,6 +46,9 @@ constexpr auto COMPACT_MODE_DISPLAY_KEY = "compactDisplayStatus";
 constexpr auto TITLE_BAR_HEIGHT_SUPPORT_COMPACT_DISPLAY = "titleBarHeightSupportCompactDisplay";
 constexpr auto SIZE_MODE_KEY = "sizeMode";
 constexpr auto SCROLLBAR_POLICY_KEY = "scrollBarPolicy";
+// DTK 自绘标题栏（原生应用）读取的键；-1 表示未接管，DTitlebar 按尺寸模式取 40/50
+constexpr auto DTK_TITLE_BAR_HEIGHT_KEY = "titlebarHeight";
+constexpr auto DTK_TITLE_BAR_HEIGHT_UNSET = -1;
 
 PersonalizationWorker::PersonalizationWorker(PersonalizationModel *model, QObject *parent)
     : QObject(parent)
@@ -129,6 +132,11 @@ PersonalizationWorker::PersonalizationWorker(PersonalizationModel *model, QObjec
 void PersonalizationWorker::active()
 {
     m_personalizationDBusProxy->blockSignals(false);
+
+    // 原生应用（DTK 自绘标题栏）的高度存在 org.deepin.dtk.preference 里，
+    // -1 表示未被接管；据此还原开关状态
+    if (m_model && m_dtkConfig)
+        m_model->setApplyTitleBarHeightToNative(m_dtkConfig->value(DTK_TITLE_BAR_HEIGHT_KEY).toInt() > 0);
 
     m_wallpaperWorker->fetchData();
 
@@ -393,9 +401,27 @@ void PersonalizationWorker::setFontList(FontModel *model, const QString &type, c
     m_personalizationDBusProxy->Show(type, l, watcher, SLOT(onShow(const QString &)));
 }
 
-void PersonalizationWorker::setTitleBarHeight(int)
+void PersonalizationWorker::setTitleBarHeight(int value)
 {
+    if (!m_model || !m_dtkConfig)
+        return;
+    // 只写 kwin(服务端装饰)那一份时保持原状；开关打开才同步给 DTK 原生应用
+    if (!m_model->getApplyTitleBarHeightToNative())
+        return;
+    m_dtkConfig->setValue(DTK_TITLE_BAR_HEIGHT_KEY, value);
+}
 
+void PersonalizationWorker::setApplyTitleBarHeightToNative(bool value)
+{
+    if (!m_model || !m_dtkConfig)
+        return;
+    if (m_model->getApplyTitleBarHeightToNative() == value)
+        return;
+
+    m_model->setApplyTitleBarHeightToNative(value);
+    // 打开时立刻把当前高度下发给原生应用并接管；关闭时写回 -1，让它们走原来的默认
+    m_dtkConfig->setValue(DTK_TITLE_BAR_HEIGHT_KEY,
+                          value ? m_model->getTitleBarHeight() : DTK_TITLE_BAR_HEIGHT_UNSET);
 }
 
 void PersonalizationWorker::setDiabledCompactToTitleHeight()

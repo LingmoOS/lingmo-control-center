@@ -61,6 +61,8 @@ void X11Worker::setTitleBarHeight(int value)
     if (m_kwinTitleBarConfig->value(TITLE_BAR_HEIGHT_KEY).toInt() != value) {
         m_kwinTitleBarConfig->setValue(TITLE_BAR_HEIGHT_KEY, value);
     }
+    // 开关打开时，同时同步给 DTK 自绘标题栏的原生应用
+    PersonalizationWorker::setTitleBarHeight(value);
 }
 
 void X11Worker::setWindowEffect(int value)

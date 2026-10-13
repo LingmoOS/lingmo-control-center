@@ -1,3 +1,15 @@
+lingmo-control-center (6.2.3.lingmo5u1) unstable; urgency=medium
+
+  * feat: 窗口标题栏高度支持同时应用到原生应用
+    - 第三方应用的标题栏由窗口管理器绘制，原生 DTK 应用则由 DTitlebar 自绘；
+      后者读的是 org.deepin.dtk.preference 的 titlebarHeight（默认 -1 表示
+      未接管），所以原先只写 kwin DConfig 的设置不会影响原生应用
+    - 在「标题栏高度」下方新增“同时应用到原生应用”开关：打开后把当前高度
+      写入该键并接管，关闭时写回 -1，原生应用恢复原有的默认高度
+    - 开关状态由该键是否大于 0 推导，不新增配置项、无需改 DConfig 元数据
+
+ -- Lingmo OS Team <team@lingmo.org>  Wed, 14 Oct 2026 00:18:55 +0800
+
 lingmo-control-center (6.2.2.lingmo.2) unstable; urgency=medium
 
   * new release for Lingmo OS.

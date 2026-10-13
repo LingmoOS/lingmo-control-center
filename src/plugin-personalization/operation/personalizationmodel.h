@@ -25,6 +25,7 @@ class PersonalizationModel : public QObject
     Q_PROPERTY(bool compactDisplay READ getCompactDisplay WRITE setCompactDisplay NOTIFY compactDisplayChanged)
     Q_PROPERTY(int scrollBarPolicy READ getScrollBarPolicy WRITE setScrollBarPolicy NOTIFY scrollBarPolicyChanged)
     Q_PROPERTY(int titleBarHeight READ getTitleBarHeight WRITE setTitleBarHeight NOTIFY titleBarHeightChanged)
+    Q_PROPERTY(bool applyTitleBarHeightToNative READ getApplyTitleBarHeightToNative WRITE setApplyTitleBarHeightToNative NOTIFY applyTitleBarHeightToNativeChanged)
     Q_PROPERTY(bool isMoveWindow READ getIsMoveWindow WRITE setIsMoveWindow NOTIFY moveWindowChanged)
     Q_PROPERTY(int windowEffectType READ windowEffectType WRITE setWindowEffectType NOTIFY windowEffectTypeChanged)
     Q_PROPERTY(QString activeColor READ getActiveColor WRITE setActiveColor NOTIFY onActiveColorChanged)
@@ -103,6 +104,8 @@ public:
 
     inline int getTitleBarHeight() const { return m_titleBarHeight; }
     void setTitleBarHeight(int titleBarHeight);
+    inline bool getApplyTitleBarHeightToNative() const { return m_applyTitleBarHeightToNative; }
+    void setApplyTitleBarHeightToNative(bool value);
 
     void setIsMoveWindow(const bool isMoveWindow);
     bool getIsMoveWindow() const { return m_isMoveWindow; };
@@ -169,6 +172,7 @@ Q_SIGNALS:
     void compactDisplayChanged(bool value);
     void scrollBarPolicyChanged(int policy);
     void titleBarHeightChanged(int titleBarHeight);
+    void applyTitleBarHeightToNativeChanged(bool value);
     void moveWindowChanged(const bool isMoveWindow);
     void windowEffectTypeChanged(int windowEffectType);
     void scrollBarPolicyConfigChanged(const QString &config);
@@ -217,6 +221,7 @@ private:
     bool m_compactDisplay;
     int m_scrollBarPolicy;
     int m_titleBarHeight;
+    bool m_applyTitleBarHeightToNative = false;
     int m_windowEffectType;
 
     QString m_scrollBarPolicyConfig;

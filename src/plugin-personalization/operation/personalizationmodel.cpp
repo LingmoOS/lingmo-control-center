@@ -118,6 +118,14 @@ void PersonalizationModel::setTitleBarHeight(int titleBarHeight)
     Q_EMIT titleBarHeightChanged(titleBarHeight);
 }
 
+void PersonalizationModel::setApplyTitleBarHeightToNative(bool value)
+{
+    if (m_applyTitleBarHeightToNative == value)
+        return;
+    m_applyTitleBarHeightToNative = value;
+    Q_EMIT applyTitleBarHeightToNativeChanged(value);
+}
+
 void PersonalizationModel::setIsMoveWindow(bool value)
 {
     if (m_isMoveWindow != value) {

@@ -264,6 +264,24 @@ DccObject {
     }
 
     DccObject {
+        name: "titleBarHeightNative"
+        parentName: "personalization/windowEffect"
+        displayName: qsTr("Also apply to native applications")
+        description: qsTr("Apply the height to applications that draw their own title bar as well.")
+        weight: 710
+        backgroundType: DccObject.Normal
+        pageType: DccObject.Editor
+        page: D.Switch {
+            checked: dccData.model.applyTitleBarHeightToNative
+            onCheckedChanged: {
+                if (checked !== dccData.model.applyTitleBarHeightToNative) {
+                    dccData.worker.setApplyTitleBarHeightToNative(checked)
+                }
+            }
+        }
+    }
+
+    DccObject {
         id: scrollBarObject
         name: "scrollBar"
         property bool hasDBusProperty: false

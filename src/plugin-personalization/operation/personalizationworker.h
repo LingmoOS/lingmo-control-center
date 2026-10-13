@@ -36,6 +36,7 @@ public:
 
 public Q_SLOTS:
     void setDiabledCompactToTitleHeight();
+    void setApplyTitleBarHeightToNative(bool value);
     void setScrollBarPolicy(int policy);
     void setCompactDisplay(bool value);
     void goDownloadTheme();
