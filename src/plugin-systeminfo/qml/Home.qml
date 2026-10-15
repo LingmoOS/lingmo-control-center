@@ -10,6 +10,12 @@ import org.deepin.dcc 1.0
 // 设备概览（名称/系统/处理器/内存/内核）+ 系统更新入口 + 常用设置入口
 DccObject {
     id: homeRoot
+    name: "home"
+    parentName: "root"
+    displayName: qsTr("Home")
+    description: qsTr("Device overview and common settings")
+    icon: "commoninfo"
+    weight: 10
 
     // 单行“标题 : 值”卡片
     component InfoRow: DccObject {

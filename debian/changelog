@@ -1,3 +1,12 @@
+lingmo-control-center (6.2.10.lingmo5u1) unstable; urgency=medium
+
+  * fix(home): 补回主页根对象的 name/parentName 等属性
+    上一版把 Home.qml 改成卡片式时漏掉了根对象自身的 name/parentName/displayName/
+    icon/weight，导致“主页”不会出现在侧边栏、其下的卡片成为无父对象。现补回
+    （name=home, parentName=root, weight=10）。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:07:03 +0800
+
 lingmo-control-center (6.2.9.lingmo5u1) unstable; urgency=medium
 
   * feat: 新增“辅助功能”插件（侧边栏第 11 项）
