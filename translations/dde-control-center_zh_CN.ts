@@ -4430,6 +4430,22 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
         <source>Device overview and common settings</source>
         <translation>设备概览与常用设置</translation>
     </message>
+    <message>
+        <source>Device name</source>
+        <translation>设备名称</translation>
+    </message>
+    <message>
+        <source>Updates</source>
+        <translation>系统更新</translation>
+    </message>
+    <message>
+        <source>Check for updates</source>
+        <translation>检查更新</translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation>网络</translation>
+    </message>
 </context>
 <context>
     <name>Apps</name>

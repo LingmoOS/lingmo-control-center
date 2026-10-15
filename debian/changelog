@@ -1,3 +1,14 @@
+lingmo-control-center (6.2.7.lingmo5u1) unstable; urgency=medium
+
+  * feat(home): 主页改为卡片式概览
+    侧边栏“主页”不再复用“关于本机”，改为独立页面：
+      - 设备概览卡片：设备名称、系统（名称+版本）、处理器、内存、内核
+      - 系统更新卡片：一键跳转到“系统更新”
+      - 常用设置卡片：网络、个性化、显示、声音、关于本机 快捷入口
+    数据复用 plugin-systeminfo 已有的 systemInfoMode()，跳转使用 DccApp.showPage()。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:03:58 +0800
+
 lingmo-control-center (6.2.6.lingmo5u1) unstable; urgency=medium
 
   * feat: 侧边栏重排为 14 项（Windows 11 式信息架构）
