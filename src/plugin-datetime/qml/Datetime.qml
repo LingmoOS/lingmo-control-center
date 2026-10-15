@@ -4,9 +4,9 @@ import org.deepin.dcc 1.0
 
 DccObject {
     name: "datetime"
-    parentName: "system"
+    parentName: "timeAndLanguage"
     displayName: qsTr("Time and date")
     description: qsTr("Time and date, time zone settings")
     icon: "dcc_time_date"
-    weight: 40
+    weight: 10
 }

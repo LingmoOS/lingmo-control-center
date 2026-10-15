@@ -134,6 +134,10 @@
         <source>Account manager</source>
         <translation>账户管理</translation>
     </message>
+    <message>
+        <source>Accounts</source>
+        <translation>账户</translation>
+    </message>
 </context>
 <context>
     <name>AccountsMain</name>
@@ -1726,6 +1730,10 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
         <source>Bluetooth and Devices</source>
         <translation>蓝牙和其他设备</translation>
     </message>
+    <message>
+        <source>Bluetooth and other devices</source>
+        <translation>蓝牙和其他设备</translation>
+    </message>
 </context>
 <context>
     <name>DisclaimerControl</name>
@@ -2830,6 +2838,10 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Power</source>
+        <translation>电源管理</translation>
+    </message>
+    <message>
+        <source>Power Management</source>
         <translation>电源管理</translation>
     </message>
 </context>
@@ -4406,6 +4418,50 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <message>
         <source>None</source>
         <translation>无</translation>
+    </message>
+</context>
+<context>
+    <name>Home</name>
+    <message>
+        <source>Home</source>
+        <translation>主页</translation>
+    </message>
+    <message>
+        <source>Device overview and common settings</source>
+        <translation>设备概览与常用设置</translation>
+    </message>
+</context>
+<context>
+    <name>Apps</name>
+    <message>
+        <source>Apps</source>
+        <translation>应用</translation>
+    </message>
+    <message>
+        <source>Default programs and installed applications</source>
+        <translation>默认程序与已安装应用</translation>
+    </message>
+</context>
+<context>
+    <name>KeyboardAndMouse</name>
+    <message>
+        <source>Keyboard and Mouse</source>
+        <translation>键盘与鼠标</translation>
+    </message>
+    <message>
+        <source>Keyboard, mouse and touchpad</source>
+        <translation>键盘、鼠标与触控板</translation>
+    </message>
+</context>
+<context>
+    <name>TimeAndLanguage</name>
+    <message>
+        <source>Time and Language</source>
+        <translation>时间和语言</translation>
+    </message>
+    <message>
+        <source>Date, time, language and formats</source>
+        <translation>日期时间、语言与格式</translation>
     </message>
 </context>
 </TS>

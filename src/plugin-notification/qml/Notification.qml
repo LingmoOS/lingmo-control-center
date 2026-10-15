@@ -4,9 +4,9 @@ import org.deepin.dcc 1.0
 
 DccObject {
     name: "notification"
-    parentName: "system"
+    parentName: "root"
     displayName: qsTr("Notification")
     description: qsTr("DND mode, app notifications")
     icon: "dcc_notification"
-    weight: 30
+    weight: 80
 }

@@ -6,11 +6,11 @@ import org.deepin.dcc 1.0
 DccObject {
     id: mouse
     name:"MouseAndTouchpad"
-    parentName:"device"
+    parentName: "keyboardAndMouse"
     displayName: qsTr("Mouse and Touchpad")
     description: qsTr("Common、Mouse、Touchpad")
     icon:"device_mouse"
-    weight: 30
+    weight: 20
 
     page: DccRightView {
         spacing: -4

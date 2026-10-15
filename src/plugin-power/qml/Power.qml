@@ -6,12 +6,12 @@ DccObject {
     id: power
     name: "power"
     parentName: "root"
-    displayName: qsTr("Power")
+    displayName: qsTr("Power Management")
     description: qsTr("Power saving settings, screen and suspend")
     icon: "power"
-    weight: 50
+    weight: 130
 
-    visible: false
+    visible: true
     DccDBusInterface {
         property var onBattery
         service: "org.deepin.dde.Power1"

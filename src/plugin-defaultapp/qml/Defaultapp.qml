@@ -4,9 +4,9 @@ import org.deepin.dcc 1.0
 
 DccObject {
     name: "defaultapp"
-    parentName: "system"
+    parentName: "apps"
     displayName: qsTr("Default App")
     description: qsTr("Set the default application for opening various types of files")
     icon: "default_program"
-    weight: 40
+    weight: 10
 }

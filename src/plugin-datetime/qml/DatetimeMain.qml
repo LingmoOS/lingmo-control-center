@@ -8,11 +8,11 @@ TimeAndDate {
     DccObject {
         id: langAndFormat
         name: "langAndFormat"
-        parentName: "system"
+        parentName: "timeAndLanguage"
         displayName: qsTr("Language and region")
         description: qsTr("System language, regional formats")
         icon: "dcc_lang_format"
-        weight: 45
+        weight: 20
         visible: false
         DccDBusInterface {
             property var locales

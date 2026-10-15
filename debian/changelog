@@ -1,3 +1,19 @@
+lingmo-control-center (6.2.6.lingmo5u1) unstable; urgency=medium
+
+  * feat: 侧边栏重排为 14 项（Windows 11 式信息架构）
+    新增“主页/应用/键盘与鼠标/时间和语言”四项，并把“通知”从“系统”提到侧栏：
+      主页(10) 系统(20) 蓝牙和其他设备(30) 网络(40) 个性化(50) 应用(60) 账户(70)
+      通知(80) 键盘与鼠标(90) 时间和语言(100) 隐私和安全性(120) 电源管理(130) 系统更新(140)
+    - 原“蓝牙与设备”下的键盘、鼠标和触控板移入“键盘与鼠标”；
+      原“系统”下的时间和日期、语言和格式移入“时间和语言”；默认程序移入“应用”。
+    - “隐私和安全性”原先只在 UOS 版可见（productType()===Uos），社区版被隐藏，现恒可见。
+    - “电源管理”原先仅在检测到电池时出现，现恒可见并更名。
+    - 恢复被注释掉的“最终用户许可协议/隐私政策/用户体验改善计划”三页，改挂到“隐私和安全性”下
+      （正文由 lingmo-desktop-base 提供到 /usr/share/protocol/）。
+    - 新增中文翻译（zh_CN）与新的根对象 QML 文件（由 dcc_build_plugin 的 GLOB 自动收录）。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:00:23 +0800
+
 lingmo-control-center (6.2.5.lingmo5u1) unstable; urgency=medium
 
   * fix(systeminfo): 许可协议改读 Lingmo 自己的协议文本

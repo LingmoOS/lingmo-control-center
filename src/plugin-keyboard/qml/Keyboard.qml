@@ -5,11 +5,11 @@ import org.deepin.dcc 1.0
 DccObject {
     id: keyboard
     name: "keyboard"
-    parentName: "device"
+    parentName: "keyboardAndMouse"
     displayName: qsTr("Keyboard")
     description: qsTr("General Settings, input method, shortcuts")
     icon: "device_keyboard"
-    weight: 40
+    weight: 10
     visible: false
     DccDBusInterface {
         property var numLockState
