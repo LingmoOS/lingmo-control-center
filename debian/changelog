@@ -1,3 +1,14 @@
+lingmo-control-center (6.2.17.lingmo5u1) unstable; urgency=medium
+
+  * fix(accessibility): 补上 accessibilitycontroller.moc include
+    DCC_FACTORY_CLASS 在 .cpp 内定义了一个带 Q_OBJECT/Q_PLUGIN_METADATA 的工厂类，
+    AUTOMOC 因此要求该 .cpp 末尾包含自己的 .moc，否则构建报：
+      AutoMoc error: contains a "DCC_FACTORY_CLASS" macro, but does not include
+      "accessibilitycontroller.moc"!
+    仓库内其余 20 个同类 .cpp 都有这行，新插件漏了，现补上。
+
+ -- Lingmo OS Team <team@lingmo.org>  Fri, 16 Oct 2026 01:11:50 +0800
+
 lingmo-control-center (6.2.16.lingmo5u1) unstable; urgency=medium
 
   * fix: 侧栏图标 SVG 缺描边色导致不可见

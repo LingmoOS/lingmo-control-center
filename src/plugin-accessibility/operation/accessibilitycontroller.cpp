@@ -79,3 +79,5 @@ void AccessibilityController::setDwellClickEnabled(bool value)
 }
 
 DCC_FACTORY_CLASS(AccessibilityController)
+
+#include "accessibilitycontroller.moc"
