@@ -157,7 +157,8 @@ Item {
             }
 
             delegate: D.ItemDelegate {
-                implicitHeight: 40
+                // 侧边栏每项高度：原为 40，略降为 36（对齐 DTK 标准行高，列表更紧凑）
+                implicitHeight: 36
                 width: parent ? parent.width : 300
                 font: D.DTK.fontManager.t6
                 activeFocusOnTab: false

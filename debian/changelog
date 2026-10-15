@@ -1,3 +1,11 @@
+lingmo-control-center (6.2.13.lingmo5u1) unstable; urgency=medium
+
+  * style: 侧边栏每项高度由 40 调整为 36
+    两栏视图左栏（SecondPage.qml 的 ListView）的 delegate 高度原为 40，略显宽松；
+    改为 36（与 DTK 标准行高一致），列表更紧凑。图标尺寸（24）与字号不变。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:20:22 +0800
+
 lingmo-control-center (6.2.12.lingmo5u1) unstable; urgency=medium
 
   * change(privacy): “隐私和安全性”只放设置项，法律文本移回“系统”
