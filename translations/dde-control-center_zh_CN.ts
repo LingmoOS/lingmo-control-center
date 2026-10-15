@@ -4499,4 +4499,74 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
         <translation>未找到应用</translation>
     </message>
 </context>
+<context>
+    <name>AccessibilityRoot</name>
+    <message>
+        <source>Accessibility</source>
+        <translation>辅助功能</translation>
+    </message>
+    <message>
+        <source>Vision, hearing and interaction aids</source>
+        <translation>视觉、听觉与操作辅助</translation>
+    </message>
+</context>
+<context>
+    <name>Accessibility</name>
+    <message>
+        <source>Screen reader</source>
+        <translation>屏幕阅读器</translation>
+    </message>
+    <message>
+        <source>Announce the interface with a speech synthesiser</source>
+        <translation>用语音朗读界面内容</translation>
+    </message>
+    <message>
+        <source>On-screen keyboard</source>
+        <translation>屏幕键盘</translation>
+    </message>
+    <message>
+        <source>Show a keyboard on the screen for pointer input</source>
+        <translation>在屏幕上显示键盘，用指针输入</translation>
+    </message>
+    <message>
+        <source>Screen magnifier</source>
+        <translation>屏幕放大镜</translation>
+    </message>
+    <message>
+        <source>Magnify part of the screen</source>
+        <translation>放大屏幕的一部分</translation>
+    </message>
+    <message>
+        <source>Sticky keys</source>
+        <translation>粘滞键</translation>
+    </message>
+    <message>
+        <source>Press modifier keys one at a time</source>
+        <translation>逐个按下组合键中的修饰键</translation>
+    </message>
+    <message>
+        <source>Slow keys</source>
+        <translation>慢速键</translation>
+    </message>
+    <message>
+        <source>Only accept a key press held for a while</source>
+        <translation>需按住一段时间的按键才生效</translation>
+    </message>
+    <message>
+        <source>Bounce keys</source>
+        <translation>防抖键</translation>
+    </message>
+    <message>
+        <source>Ignore repeated key presses in a short time</source>
+        <translation>短时间内忽略重复按键</translation>
+    </message>
+    <message>
+        <source>Hover click</source>
+        <translation>悬停点击</translation>
+    </message>
+    <message>
+        <source>Click by hovering the pointer over a control</source>
+        <translation>指针悬停在控件上即点击</translation>
+    </message>
+</context>
 </TS>

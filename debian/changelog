@@ -1,3 +1,16 @@
+lingmo-control-center (6.2.9.lingmo5u1) unstable; urgency=medium
+
+  * feat: 新增“辅助功能”插件（侧边栏第 11 项）
+    - 新插件 src/plugin-accessibility：AccessibilityController 读写
+      com.deepin.wrap.gnome.desktop.a11y.* 设置；沿用项目既有做法调用
+      gsettings 命令行，不引入 gsettings-qt 依赖。
+    - 提供七个开关：屏幕阅读器、屏幕键盘、屏幕放大镜、粘滞键、慢速键、
+      防抖键、悬停点击。
+    - 顶层 CMakeLists 注册 add_subdirectory(src/plugin-accessibility)；
+      打包为通配（usr/lib/*/dde-control-center/），新插件自动随包发布。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:06:49 +0800
+
 lingmo-control-center (6.2.8.lingmo5u1) unstable; urgency=medium
 
   * feat(apps): “应用”页新增已安装应用列表
