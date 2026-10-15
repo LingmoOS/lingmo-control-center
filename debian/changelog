@@ -1,3 +1,14 @@
+lingmo-control-center (6.2.4.lingmo5u1) unstable; urgency=medium
+
+  * feat: 不再内置 Deepin ID（云账号）插件
+    控制中心里原本挂着整套 deepin 账号系统（登录、注册、账号安全、微信绑定，
+    接口指向 deepinid/userinfo），与 Lingmo 无关。按项目既有的“插件开关”风格新增
+    DISABLE_DEEPIN_ID 选项并默认打开，plugin-deepinid 不再编译与安装；
+    需要时可用 -DDISABLE_DEEPIN_ID=OFF 恢复。
+    插件源码仍保留在仓库中，便于将来替换为自有账号体系。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 20:32:28 +0800
+
 lingmo-control-center (6.2.3.lingmo5u1) unstable; urgency=medium
 
   * feat: 窗口标题栏高度支持同时应用到原生应用

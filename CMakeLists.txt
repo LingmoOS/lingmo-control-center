@@ -45,6 +45,10 @@ option(DISABLE_PRIVACY_PLUGIN "disable privacy and security plugin" OFF)
 option(DISABLE_LANGUAGE "disable lanugage settings in control center" OFF)
 option(USE_DEEPIN_ZONE "enable special timezone file on deepin" OFF)
 option(DISABLE_SOUND_ADVANCED "disable sound advanced settings" OFF)
+# 不再内置 Deepin ID（云账号）插件：它是一整套 deepin 账号系统（登录/注册/
+# 账号安全/微信绑定，接口指向 deepinid/userinfo），与 Lingmo 无关。
+# 默认不编译；需要时用 -DDISABLE_DEEPIN_ID=OFF 恢复。
+option(DISABLE_DEEPIN_ID "disable the Deepin ID (cloud account) plugin" ON)
 set(DEEPIN_TIME_ZONE_PATH "/usr/share/dde/zoneinfo/zone1970.tab" CACHE STRING "deepin timezone path")
 set(LOCALE_I18N_PATH "/usr/share/i18n/SUPPORTED" CACHE STRING "Supported locale path")
 
@@ -235,7 +239,9 @@ add_subdirectory(src/plugin-datetime)
 add_subdirectory(src/plugin-wacom)
 add_subdirectory(src/plugin-bluetooth)
 add_subdirectory(src/plugin-notification)
-add_subdirectory(src/plugin-deepinid)
+if (NOT DISABLE_DEEPIN_ID)
+    add_subdirectory(src/plugin-deepinid)
+endif()
 add_subdirectory(src/plugin-display)
 if (NOT DISABLE_PRIVACY_PLUGIN)
     add_subdirectory(src/plugin-privacy)
