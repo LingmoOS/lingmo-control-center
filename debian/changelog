@@ -1,3 +1,15 @@
+lingmo-control-center (6.2.5.lingmo5u1) unstable; urgency=medium
+
+  * fix(systeminfo): 许可协议改读 Lingmo 自己的协议文本
+    - 系统信息页的隐私政策、用户体验改善计划、最终用户许可协议，社区版分支原先
+      被写死到 /usr/share/deepin-deepinid-client/privacy/（deepin 客户端包），
+      Lingmo 上没有该包，页面只能空白。现优先读取
+      /usr/share/protocol/（由 lingmo-desktop-base 提供），找不到再退回旧路径。
+    - 顺带修正 getPrivacyFile 中两处中英文混用：中文缺失时退回的是英文旧路径
+      （oldENContent），英文是否存在却用中文文件判断（privacyzhCNFile）。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 20:40:53 +0800
+
 lingmo-control-center (6.2.4.lingmo5u1) unstable; urgency=medium
 
   * feat: 不再内置 Deepin ID（云账号）插件

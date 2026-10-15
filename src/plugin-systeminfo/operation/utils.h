@@ -125,15 +125,23 @@ inline const QString getLicenseText(const QString &filePath, const QString &type
     const QString oldENContent = "/usr/share/deepin-deepinid-client/privacy/deepinid-CN-en_US.md";
 
     QFile privacyzhCNFile(newCNContent);
-    zhCNContent = privacyzhCNFile.exists() ? newCNContent : oldENContent;
+    // 修：中文缺失时应退回中文旧路径，原实现写成了 oldENContent（退回英文）
+    zhCNContent = privacyzhCNFile.exists() ? newCNContent : oldCNContent;
     QFile privacyenUSFile(newENContent);
-    enUSContent = privacyzhCNFile.exists() ? newENContent : oldENContent;
-    // 目前社区版的协议只放在这个路径下,后续如果修改了,再作适配
+    // 修：英文是否存在应由英文文件判断，原实现用的是 privacyzhCNFile
+    enUSContent = privacyenUSFile.exists() ? newENContent : oldENContent;
+    // 社区版原先只读 deepin 客户端包（deepin-deepinid-client）下的路径，Lingmo 上
+    // 没有该包，页面只能空白。现随 lingmo-desktop-base 把同样内容装到
+    // /usr/share/protocol/，社区版也优先读新路径，找不到再退回旧路径。
     if (DSysInfo::isCommunityEdition()) {
-        zhCNContent = "/usr/share/deepin-deepinid-client/privacy/Privacy-Policy-Community/"
-                      "Privacy-Policy-CN-zh_CN.md";
-        enUSContent = "/usr/share/deepin-deepinid-client/privacy/Privacy-Policy-Community/"
-                      "Privacy-Policy-CN-en_US.md";
+        const QString communityOldCN =
+                "/usr/share/deepin-deepinid-client/privacy/Privacy-Policy-Community/"
+                "Privacy-Policy-CN-zh_CN.md";
+        const QString communityOldEN =
+                "/usr/share/deepin-deepinid-client/privacy/Privacy-Policy-Community/"
+                "Privacy-Policy-CN-en_US.md";
+        zhCNContent = privacyzhCNFile.exists() ? newCNContent : communityOldCN;
+        enUSContent = privacyenUSFile.exists() ? newENContent : communityOldEN;
     }
 }
 
@@ -143,6 +151,9 @@ inline const QString getLicenseText(const QString &filePath, const QString &type
                                             "User-Experience-Program-License-Agreement-CN-%1.%2",
                                             "md");
     if (DSysInfo::isCommunityEdition()) {
+        // 新版路径由 lingmo-desktop-base 提供；不存在时退回旧的 deepin 客户端路径
+        if (QFile::exists(userExpContent))
+            return userExpContent;
         userExpContent = getLicensePath("/usr/share/deepin-deepinid-client/privacy/"
                                         "User-Experience-Program-License-Agreement-Community/"
                                         "User-Experience-Program-License-Agreement-CN-%1.%2",
@@ -196,10 +207,17 @@ inline LicenseSearchInfo isEndUserAgreementExist()
         if (candidate.isEmpty())
             candidate = pathIfExists(homeEnduserAgreement_old, "txt");
     } else if (DSysInfo::isCommunityEdition()) {
+        // 新版路径（lingmo-desktop-base 提供 End-User-License-Agreement-Community-CN-*.txt）
         candidate = pathIfExists(
-            "/usr/share/deepin-deepinid-client/privacy/End-User-License-Agreement-Community/"
-            "End-User-License-Agreement-CN-%1.%2",
+            "/usr/share/protocol/enduser-agreement/"
+            "End-User-License-Agreement-Community-CN-%1.%2",
             "txt");
+        // 退回旧的 deepin 客户端路径
+        if (candidate.isEmpty())
+            candidate = pathIfExists(
+                "/usr/share/deepin-deepinid-client/privacy/End-User-License-Agreement-Community/"
+                "End-User-License-Agreement-CN-%1.%2",
+                "txt");
     } else if (DSysInfo::uosEditionType() == DSysInfo::UosEdition::UosEducation) {
         candidate = pathIfExists(educationEnduserAgreement, "txt");
     } else if (DSysInfo::uosEditionType() == DSysInfo::UosEdition::UosMilitary) {
