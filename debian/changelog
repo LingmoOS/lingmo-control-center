@@ -1,3 +1,13 @@
+lingmo-control-center (6.2.16.lingmo5u1) unstable; urgency=medium
+
+  * fix: 侧栏图标 SVG 缺描边色导致不可见
+    Tabler 把 stroke="currentColor" 放在根 <svg> 上，上一版重建根标签时丢掉了该属性，
+    路径又没有自己的 stroke，结果图标会渲染为不可见（只剩空路径）。现把颜色与线宽
+    放到 <g> 上由路径继承：stroke=黑/白 + stroke-width=2（Tabler 原生线宽）。
+    三个变体（light 黑 / dark 白 / selected 白，均无底色）已重新生成。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:37:52 +0800
+
 lingmo-control-center (6.2.15.lingmo5u1) unstable; urgency=medium
 
   * style: 侧栏图标改为纯黑/白单色（去掉底色块）
