@@ -1,3 +1,16 @@
+lingmo-control-center (6.2.15.lingmo5u1) unstable; urgency=medium
+
+  * style: 侧栏图标改为纯黑/白单色（去掉底色块）
+    上一版把“双色”做成了“主题色线条 + 蓝色圆角底块”，理解有误。现按黑白单色重做：
+      - light 变体：黑色线条（#1A1A1A），亮色主题未选中；
+      - dark 变体：白色线条（#FFFFFF），暗色主题未选中；
+      - selected 变体：白色线条，选中态恒用（选中行底色为高亮色，需浅色图标）。
+    三者均无底色，纯线条。
+  * 生成脚本 icons/gen-sidebar-icons.py 入库；debian/copyright 写入 Tabler 的完整
+    MIT 许可全文与“重新着色”修改说明（MIT 要求保留许可声明）。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:37:04 +0800
+
 lingmo-control-center (6.2.14.lingmo5u1) unstable; urgency=medium
 
   * style: 侧边栏图标改用 Tabler（MIT）双色 SVG，按主题与选中态切换
