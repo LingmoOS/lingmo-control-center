@@ -4480,4 +4480,23 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
         <translation>日期时间、语言与格式</translation>
     </message>
 </context>
+<context>
+    <name>InstalledApps</name>
+    <message>
+        <source>Installed applications</source>
+        <translation>已安装应用</translation>
+    </message>
+    <message>
+        <source>Browse and launch installed applications</source>
+        <translation>浏览并启动已安装的应用</translation>
+    </message>
+    <message>
+        <source>Search applications</source>
+        <translation>搜索应用</translation>
+    </message>
+    <message>
+        <source>No applications found</source>
+        <translation>未找到应用</translation>
+    </message>
+</context>
 </TS>

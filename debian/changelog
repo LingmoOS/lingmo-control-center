@@ -1,3 +1,15 @@
+lingmo-control-center (6.2.8.lingmo5u1) unstable; urgency=medium
+
+  * feat(apps): “应用”页新增已安装应用列表
+    DefAppModel 增加 installedApps 属性与 launchApp()：
+      - 扫描 /usr/share/applications 与 ~/.local/share/applications 下的 .desktop，
+        读取 Name/Icon/Exec，跳过 NoDisplay 与 Hidden；
+      - 启动使用 gio launch，避免自行解析 Exec 中的 %U/%f 等字段码。
+    新增页面 src/plugin-defaultapp/qml/InstalledApps.qml（挂在“应用”下）：
+    支持搜索、点击启动，显示应用图标。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:05:52 +0800
+
 lingmo-control-center (6.2.7.lingmo5u1) unstable; urgency=medium
 
   * feat(home): 主页改为卡片式概览

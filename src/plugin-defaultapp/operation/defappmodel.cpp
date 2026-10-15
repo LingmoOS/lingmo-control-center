@@ -2,6 +2,12 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "defappmodel.h"
+#include <QVariantList>
+#include <QVariantMap>
+#include <QTextStream>
+#include <QProcess>
+#include <QFile>
+#include <QDir>
 
 #include "QtQml/qqml.h"
 #include "categorymodel.h"
@@ -51,3 +57,55 @@ DefAppModel::~DefAppModel()
 DCC_FACTORY_CLASS(DefAppModel)
 
 #include "defappmodel.moc"
+
+// 扫描系统与用户目录下的 .desktop，返回 {name, icon, file} 列表
+QVariantList DefAppModel::installedApps() const
+{
+    QVariantList list;
+    const QStringList dirs{ QStringLiteral("/usr/share/applications"),
+                            QDir::homePath() + QStringLiteral("/.local/share/applications") };
+    for (const QString &dirPath : dirs) {
+        QDir dir(dirPath);
+        const QStringList files = dir.entryList({ QStringLiteral("*.desktop") }, QDir::Files, QDir::Name);
+        for (const QString &fileName : files) {
+            QFile file(dir.filePath(fileName));
+            if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+                continue;
+            QString name, icon, exec;
+            bool skip = false, inEntry = false;
+            QTextStream in(&file);
+            while (!in.atEnd()) {
+                const QString line = in.readLine().trimmed();
+                if (line.startsWith(QLatin1Char('['))) {
+                    inEntry = (line == QLatin1String("[Desktop Entry]"));
+                    continue;
+                }
+                if (!inEntry)
+                    continue;
+                if (line.startsWith(QLatin1String("Name=")) && name.isEmpty())
+                    name = line.mid(5);
+                else if (line.startsWith(QLatin1String("Icon=")))
+                    icon = line.mid(5);
+                else if (line.startsWith(QLatin1String("Exec=")))
+                    exec = line.mid(5);
+                else if (line == QLatin1String("NoDisplay=true") || line == QLatin1String("Hidden=true"))
+                    skip = true;
+            }
+            file.close();
+            if (skip || name.isEmpty() || exec.isEmpty())
+                continue;
+            QVariantMap item;
+            item.insert(QStringLiteral("name"), name);
+            item.insert(QStringLiteral("icon"), icon);
+            item.insert(QStringLiteral("file"), dir.filePath(fileName));
+            list.append(item);
+        }
+    }
+    return list;
+}
+
+void DefAppModel::launchApp(const QString &desktopFile)
+{
+    // gio 由 glib 提供，系统必然存在；避免自行解析 Exec 中的字段码
+    QProcess::startDetached(QStringLiteral("gio"), { QStringLiteral("launch"), desktopFile });
+}

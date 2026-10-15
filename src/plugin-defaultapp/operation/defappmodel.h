@@ -8,6 +8,7 @@
 #include "categorymodel.h"
 
 #include <QObject>
+#include <QVariantList>
 
 class Category;
 class DefAppWorker;
@@ -16,6 +17,8 @@ class DefAppWorkerOld;
 class DefAppModel : public QObject
 {
     Q_OBJECT
+    // 已安装应用列表（供“应用”页展示与启动）
+    Q_PROPERTY(QVariantList installedApps READ installedApps NOTIFY installedAppsChanged FINAL)
 public:
     explicit DefAppModel(QObject *parent = 0);
     ~DefAppModel();
@@ -32,6 +35,11 @@ public:
     };
 
 public Q_SLOTS:
+
+    // 扫描 /usr/share/applications 与 ~/.local/share/applications 得到已安装应用
+    QVariantList installedApps() const;
+    // 用 gio launch 启动指定 .desktop
+    Q_INVOKABLE void launchApp(const QString &desktopFile);
 
     inline CategoryModel *browser() const { return m_categoryModel[Browser]; }
 
@@ -60,6 +68,9 @@ public Q_SLOTS:
     inline Category *getModPicture() const { return m_categoryModel[Picture]->category(); }
 
     inline Category *getModTerminal() const { return m_categoryModel[Terminal]->category(); }
+
+Q_SIGNALS:
+    void installedAppsChanged();
 
 private:
     CategoryModel *m_categoryModel[Count];
