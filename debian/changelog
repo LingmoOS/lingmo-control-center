@@ -1,3 +1,13 @@
+lingmo-control-center (6.2.11.lingmo5u1) unstable; urgency=medium
+
+  * change(apps): 已安装应用列表去掉“点击启动”，改为纯展示
+    列表只用于查看本机已安装的应用，不承担启动器的职责（与 Windows 11
+    “已安装的应用”一致：点开是详情/卸载，而不是启动）。委托由 ItemDelegate
+    改为不带交互的展示行，同时删除因此不再使用的 DefAppModel::launchApp()
+    及其 QProcess 依赖。搜索框保留。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:08:36 +0800
+
 lingmo-control-center (6.2.10.lingmo5u1) unstable; urgency=medium
 
   * fix(home): 补回主页根对象的 name/parentName 等属性

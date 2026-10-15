@@ -5,7 +5,6 @@
 #include <QVariantList>
 #include <QVariantMap>
 #include <QTextStream>
-#include <QProcess>
 #include <QFile>
 #include <QDir>
 
@@ -104,8 +103,3 @@ QVariantList DefAppModel::installedApps() const
     return list;
 }
 
-void DefAppModel::launchApp(const QString &desktopFile)
-{
-    // gio 由 glib 提供，系统必然存在；避免自行解析 Exec 中的字段码
-    QProcess::startDetached(QStringLiteral("gio"), { QStringLiteral("launch"), desktopFile });
-}

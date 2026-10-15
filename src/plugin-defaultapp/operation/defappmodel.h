@@ -38,9 +38,6 @@ public Q_SLOTS:
 
     // 扫描 /usr/share/applications 与 ~/.local/share/applications 得到已安装应用
     QVariantList installedApps() const;
-    // 用 gio launch 启动指定 .desktop
-    Q_INVOKABLE void launchApp(const QString &desktopFile);
-
     inline CategoryModel *browser() const { return m_categoryModel[Browser]; }
 
     inline CategoryModel *mail() const { return m_categoryModel[Mail]; }

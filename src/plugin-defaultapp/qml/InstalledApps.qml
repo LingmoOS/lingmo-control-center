@@ -43,11 +43,25 @@ DccObject {
                     return a.name.toLowerCase().indexOf(kw) >= 0
                 })
             }
-            delegate: ItemDelegate {
+            // 纯展示：不提供启动/点击动作（列表仅用于查看已安装的应用）
+            delegate: RowLayout {
                 width: ListView.view.width
-                text: modelData.name
-                icon.name: modelData.icon ? modelData.icon : ""
-                onClicked: dccData.launchApp(modelData.file)
+                spacing: 10
+                Image {
+                    Layout.leftMargin: 10
+                    Layout.preferredWidth: 24
+                    Layout.preferredHeight: 24
+                    sourceSize.width: 24
+                    sourceSize.height: 24
+                    source: modelData.icon ? "image://icon/" + modelData.icon : ""
+                    visible: modelData.icon ? true : false
+                }
+                Label {
+                    Layout.fillWidth: true
+                    text: modelData.name
+                    elide: Text.ElideRight
+                }
+                Item { Layout.fillWidth: false; Layout.preferredWidth: 10 }
             }
             ScrollBar.vertical: ScrollBar {}
         }
