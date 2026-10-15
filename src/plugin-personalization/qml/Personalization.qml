@@ -7,5 +7,7 @@ DccObject {
     parentName: "root"
     displayName: qsTr("Personalization")
     icon: "personalization"
+    // 双色 SVG（Tabler, MIT）：实际变体由 delegate 按主题/选中态选择
+    iconSource: "file:///usr/share/dde-control-center/icons/sidebar/personalization-light.svg"
     weight: 50
 }

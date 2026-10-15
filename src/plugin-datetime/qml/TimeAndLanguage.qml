@@ -10,5 +10,7 @@ DccObject {
     displayName: qsTr("Time and Language")
     description: qsTr("Date, time, language and formats")
     icon: "dcc_time_date"
+    // 双色 SVG（Tabler, MIT）：实际变体由 delegate 按主题/选中态选择
+    iconSource: "file:///usr/share/dde-control-center/icons/sidebar/timeAndLanguage-light.svg"
     weight: 100
 }

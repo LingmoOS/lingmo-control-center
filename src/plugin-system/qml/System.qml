@@ -13,6 +13,8 @@ DccObject {
     parentName: "root"
     displayName: qsTr("System")
     icon: "commoninfo"
+    // 双色 SVG（Tabler, MIT）：实际变体由 delegate 按主题/选中态选择
+    iconSource: "file:///usr/share/dde-control-center/icons/sidebar/system-light.svg"
     weight: 20
 
     DccTitleObject {

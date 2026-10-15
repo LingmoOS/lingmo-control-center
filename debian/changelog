@@ -1,3 +1,20 @@
+lingmo-control-center (6.2.14.lingmo5u1) unstable; urgency=medium
+
+  * style: 侧边栏图标改用 Tabler（MIT）双色 SVG，按主题与选中态切换
+    - 新增 icons/sidebar/ 共 42 个 SVG（14 个侧栏图标 × light/dark/selected），
+      由 Tabler Icons 单色 SVG 重新着色生成：前景为主题文字色，底色为 Lingmo 蓝
+      圆角色块（即“双色”），并安装到 /usr/share/dde-control-center/icons/sidebar/。
+    - 选中态恒用 selected（亮色）变体：侧栏选中行底色为高亮色，需浅色图标；
+      未选中时按系统亮/暗主题使用 light/dark 变体。
+    - 三处 delegate（SecondPage/HomePage/DccEditorItem）统一按上述规则选择变体；
+      使用 iconSource 时同时把 name 置空，否则 DciIcon 会优先按 name 走 DCI 查找、
+      忽略 source（见 dquickdciiconimage.cpp 的 maybeUpdateIconType 分支）。
+    - 14 个侧栏根对象设置 iconSource 指向对应 SVG；未设置 iconSource 的项仍走原
+      DCI 图标，互不影响。
+    - debian/copyright 增加 Tabler（MIT）署名。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:33:57 +0800
+
 lingmo-control-center (6.2.13.lingmo5u1) unstable; urgency=medium
 
   * style: 侧边栏每项高度由 40 调整为 36

@@ -15,6 +15,8 @@ DccObject {
     displayName: qsTr("Home")
     description: qsTr("Device overview and common settings")
     icon: "commoninfo"
+    // 双色 SVG（Tabler, MIT）：实际变体由 delegate 按主题/选中态选择
+    iconSource: "file:///usr/share/dde-control-center/icons/sidebar/home-light.svg"
     weight: 10
 
     // 单行“标题 : 值”卡片

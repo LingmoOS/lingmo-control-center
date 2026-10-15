@@ -11,6 +11,8 @@ DccObject {
     displayName: qsTr("Privacy and Security")
     description: qsTr("Camera, folder permissions")
     icon: "privacy"
+    // 双色 SVG（Tabler, MIT）：实际变体由 delegate 按主题/选中态选择
+    iconSource: "file:///usr/share/dde-control-center/icons/sidebar/privacy-light.svg"
     weight: 120
     visible: true
 }

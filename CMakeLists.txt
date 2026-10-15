@@ -37,6 +37,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # INFO:
 # plugins can be disabled and their options
+# 侧边栏图标（Tabler, MIT）：双色 SVG，light/dark/selected 三态
+install(DIRECTORY icons/sidebar DESTINATION share/dde-control-center/icons)
+
 # plugin-authentication : DISABLE_AUTHENTICATION
 # plugin-keyboard: DISABLE_LANGUAGE to disable language panel
 

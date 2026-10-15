@@ -9,6 +9,8 @@ DccObject {
     displayName: qsTr("Power Management")
     description: qsTr("Power saving settings, screen and suspend")
     icon: "power"
+    // 双色 SVG（Tabler, MIT）：实际变体由 delegate 按主题/选中态选择
+    iconSource: "file:///usr/share/dde-control-center/icons/sidebar/power-light.svg"
     weight: 130
 
     visible: true

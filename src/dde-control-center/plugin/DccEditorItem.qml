@@ -53,8 +53,16 @@ D.ItemDelegate {
     Keys.onEnterPressed: control.clicked()
 
     icon {
-        name: model.item.icon
-        source: model.item.iconSource
+        // 有 iconSource 时置空 name，才会按普通图片渲染（否则会走 DCI 查找）
+        name: model.item.iconSource ? "" : model.item.icon
+        source: {
+            var s = model.item.iconSource
+            if (!s)
+                return ""
+            // 选中恒用亮色变体；其余跟随系统亮/暗主题
+            var variant = (D.DTK.themeType === D.ApplicationHelper.DarkType ? "dark" : "light")
+            return String(s).replace(/-(light|dark|selected)\.svg$/, "-" + variant + ".svg")
+        }
         width: control.iconSize > 0 ? control.iconSize : DS.Style.itemDelegate.iconSize
         height: control.iconSize > 0 ? control.iconSize : DS.Style.itemDelegate.iconSize
     }

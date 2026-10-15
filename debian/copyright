@@ -19,3 +19,9 @@ License: LGPL-3+
  .
  On Debian systems, the complete text of the GNU Lesser General
  Public License version 3 can be found in "/usr/share/common-licenses/LGPL-3".
+
+Files: icons/sidebar/*
+Copyright: 2020-2026 Paweł Kuna and Tabler contributors
+License: MIT
+ Comment: 侧边栏图标取自 Tabler Icons (https://tabler.io/icons)，按其 MIT 许可使用；
+  生成脚本对其单色 SVG 重新着色并输出 light/dark/selected 三个变体。
