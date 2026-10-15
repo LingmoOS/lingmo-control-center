@@ -3669,6 +3669,10 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
         <source>Open Source Software Notice</source>
         <translation>开源软件声明</translation>
     </message>
+    <message>
+        <source>Send anonymous usage statistics to help improve the system</source>
+        <translation>发送匿名使用统计，帮助我们改进系统</translation>
+    </message>
 </context>
 <context>
     <name>ThemeSelectView</name>

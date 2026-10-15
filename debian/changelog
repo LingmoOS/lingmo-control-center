@@ -1,3 +1,16 @@
+lingmo-control-center (6.2.12.lingmo5u1) unstable; urgency=medium
+
+  * change(privacy): “隐私和安全性”只放设置项，法律文本移回“系统”
+    上一版把最终用户许可协议、隐私政策、用户体验改善计划三个文本页放在
+    “隐私和安全性”下，这一页应当是权限与开关：
+      - 最终用户许可协议（1020）、隐私政策（1030）、用户体验改善计划协议（1040）
+        移回“系统”，排在“关于本机”之后；
+      - “隐私和安全性”新增“用户体验改善计划”开关（诊断与反馈，weight 10），
+        读写 systemInfoMode().joinUeProgram / systemInfoWork().setUeProgram()；
+      - 该页现有设置：用户体验改善计划、摄像头权限、文件夹权限。
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 15 Oct 2026 21:10:21 +0800
+
 lingmo-control-center (6.2.11.lingmo5u1) unstable; urgency=medium
 
   * change(apps): 已安装应用列表去掉“点击启动”，改为纯展示
