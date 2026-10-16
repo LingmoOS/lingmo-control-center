@@ -1,3 +1,14 @@
+lingmo-control-center (6.2.18.lingmo5u1) unstable; urgency=medium
+
+  * fix(accessibility): 插件 CMakeLists 缺少 Qt 依赖
+    新插件的 target_link_libraries 只列了 ${DCC_FRAME_Library}，没有任何 Qt 模块，
+    编译时报 accessibilitycontroller.h:6:10: fatal error: QObject: No such file or
+    directory（编译命令里完全没有 Qt 的头文件 -isystem 路径）。
+    现补上 ${QT_NS}::Core（QObject/QProcess/QString）与 ${QT_NS}::Gui，
+    与其它插件的做法一致。
+
+ -- Lingmo OS Team <team@lingmo.org>  Fri, 16 Oct 2026 12:58:02 +0800
+
 lingmo-control-center (6.2.17.lingmo5u1) unstable; urgency=medium
 
   * fix(accessibility): 补上 accessibilitycontroller.moc include
