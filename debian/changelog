@@ -1,3 +1,18 @@
+lingmo-control-center (6.2.19.lingmo5u1) unstable; urgency=medium
+
+  * fix: 侧栏图标改用可写的 icon 属性（iconSource 是只读，导致插件全部加载失败）
+    DccObject 的 iconSource 是只读属性（由 icon 经 QQmlContext::resolvedUrl 派生），
+    上一版直接写 iconSource: 导致运行时报：
+      Invalid property assignment: "iconSource" is a read-only property
+      create module object error: .../System.qml:17 / Device.qml:12 / Apps.qml:26 / ...
+      pluginManager list is empty
+    即每个插件的根对象都创建失败，控制中心整片空白。现改为写 icon:（可写属性），
+    iconSource 会自动派生为该文件 URL，delegate 的三态变体选择逻辑不需改动。
+    涉及 12 个根对象（system/device/network/apps/accounts/notification/
+    keyboardAndMouse/personalization/power/privacy/update/home/... ）。
+
+ -- Lingmo OS Team <team@lingmo.org>  Fri, 16 Oct 2026 15:46:16 +0800
+
 lingmo-control-center (6.2.18.lingmo5u1) unstable; urgency=medium
 
   * fix(accessibility): 插件 CMakeLists 缺少 Qt 依赖

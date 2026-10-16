@@ -9,8 +9,7 @@ DccObject {
     parentName: "root"
     displayName: qsTr("Keyboard and Mouse")
     description: qsTr("Keyboard, mouse and touchpad")
-    icon: "device_keyboard"
-    // 双色 SVG（Tabler, MIT）：实际变体由 delegate 按主题/选中态选择
-    iconSource: "file:///usr/share/dde-control-center/icons/sidebar/keyboardAndMouse-light.svg"
+    // DccObject 的 iconSource 是只读（由 icon 派生），这里必须用可写的 icon
+    icon: "file:///usr/share/dde-control-center/icons/sidebar/keyboardAndMouse-light.svg"
     weight: 90
 }
