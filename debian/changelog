@@ -1,3 +1,17 @@
+lingmo-control-center (6.2.20.lingmo5u1) unstable; urgency=medium
+
+  * fix(accessibility): 按插件约定重排 QML 文件，修 dccData 未定义
+    本仓库的插件约定（misc/DdeControlCenterPluginMacros.cmake）要求：
+      <Cap>.qml      = 侧栏根对象（parentName: "root"）
+      <Cap>Main.qml  = 插件主体（裸 DccObject，内含全部子项）
+    此前我用的是 AccessibilityRoot.qml（根对象）+ Accessibility.qml（子项），既没有
+    AccessibilityMain.qml 入口，子项也不在主体文件里，运行时报：
+      qrc:/qt/qml/accessibility/Accessibility.qml:39 ReferenceError: dccData is not defined
+    现照 power 插件的写法重排为 Accessibility.qml（根对象）+ AccessibilityMain.qml（主体），
+    删除 AccessibilityRoot.qml。
+
+ -- Lingmo OS Team <team@lingmo.org>  Fri, 16 Oct 2026 15:47:59 +0800
+
 lingmo-control-center (6.2.19.lingmo5u1) unstable; urgency=medium
 
   * fix: 侧栏图标改用可写的 icon 属性（iconSource 是只读，导致插件全部加载失败）
