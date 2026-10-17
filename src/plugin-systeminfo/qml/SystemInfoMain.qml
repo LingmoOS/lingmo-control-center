@@ -13,7 +13,9 @@ DccObject {
         parentName: "system"
         displayName: qsTr("About This PC")
         description: qsTr("System version, device information")
-        icon: "about"
+        // 图标名必须与 qrc 里实际存在的资源对应：本仓库只有 dcc_nav_systeminfo_*，
+        // 原先的 "about" 在图标集里不存在，会让该行在侧栏渲染为空白。
+        icon: "systeminfo"
         weight: 1010
         NativeInfoPage {}
     }

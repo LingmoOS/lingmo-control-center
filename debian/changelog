@@ -1,3 +1,11 @@
+lingmo-control-center (6.2.21.lingmo5u1) unstable; urgency=medium
+
+  * 系统：修复侧栏「关于本机」不显示（整行空白）
+    SystemInfoMain.qml 该项写的是 icon: "about"，图标集里只有
+    dcc_nav_systeminfo_42px/84px，不存在 about。改为 icon: "systeminfo"。
+
+ -- Lingmo OS Team <team@lingmo.org>  Sat, 17 Oct 2026 21:28:18 +0800
+
 lingmo-control-center (6.2.20.lingmo5u1) unstable; urgency=medium
 
   * fix(accessibility): 按插件约定重排 QML 文件，修 dccData 未定义
