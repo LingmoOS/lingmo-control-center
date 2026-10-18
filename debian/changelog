@@ -1,3 +1,13 @@
+lingmo-control-center (6.2.22.lingmo5u1) unstable; urgency=medium
+
+  * 补齐各插件缺失的入口 QML，修插件加载报错。
+    commonInfo 缺 CommonInfo.qml，加载时报
+    Module "commonInfo" contains no named "CommonInfo"；
+    system 与 device 缺 SystemMain.qml / DeviceMain.qml，报 MainObjError。
+    新增的入口对象不带 name，不会在侧栏多出条目。
+
+ -- Lingmo OS Team <team@lingmo.org>  Sun, 18 Oct 2026 14:34:02 +0800
+
 lingmo-control-center (6.2.21.lingmo5u1) unstable; urgency=medium
 
   * 系统：修复侧栏「关于本机」不显示（整行空白）
