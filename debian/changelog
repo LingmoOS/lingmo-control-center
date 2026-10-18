@@ -1,3 +1,10 @@
+lingmo-control-center (6.2.23.lingmo5u1) unstable; urgency=medium
+
+  * 主页改为卡片式布局：设备概览卡、规格卡（处理器/内存/内核）、
+    系统更新入口卡与常用设置快捷入口。
+
+ -- Lingmo OS Team <team@lingmo.org>  Sun, 18 Oct 2026 22:44:40 +0800
+
 lingmo-control-center (6.2.22.lingmo5u1) unstable; urgency=medium
 
   * 补齐各插件缺失的入口 QML，修插件加载报错。
