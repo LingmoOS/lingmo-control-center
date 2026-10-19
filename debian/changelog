@@ -1,3 +1,15 @@
+lingmo-control-center (6.2.25.lingmo5u1) unstable; urgency=medium
+
+  * 主页改为两栏卡片布局，并修复条目文字不显示。
+    卡片高度此前只能等于 page 根节点估出的 implicitHeight，内容超出的部分会被
+    下一张卡的不透明背景盖住；改为自定义页面，高度由内容自算。
+    可点入口未关闭 DTK ItemDelegate 默认的 checkable，选中后文字改用
+    checkedTextColor，在浅色卡片上变成白字；现统一 checkable: false。
+  * 新增 GitHub 仓库卡片（暗色底，点击用 Qt.openUrlExternally 打开）。
+  * 去掉指向不存在模块的「网络」入口。
+
+ -- Lingmo OS Team <team@lingmo.org>  Mon, 19 Oct 2026 12:41:56 +0800
+
 lingmo-control-center (6.2.24.lingmo5u1) unstable; urgency=medium
 
   * 系统信息页：dccData 相关绑定改为防御式。
