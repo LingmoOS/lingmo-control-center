@@ -62,7 +62,7 @@ Lingmo OS 的系统设置中心，使用 Qt 6 与 QML 编写。主程序提供�
 完整列表见 `debian/control` 的 `Build-Depends` 与 `Depends`，主要分为：
 
 - 构建工具：`cmake`（顶层声明 3.18，`misc/DdeControlCenterPluginMacros.cmake:1` 要求 3.23）、`pkg-config`、`extra-cmake-modules`、C++17 编译器；`doxygen` 只在 `BUILD_DOCS=ON` 时需要。
-- Qt 6：`qt6-base-dev`、`qt6-declarative-dev`、`qt6-tools-dev`（提供 `lrelease`）、`qt6-multimedia-dev`、`qt6-wayland-dev`、`libqt6svg6`。Qt 6.10 及以上还会查找 GuiPrivate、QmlModelsPrivate、QuickPrivate、WaylandClientPrivate（`CMakeLists.txt:11-13,183-185`），需要对应的私有开发包；`debian/control` 目前列了 `qt6-declarative-private-dev` 与 `qt6-wayland-private-dev`。
+- Qt 6：`qt6-base-dev`、`qt6-declarative-dev`、`qt6-tools-dev`（提供 `lrelease`）、`qt6-multimedia-dev`、`qt6-wayland-dev`、`libqt6svg6`。Qt 6.10 及以上还会查找 GuiPrivate、QmlModelsPrivate、QuickPrivate、WaylandClientPrivate（`CMakeLists.txt:11-13,183-185`），需要对应的私有开发包；`debian/control` 目前列了 `qt6-base-private-dev`、`qt6-declarative-private-dev` 与 `qt6-wayland-private-dev`。
 - DTK6：`libdtk6core-dev`、`libdtk6gui-dev`（≥ 6.0.21）、`libdtkcommon-dev`；运行时需要 `libdtk6declarative`。
 - 其它：`libpolkit-qt6-1-dev`、`libsystemd-dev`、`libwayland-dev`、`wlr-protocols`、`treeland-protocols`（≥ 0.4.1）、`libicu-dev`、`libssl-dev`、`libgtest-dev`、`libdpkg-dev`、`libdareader-dev`、`libdeepin-pw-check-dev`、`libdde-shell-dev`、`deepin-gettext-tools`。
 
@@ -205,6 +205,8 @@ DCC_FACTORY_CLASS(FooInteraction)
 
 ## 4. 翻译
 
+翻译文件的命名、放置与 Weblate 流程见 [docs/TRANSLATING.md](docs/TRANSLATING.md)。
+
 ### 文件与命名
 
 - 主程序翻译统一放在 `translations/dde-control-center_<locale>.ts`，目前共 91 份。
@@ -249,6 +251,8 @@ DCC_FACTORY_CLASS(FooInteraction)
 
 ## 6. 参与贡献
 
+提 issue、提 PR 与代码风格的约定见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
 - 问题报告：<https://github.com/LingmoOS/lingmo-control-center/issues>
 - 代码提交：<https://github.com/LingmoOS/lingmo-control-center/pulls>
 - 讨论：<https://github.com/orgs/LingmoOS/discussions>
@@ -260,14 +264,3 @@ DCC_FACTORY_CLASS(FooInteraction)
 - 新增或修改用户可见字符串后，同步更新 `translations/`（见第 4 节）。
 - 新增插件的目录、命名与安装方式遵循第 3 节；不要绕过 `dcc_install_plugin` 手工写安装规则。
 - 贡献按第 5 节的许可证授权。
-
-## 7. 持续集成
-
-仓库只有一个工作流 `.github/workflows/upload.yml`，名为 `Upload to OBS`：
-
-- 触发条件：推送到 `main`、推送 `v*.*.*` 标签、对 `main` 的 PR。
-- 运行环境：`docker.io/library/debian:testing` 容器。
-- 步骤：安装构建工具后执行 `dpkg-buildpackage -S -us -uc -d`，只构建**源码包**，不编译二进制、不跑测试。
-- 把 `../*.dsc`、`../*.tar.*` 收集到 `src-tar-output/`，通过 `LingmoOS/action-upload-to-obs@0.0.4` 上传到 OBS 的 `home:LingmoOS` 项目、包名 `lingmo-control-center`，认证使用仓库密钥 `OBS_USERNAME` 与 `OBS_TOKEN`。
-
-因此 CI 的职责是把源码包送进 OBS，编译与二进制打包发生在 OBS 侧；PR 阶段也不会执行构建，提交前需要本地自行验证。

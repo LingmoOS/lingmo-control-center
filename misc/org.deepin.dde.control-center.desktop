@@ -1,10 +1,10 @@
 [Desktop Entry]
 Categories=Application;System;Settings
-Comment=Deepin Desktop Environment Control Center
+Comment=Lingmo Desktop Environment Control Center
 Exec=dde-control-center --show %f
 GenericName=Control Center
 Icon=preferences-system
-Name=Deepin Control Center
+Name=Lingmo Control Center
 StartupNotify=false
 StartupWMClass=dde-control-center
 Terminal=false

@@ -7,6 +7,7 @@ Build-Depends:
  pkg-config,
  cmake,
  qt6-base-dev,
+ qt6-base-private-dev,
  qt6-declarative-dev,
  qt6-tools-dev,
  qt6-declarative-private-dev,
@@ -55,7 +56,7 @@ Depends:
 Recommends: uos-license-content,
 Conflicts: dde-control-center-dock
 Replaces: dde-control-center-dock
-Description: New control center for Deepin Desktop Environment,
+Description: New control center for Lingmo OS,
  Integrated control center with rich functions,Besides providing rich
  system setting items, the function level is simple, the logic is clear,
  the user can easily set the system, and the learning cost is low,
@@ -64,7 +65,7 @@ Description: New control center for Deepin Desktop Environment,
  abrecovery -restore system, Determine whether the system is restored
  reboot-reminder-dialog -Update restart, Confirm whether to restart the system
  after the completion of the update.
- DDE Control Center is the control panel of Deepin Desktop Environment.
+ Lingmo Control Center is the system settings center of Lingmo OS.
 
 Package: dde-control-center-dev
 Architecture: any
@@ -73,8 +74,8 @@ Depends:
  qt6-declarative-dev,
  qt6-tools-dev,
  ${misc:Depends},
-Description: New control center for Deepin Desktop Environment - development files
- DDE Control Center is the control panel of Deepin Desktop Environment.
+Description: New control center for Lingmo OS - development files
+ Lingmo Control Center is the system settings center of Lingmo OS.
 
 Package: dde-control-center-doc
 Architecture: any

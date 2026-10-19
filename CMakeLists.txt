@@ -8,7 +8,7 @@ set(PROJECT_NAME dde-control-center)
 project(${PROJECT_NAME}
     VERSION "6.1.89"
     DESCRIPTION "Lingmo Control Center"
-    HOMEPAGE_URL "https://github.com/LingmoOS/velora-control-center"
+    HOMEPAGE_URL "https://github.com/LingmoOS/lingmo-control-center"
     LANGUAGES CXX C
 )
 

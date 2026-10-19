@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
     QCommandLineOption pluginDir("spec", "load plugins from specialdir", "plugindir");
 
     QCommandLineParser parser;
-    parser.setApplicationDescription("DDE Control Center");
+    parser.setApplicationDescription("Lingmo Control Center");
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addOption(showOption);
