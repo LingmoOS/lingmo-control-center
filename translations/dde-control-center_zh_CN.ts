@@ -4573,4 +4573,83 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
         <translation>指针悬停在控件上即点击</translation>
     </message>
 </context>
+<context>
+    <name>HomeView</name>
+    <message>
+        <source>Kernel %1</source>
+        <translation>?? %1</translation>
+    </message>
+    <message>
+        <source>Memory</source>
+        <translation>??</translation>
+    </message>
+    <message>
+        <source>Processor</source>
+        <translation>???</translation>
+    </message>
+    <message>
+        <source>Common settings</source>
+        <translation>????</translation>
+    </message>
+    <message>
+        <source>Personalization</source>
+        <translation>???</translation>
+    </message>
+    <message>
+        <source>Power Management</source>
+        <translation>????</translation>
+    </message>
+    <message>
+        <source>Sound</source>
+        <translation>??</translation>
+    </message>
+    <message>
+        <source>Time and Language</source>
+        <translation>?????</translation>
+    </message>
+    <message>
+        <source>Notification</source>
+        <translation>??</translation>
+    </message>
+    <message>
+        <source>Keyboard and Mouse</source>
+        <translation>?????</translation>
+    </message>
+    <message>
+        <source>Specifications</source>
+        <translation>????</translation>
+    </message>
+    <message>
+        <source>Kernel</source>
+        <translation>????</translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>??</translation>
+    </message>
+    <message>
+        <source>System update</source>
+        <translation>????</translation>
+    </message>
+    <message>
+        <source>Check for and install updates</source>
+        <translation>???????</translation>
+    </message>
+    <message>
+        <source>About This PC</source>
+        <translation>????</translation>
+    </message>
+    <message>
+        <source>Device name, system version and hardware</source>
+        <translation>??????????????</translation>
+    </message>
+    <message>
+        <source>Lingmo Control Center</source>
+        <translation>Lingmo ????</translation>
+    </message>
+    <message>
+        <source>Source code and discussions on GitHub</source>
+        <translation>??????GitHub?</translation>
+    </message>
+</context>
 </TS>

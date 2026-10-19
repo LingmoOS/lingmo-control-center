@@ -3,6 +3,7 @@ set(Plugin_Name home)
 file(GLOB_RECURSE plugin_home_SRCS
     "operation/*.cpp"
     "operation/*.h"
+    "operation/qrc/home.qrc"
 )
 
 add_library(${Plugin_Name} MODULE
