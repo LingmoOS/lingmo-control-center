@@ -1,3 +1,13 @@
+lingmo-control-center (6.2.27.lingmo5u1) unstable; urgency=medium
+
+  * 翻译文件统一为 language_TERRITORY 形式，去掉同语言重复文件。
+    af/am/ar/el/gl/id/ku/nb/ru/sv 这些语言此前同时存在裸语言码与带地区码两份，
+    Weblate 会判定同一语言存在多个文件。现统一保留带地区码的那份
+    （af_ZA、am_ET、ar_EG、el_GR、gl_ES、id_ID、ku_IQ、nb_NO、ru_UA、sv_SE），
+    删除没有译文的裸语言码文件。zh_CN/zh_HK/zh_TW、en 系列与 pt/pt_BR 不受影响。
+
+ -- Lingmo OS Team <team@lingmo.org>  Mon, 19 Oct 2026 13:04:13 +0800
+
 lingmo-control-center (6.2.26.lingmo5u1) unstable; urgency=medium
 
   * 删除重复的南非荷兰语翻译文件 af_ZA.ts。

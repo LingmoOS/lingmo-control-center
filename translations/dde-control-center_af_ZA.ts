@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="af">
+<TS version="2.1" language="af_ZA">
 <context>
     <name>AccountSettings</name>
     <message>
@@ -174,7 +174,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Retry Enroll</source>
@@ -200,7 +200,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     <name>AddFingerDialog</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Done</source>
@@ -263,7 +263,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Retry Enroll</source>
@@ -407,11 +407,11 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Stoor</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -557,7 +557,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     <name>BluetoothDeviceModel</name>
     <message>
         <source>Connected</source>
-        <translation>Verbind</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Not connected</source>
@@ -636,7 +636,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sure</source>
@@ -798,7 +798,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Camera occupied!</source>
@@ -844,7 +844,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete</source>
@@ -859,7 +859,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1062,7 +1062,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create account</source>
@@ -1169,7 +1169,7 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm</source>
@@ -1296,11 +1296,11 @@ UnionTech Software Technology Co., Ltd. is committed to research and improve the
     <name>DccColorDialog</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Stoor</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1432,7 +1432,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear</source>
@@ -1722,7 +1722,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Agree</source>
@@ -1733,7 +1733,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>Display</name>
     <message>
         <source>Display</source>
-        <translation>Vertoonskerm</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Brightness,resolution,scaling</source>
@@ -1820,7 +1820,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished">Modus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Main Screen</source>
@@ -1962,7 +1962,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished">Modus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Classic Mode</source>
@@ -1998,11 +1998,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished">Links</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished">Regs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Status</source>
@@ -2328,7 +2328,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
@@ -2385,7 +2385,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Input Volume</source>
-        <translation>Invoer Volume</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Input Level</source>
@@ -2408,7 +2408,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>Mouse</name>
     <message>
         <source>Mouse and Touchpad</source>
-        <translation>Muis en Voelblok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Common、Mouse、Touchpad</source>
@@ -2707,14 +2707,14 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Personalization</name>
     <message>
         <source>Personalization</source>
-        <translation>Verpersoonliking</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2795,7 +2795,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>PersonalizationWorker</name>
     <message>
         <source>Custom</source>
-        <translation>Verspersoonlik</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2851,7 +2851,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>PowerOperatorModel</name>
     <message>
         <source>Shut down</source>
-        <translation type="unfinished">Skakel af</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Suspend</source>
@@ -3047,7 +3047,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>QObject</name>
     <message>
         <source>Control Center</source>
-        <translation>Beheersentrum</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Activated</source>
@@ -3143,11 +3143,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Stoor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Regional format</source>
@@ -3177,7 +3177,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm</source>
@@ -3196,11 +3196,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Stoor</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3301,11 +3301,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Geen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add</source>
@@ -3325,7 +3325,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Stoor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>click Save to make this shortcut key effective</source>
@@ -3364,7 +3364,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>or</source>
@@ -3391,7 +3391,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>Sound</name>
     <message>
         <source>Sound</source>
-        <translation>Klank</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Output, input, sound effects, devices</source>
@@ -3451,7 +3451,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Shut down</source>
-        <translation>Skakel af</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Log out</source>
@@ -3479,7 +3479,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Empty Trash</source>
-        <translation>Maak Asblik Leeg</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Plug in</source>
@@ -3506,11 +3506,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>SpeakerPage</name>
     <message>
         <source>Mode</source>
-        <translation>Modus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Output Volume</source>
-        <translation>Uitset Volume</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Volume Boost</source>
@@ -3522,11 +3522,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Left</source>
-        <translation>Links</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Regs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Output</source>
@@ -3565,7 +3565,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>SyncInfoListModel</name>
     <message>
         <source>Sound</source>
-        <translation type="unfinished">Klank</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Power</source>
@@ -3592,7 +3592,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">Stelsel</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3726,11 +3726,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Revert</source>
-        <translation>Keer terug</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Stoor</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3753,11 +3753,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Stoor</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3844,7 +3844,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm</source>
@@ -3882,7 +3882,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Kanselleer</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Confirm</source>
@@ -4049,7 +4049,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Geen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Small</source>
@@ -4134,11 +4134,11 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>dcc::Locale::dialectNames</name>
     <message>
         <source>Traditional Chinese (Chinese Hong Kong)</source>
-        <translation>Tradisionele Chinees (Hong Kong)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Traditional Chinese (Chinese Taiwan)</source>
-        <translation>Tradisionele Chinees (Taiwan)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Min Nan Chinese</source>
@@ -4149,7 +4149,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>dcc::Locale::regionNames</name>
     <message>
         <source>Taiwan China</source>
-        <translation>Taiwan China</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4310,7 +4310,7 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>dccV25::KeyboardController</name>
     <message>
         <source>This shortcut conflicts with [%1]</source>
-        <translation>Hierdie snelkoppeling kollideer met [%1]</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4372,27 +4372,27 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>dccV25::ShortcutModel</name>
     <message>
         <source>System</source>
-        <translation>Stelsel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Window</source>
-        <translation>Venster</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Workspace</source>
-        <translation>Werkarea</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>AssistiveTools</source>
-        <translation>Hulpprogramme</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Eie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Geen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
