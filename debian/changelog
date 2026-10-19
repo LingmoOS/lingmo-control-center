@@ -1,3 +1,12 @@
+lingmo-control-center (6.2.24.lingmo5u1) unstable; urgency=medium
+
+  * 系统信息页：dccData 相关绑定改为防御式。
+    原先 userExperienceProgram 的 visible 与 ueProgramSwitch 的 checked 直接调用
+    dccData.systemInfoMode()，一旦取不到就让整份 SystemInfoMain.qml 加载失败，
+    本页所有条目（关于本机、许可协议、隐私政策、用户体验计划）随之消失。
+
+ -- Lingmo OS Team <team@lingmo.org>  Mon, 19 Oct 2026 12:13:56 +0800
+
 lingmo-control-center (6.2.23.lingmo5u1) unstable; urgency=medium
 
   * 主页改为卡片式布局：设备概览卡、规格卡（处理器/内存/内核）、

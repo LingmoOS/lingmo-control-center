@@ -45,7 +45,10 @@ DccObject {
         description: qsTr("Join the user experience program to help improve the product")
         icon: "user_experience_plan"
         weight: 1040
-        visible: dccData.systemInfoMode().showUserExperienceProgram()
+        // 防御式：dccData 或 systemInfoMode 不可用时不能让整份文件加载失败，
+          // 否则本页所有条目（含关于本机）会一起消失。
+          visible: (typeof dccData !== "undefined" && dccData && dccData.systemInfoMode)
+                   ? dccData.systemInfoMode().showUserExperienceProgram() : false
         UserExperienceProgramPage{}
     }
     // “隐私和安全性”里放的是设置项：用户体验改善计划（诊断与反馈）
@@ -58,7 +61,8 @@ DccObject {
         weight: 10
         pageType: DccObject.Editor
         page: D.Switch {
-            checked: dccData.systemInfoMode().joinUeProgram
+            checked: (typeof dccData !== "undefined" && dccData && dccData.systemInfoMode)
+                     ? dccData.systemInfoMode().joinUeProgram : false
             onCheckedChanged: {
                 if (checked !== dccData.systemInfoMode().joinUeProgram)
                     dccData.systemInfoWork().setUeProgram(checked)
