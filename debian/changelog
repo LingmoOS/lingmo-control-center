@@ -1,3 +1,11 @@
+lingmo-control-center (6.2.26.lingmo5u1) unstable; urgency=medium
+
+  * 删除重复的南非荷兰语翻译文件 af_ZA.ts。
+    文件掩码 translations/dde-control-center_*.ts 同时匹配 af.ts 与 af_ZA.ts，
+    翻译工具因此报同一语言存在多个文件；两份均无已完成译文，保留通用的 af.ts。
+
+ -- Lingmo OS Team <team@lingmo.org>  Mon, 19 Oct 2026 13:02:04 +0800
+
 lingmo-control-center (6.2.25.lingmo5u1) unstable; urgency=medium
 
   * 主页改为两栏卡片布局，并修复条目文字不显示。
