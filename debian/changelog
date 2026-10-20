@@ -1,3 +1,12 @@
+lingmo-control-center (6.2.30+lingmo5u1) unstable; urgency=medium
+
+  * fix(i18n): 修复切换中文后主页全部显示问号的问题
+    translations/dde-control-center_zh_CN.ts 中 HomeView 上下文的 19 条翻译，
+    在写入文件时中文字符被存为字面量 '?'，导致切换中文后主页所有文字
+    （内核、内存、处理器、常用设置、个性化等）均显示为问号。现补入正确的中文译文。
+
+ -- Lingmo OS Team <team@lingmo.org>  Tue, 20 Oct 2026 13:33:19 +0800
+
 lingmo-control-center (6.2.29+lingmo5u1) unstable; urgency=medium
 
   * fix(qml): 修复 systemInfo/touchscreen/datetime 插件二级选项不显示的问题

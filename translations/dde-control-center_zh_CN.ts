@@ -4577,79 +4577,79 @@ Sign in to %1 ID to get personalized features and services of Browser, App Store
     <name>HomeView</name>
     <message>
         <source>Kernel %1</source>
-        <translation>?? %1</translation>
+        <translation>内核 %1</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation>??</translation>
+        <translation>内存</translation>
     </message>
     <message>
         <source>Processor</source>
-        <translation>???</translation>
+        <translation>处理器</translation>
     </message>
     <message>
         <source>Common settings</source>
-        <translation>????</translation>
+        <translation>常用设置</translation>
     </message>
     <message>
         <source>Personalization</source>
-        <translation>???</translation>
+        <translation>个性化</translation>
     </message>
     <message>
         <source>Power Management</source>
-        <translation>????</translation>
+        <translation>电源管理</translation>
     </message>
     <message>
         <source>Sound</source>
-        <translation>??</translation>
+        <translation>声音</translation>
     </message>
     <message>
         <source>Time and Language</source>
-        <translation>?????</translation>
+        <translation>时间与语言</translation>
     </message>
     <message>
         <source>Notification</source>
-        <translation>??</translation>
+        <translation>通知</translation>
     </message>
     <message>
         <source>Keyboard and Mouse</source>
-        <translation>?????</translation>
+        <translation>键盘和鼠标</translation>
     </message>
     <message>
         <source>Specifications</source>
-        <translation>????</translation>
+        <translation>设备规格</translation>
     </message>
     <message>
         <source>Kernel</source>
-        <translation>????</translation>
+        <translation>内核</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>??</translation>
+        <translation>系统</translation>
     </message>
     <message>
         <source>System update</source>
-        <translation>????</translation>
+        <translation>系统更新</translation>
     </message>
     <message>
         <source>Check for and install updates</source>
-        <translation>???????</translation>
+        <translation>检查并安装更新</translation>
     </message>
     <message>
         <source>About This PC</source>
-        <translation>????</translation>
+        <translation>关于本机</translation>
     </message>
     <message>
         <source>Device name, system version and hardware</source>
-        <translation>??????????????</translation>
+        <translation>设备名称、系统版本和硬件信息</translation>
     </message>
     <message>
         <source>Lingmo Control Center</source>
-        <translation>Lingmo ????</translation>
+        <translation>Lingmo 控制中心</translation>
     </message>
     <message>
         <source>Source code and discussions on GitHub</source>
-        <translation>??????GitHub?</translation>
+        <translation>在 GitHub 上查看源码与讨论</translation>
     </message>
 </context>
 </TS>
