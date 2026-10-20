@@ -1,4 +1,14 @@
-lingmo-control-center (6.2.28.lingmo5u1) unstable; urgency=medium
+lingmo-control-center (6.2.29+lingmo5u1) unstable; urgency=medium
+
+  * fix(qml): 修复 systemInfo/touchscreen/datetime 插件二级选项不显示的问题
+    - plugin-systeminfo: 恢复被注释的 import org.deepin.dtk，修复 D.Switch 无法解析
+    - plugin-touchscreen: 修正 TouchScreen → Touchscreen 类型名大小写
+    - plugin-datetime: DatetimeMain.qml 补充 TimeAndLanguage/Datetime 节点实例化，
+      修复「时间与语言」侧边栏入口从未创建的问题，同时恢复 QtQuick import
+
+ -- Lingmo OS Team <team@lingmo.org>  Tue, 20 Oct 2026 08:56:47 +0800
+
+lingmo-control-center (6.2.28+lingmo5u1) unstable; urgency=medium
 
   * 重写 README（按插件、构建、翻译、许可分节），新增 CONTRIBUTING.md 与
     docs/TRANSLATING.md。
