@@ -19,6 +19,6 @@ DccObject {
             isGroup: false
             height: implicitHeight + 20
         }
-        TouchScreen {}
+        Touchscreen {}
     }
 }
